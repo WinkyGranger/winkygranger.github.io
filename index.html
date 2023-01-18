@@ -1,109 +1,36 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html lang="zh"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta><title>Winky&#039;s Blog</title><link rel="manifest" href="/manifest.json"><meta name="application-name" content="Winky Granger"><meta name="msapplication-TileImage" content="/img/favicon.svg"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Winky Granger"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta property="og:type" content="blog"><meta property="og:title" content="Winky&#039;s Blog"><meta property="og:url" content="http://example.com/"><meta property="og:site_name" content="Winky&#039;s Blog"><meta property="og:locale" content="zh_CN"><meta property="og:image" content="http://example.com/img/og_image.png"><meta property="article:author" content="Winky"><meta property="twitter:card" content="summary"><meta property="twitter:image:src" content="http://example.com/img/og_image.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"http://example.com"},"headline":"Winky's Blog","image":["http://example.com/img/og_image.png"],"author":{"@type":"Person","name":"Winky"},"publisher":{"@type":"Organization","name":"Winky's Blog","logo":{"@type":"ImageObject","url":"http://example.com/img/logo.svg"}},"description":""}</script><link rel="icon" href="/img/favicon.svg"><link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.0.0/css/all.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/xt256.css"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Oxanium:wght@300;400;600&amp;family=Roboto+Mono"><link rel="stylesheet" href="/css/cyberpunk.css"><style>body>.footer,body>.navbar,body>.section{opacity:0}</style><!--!--><!--!--><!--!--><!--!--><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.10.0/dist/css/lightgallery.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/css/justifiedGallery.min.css"><!--!--><!--!--><style>.pace{-webkit-pointer-events:none;pointer-events:none;-webkit-user-select:none;-moz-user-select:none;user-select:none}.pace-inactive{display:none}.pace .pace-progress{background:#3273dc;position:fixed;z-index:2000;top:0;right:100%;width:100%;height:2px}</style><script src="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/pace.min.js"></script><!--!--><!--!--><!-- hexo injector head_end start --><script>
+  (function () {
+      function switchTab() {
+          if (!location.hash) {
+            return;
+          }
 
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  
-  
-  
-  <title>
-    
-    Winky&#39;s Blog
-  </title>
-  <!-- Icon -->
-  
-    <link rel="shortcut icon" href="/favicon.ico">
-    
-  
-<link rel="stylesheet" href="/css/style.css">
+          const id = '#' + CSS.escape(location.hash.substring(1));
+          const $tabMenu = document.querySelector(`.tabs a[href="${id}"]`);
+          if (!$tabMenu) {
+            return;
+          }
 
-  
-  
-<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+          const $tabMenuContainer = $tabMenu.parentElement.parentElement;
+          Array.from($tabMenuContainer.children).forEach($menu => $menu.classList.remove('is-active'));
+          Array.from($tabMenuContainer.querySelectorAll('a'))
+              .map($menu => document.getElementById($menu.getAttribute("href").substring(1)))
+              .forEach($content => $content.classList.add('is-hidden'));
 
-  
-  
-<script src="/js/pace.min.js"></script>
-
-<meta name="generator" content="Hexo 5.4.2"><link rel="alternate" href="/atom.xml" title="Winky's Blog" type="application/atom+xml">
-</head>
-
-<body>
-  <main class="content">
-    <section class="jumbotron">
-  <div class="video">
-    
-    <div class="video-frame">
-      <img src="/images/ocean/overlay-hero.png" alt="Decorative image frame">
-    </div>
-    
-    <div class="video-media">
-      <video playsinline="" autoplay="" loop="" muted="" data-autoplay="" poster="/images/ocean/ocean.png"
-        x5-video-player-type="h5">
-        <source src="/images/ocean/ocean.mp4" type="video/mp4">
-        <source src="/images/ocean/ocean.ogv" type="video/ogg">
-        <source src="/images/ocean/ocean.webm" type="video/webm">
-        <p>Your user agent does not support the HTML5 Video element.</p>
-      </video>
-      <div class="video-overlay"></div>
-    </div>
-    <div class="video-inner text-center text-white">
-      <h1><a href="/">Winky&#39;s Blog</a></h1>
-      <p>一个正在努力的小开发</p>
-      <div><img src="/images/hexo-inverted.svg" class="brand" alt="Winky&#39;s Blog"></div>
-    </div>
-    <div class="video-learn-more">
-      <a class="anchor" href="#landingpage"><i class="fe fe-mouse"></i></a>
-    </div>
-  </div>
-</section>
-<div id="landingpage">
-  <section class="outer">
-  <article class="articles">
-    
-    <h1 class="page-type-title"></h1>
-    
-    
-    <article id="post-Spring" class="article article-type-post" itemscope
-  itemprop="blogPost" data-scroll-reveal>
-
-  <div class="article-inner">
-    
-    <header class="article-header">
-      
-  
-  <h2 class="article-title" itemprop="name">
-    <a href="/2022/05/22/Spring/">Spring</a>
-  </h2>
-  
-  
-
-    </header>
-    
-
-    
-    <div class="article-meta">
-      <a href="/2022/05/22/Spring/" class="article-date">
-  <time datetime="2022-05-22T13:03:41.000Z" itemprop="datePublished">2022-05-22</time>
-</a>
-      
-<div class="article-category">
-  <a class="article-category-link" href="/categories/java/">java</a> / <a class="article-category-link" href="/categories/java/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/">后端开发</a>
-</div>
-
-    </div>
-    
-
-    
-
-    <div class="article-entry" itemprop="articleBody">
-      
-      
-        
-      
-      
-        <h1 id="谈谈对AOP的理解"><a href="#谈谈对AOP的理解" class="headerlink" title="谈谈对AOP的理解"></a>谈谈对AOP的理解</h1><ul>
+          if ($tabMenu) {
+              $tabMenu.parentElement.classList.add('is-active');
+          }
+          const $activeTab = document.querySelector(id);
+          if ($activeTab) {
+              $activeTab.classList.remove('is-hidden');
+          }
+      }
+      switchTab();
+      window.addEventListener('hashchange', switchTab, false);
+  })();
+  </script><!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.0.0"><link rel="alternate" href="/atom.xml" title="Winky's Blog" type="application/atom+xml">
+</head><body class="is-2-column"><nav class="navbar navbar-main"><div class="container navbar-container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/"><img src="/img/logo.svg" alt="Winky&#039;s Blog" height="28"></a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item is-active" href="/">Home</a><a class="navbar-item" href="/archives">Archives</a><a class="navbar-item" href="/categories">Categories</a><a class="navbar-item" href="/tags">Tags</a></div><div class="navbar-end"><a class="navbar-item" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/WinkyGranger"><i class="fab fa-github"></i></a><a class="navbar-item search" title="搜索" href="javascript:;"><i class="fas fa-search"></i></a></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-8-tablet is-8-desktop is-8-widescreen"><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2022-05-22T13:03:41.000Z" title="2022/5/22 21:03:41">2022-05-22</time>发表</span><span class="level-item"><time dateTime="2023-01-17T09:44:04.060Z" title="2023/1/17 17:44:04">2023-01-17</time>更新</span><span class="level-item"><a class="link-muted" href="/categories/java/">java</a><span> / </span><a class="link-muted" href="/categories/java/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/">后端开发</a></span><span class="level-item">37 分钟读完 (大约5581个字)</span></div></div><h1 class="title is-3 is-size-4-mobile"><a class="link-muted" href="/2022/05/22/Spring/">Spring</a></h1><div class="content"><h1 id="谈谈对AOP的理解"><a href="#谈谈对AOP的理解" class="headerlink" title="谈谈对AOP的理解"></a>谈谈对AOP的理解</h1><ul>
 <li><p>系统是由许多不同的组件所组成的，每一个组件各负责一块特定功能。除了实现自身校心功能之外，这些组件还经常承担者额外的指责。例如日志，事务管理和安全这样的核心服务经第融入到自身具有校心业务理相的组件中去。这些系统服务经第被称为横切关注点，因为它们会路越系統的多个组件。</p>
 </li>
 <li><p>当我们需要为分散的对象引入公共行为的时候，OOP则显得无能为力，也就是说，OOP允许你定义从上到下的关系，但井不适合定义从左到右的关系，例如日志功能。</p>
@@ -311,63 +238,428 @@
 <h1 id="MyBatis二级缓存"><a href="#MyBatis二级缓存" class="headerlink" title="MyBatis二级缓存"></a>MyBatis二级缓存</h1><p>Mybatis 中有一级缓存和二级缓存，默认情况下一级缓存是开启的，而且是不能关闭的。一级缓存 是指 SqlSession 级别的缓存，当在同一个 SqlSession 中进行相同的 SQL 语句查询时，第二次以 后的查询不会从数据库查询，而是直接从缓存中获取，一级缓存最多缓存 1024 条 SQL。二级缓存 是指可以跨 SqlSession 的缓存。是 mapper 级别的缓存，对于 mapper 级别的缓存不同的 sqlsession 是可以共享的  </p>
 </li>
 </ul>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2022/05/22/Spring/" data-id="cld18dn1z00038wvkcf4eapxv" class="article-share-link">
-        分享
-      </a>
-      
-    </footer>
-
-  </div>
-
-  
-
-  
-
-</article>
-    
-    <article id="post-计算机网络" class="article article-type-post" itemscope
-  itemprop="blogPost" data-scroll-reveal>
-
-  <div class="article-inner">
-    
-    <header class="article-header">
-      
-  
-  <h2 class="article-title" itemprop="name">
-    <a href="/2022/05/21/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/">计算机网络</a>
-  </h2>
-  
-  
-
-    </header>
-    
-
-    
-    <div class="article-meta">
-      <a href="/2022/05/21/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" class="article-date">
-  <time datetime="2022-05-21T13:03:41.000Z" itemprop="datePublished">2022-05-21</time>
-</a>
-      
-<div class="article-category">
-  <a class="article-category-link" href="/categories/java/">java</a> / <a class="article-category-link" href="/categories/java/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/">后端开发</a>
-</div>
-
-    </div>
-    
-
-    
-
-    <div class="article-entry" itemprop="articleBody">
-      
-      
-        
-      
-      
-        <h1 id="分层"><a href="#分层" class="headerlink" title="分层"></a>分层</h1><p><img src="https://cdn.nlark.com/yuque/0/2022/png/22222537/1657506890803-2f92c24f-e677-4640-aad6-29370dc5f594.png#clientId=u7cca30bd-a35c-4&crop=0&crop=0&crop=1&crop=1&from=paste&id=u82bc0f33&margin=%5Bobject%20Object%5D&originHeight=421&originWidth=731&originalType=url&ratio=1&rotation=0&showTitle=false&status=done&style=none&taskId=u3fa4f199-bb77-4569-bce1-4f708cb396f&title="></p>
+</div></article></div><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2022-05-22T13:03:41.000Z" title="2022/5/22 21:03:41">2022-05-22</time>发表</span><span class="level-item"><time dateTime="2023-01-18T07:44:53.788Z" title="2023/1/18 15:44:53">2023-01-18</time>更新</span><span class="level-item"><a class="link-muted" href="/categories/java/">java</a><span> / </span><a class="link-muted" href="/categories/java/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/">后端开发</a></span><span class="level-item">2 小时读完 (大约18622个字)</span></div></div><h1 class="title is-3 is-size-4-mobile"><a class="link-muted" href="/2022/05/22/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">操作系统</a></h1><div class="content"><h1 id="进程、线程、协程"><a href="#进程、线程、协程" class="headerlink" title="进程、线程、协程"></a>进程、线程、协程</h1><p>进程是系统资源分配和调度的最小单位、<br>线程是操作系统分配和调度的最小单位<br>线程分成更小的协程，多个协程共享一个线程。<br>线程切换是一个操作系统层面的行为，要关中断、保存断点、终端服务寻址、开中断执行服务<br>协程间切换是runtime的 行为<br><img src="https://cdn.nlark.com/yuque/0/2022/png/22222537/1658146534047-a200795a-9aad-4eae-b0cc-c17df81a3f03.png#clientId=ue90da96b-82bc-4&crop=0&crop=0&crop=1&crop=1&from=paste&height=703&id=u9c618606&margin=%5Bobject%20Object%5D&name=image.png&originHeight=703&originWidth=1262&originalType=binary&ratio=1&rotation=0&showTitle=false&size=130076&status=done&style=none&taskId=uee8e7265-d4d6-44f7-ada6-cdb6873eb1c&title=&width=1262" alt="image.png"></p>
+<h1 id="操作系统运行机制"><a href="#操作系统运行机制" class="headerlink" title="操作系统运行机制"></a>操作系统运行机制</h1><ul>
+<li><p>时钟管理</p>
+</li>
+<li><p>中断机制</p>
+<ul>
+<li><p>外中断：中断信号来源于外部设备（被迫的）</p>
+</li>
+<li><p>内中断：中断信号来源于当前指令（自愿的）：</p>
+<ul>
+<li>陷入指令（应用程序引发的，cpu产生），比如程序执行到某处需要进行读文件操作，cpu从用户态切换到内核态</li>
+<li>内存缺页中断<table>
+<thead>
+<tr>
+<th><img src="https://cdn.nlark.com/yuque/0/2022/png/22222537/1658643001593-35048363-b135-4161-9a30-4c184493dca2.png#clientId=u43da0f96-59d8-4&crop=0&crop=0&crop=1&crop=1&from=paste&height=669&id=u9e60d7c4&margin=%5Bobject%20Object%5D&name=image.png&originHeight=669&originWidth=1559&originalType=binary&ratio=1&rotation=0&showTitle=false&size=439699&status=done&style=none&taskId=u01d47b28-935a-49e5-8ecc-910d9648e46&title=&width=1559" alt="image.png"></th>
+<th><img src="https://cdn.nlark.com/yuque/0/2022/png/22222537/1658643772980-833f7727-579a-4fd6-95f9-2d73382c28b1.png#clientId=u43da0f96-59d8-4&crop=0&crop=0&crop=1&crop=1&from=paste&height=464&id=u11ea74ce&margin=%5Bobject%20Object%5D&name=image.png&originHeight=464&originWidth=855&originalType=binary&ratio=1&rotation=0&showTitle=false&size=177795&status=done&style=none&taskId=u39b864e1-78f7-426a-8986-3c595cf6db9&title=&width=855" alt="image.png"></th>
+</tr>
+</thead>
+</table>
+</li>
+</ul>
+</li>
+<li></li>
+</ul>
+</li>
+<li><p>原语（原语的底层实现就是靠开中断和关中断实现的）</p>
+<ul>
+<li>若干条指令组成</li>
+<li>完成某个特定功能</li>
+<li>执行过程不会被中断（具有原子性）</li>
+</ul>
+</li>
+<li><p>系统数据结构</p>
+<ul>
+<li>进程管理：作业控制快、进程控制块</li>
+<li>存储器管理：存储器分配与回收</li>
+<li>设备管理：缓冲区、设备控制快</li>
+</ul>
+</li>
+<li><p>系统调用（应用程序去访问操作系统内核的时候）</p>
+<ul>
+<li>一套接口的集合</li>
+<li>应用程序去访问操作系统内核服务的方式<h1 id="操作系统"><a href="#操作系统" class="headerlink" title="操作系统"></a>操作系统</h1></li>
+</ul>
+</li>
+</ul>
+<p><strong>PCB:<strong>为了描述控制进程的运行，系统中存放进程的管理和控制信息的数据结构称为</strong>进程控制块</strong>（PCB Process Control Block），它是进程实体的一部分，是操作系统中最重要的记录性数据结构。它是进程管理和控制的最重要的数据结构，每一个进程均有一个PCB，在创建进程时，建立PCB，伴随进程运行的全过程，直到进程撤消而撤消。<br><img src="https://cdn.nlark.com/yuque/0/2022/png/22222537/1658157424101-9c5d3320-4b20-4459-801c-a94d8e7f4a9c.png#clientId=u068474b6-549f-4&crop=0&crop=0&crop=1&crop=1&from=ui&id=u3e41f8f6&margin=%5Bobject%20Object%5D&name=image-20220525164411310.png&originHeight=580&originWidth=1044&originalType=binary&ratio=1&rotation=0&showTitle=false&size=270836&status=done&style=none&taskId=ub2293613-fbcf-4449-8a33-bce616214be&title=" alt="image-20220525164411310.png"><br>寄存器里面放的是有些程序运行计算了一半被抢占了，记录执行的位置，下次执行可以接着中间数据往下执行<br><img src="https://cdn.nlark.com/yuque/0/2022/png/22222537/1658157467622-4d68b3f0-01f7-41f1-9b49-69906b69339f.png#clientId=u068474b6-549f-4&crop=0&crop=0&crop=1&crop=1&from=ui&id=u348082be&margin=%5Bobject%20Object%5D&name=image-20220525164641495.png&originHeight=570&originWidth=910&originalType=binary&ratio=1&rotation=0&showTitle=false&size=213030&status=done&style=none&taskId=ub607dfdf-1610-4e18-8234-ba71cfece23&title=" alt="image-20220525164641495.png"><br><img src="https://cdn.nlark.com/yuque/0/2022/png/22222537/1658157534537-7b08b675-a40f-41ed-95c3-7faf870ca7f3.png#clientId=u068474b6-549f-4&crop=0&crop=0&crop=1&crop=1&from=ui&id=uc5e0c3bc&margin=%5Bobject%20Object%5D&name=image-20220525164930084.png&originHeight=540&originWidth=1049&originalType=binary&ratio=1&rotation=0&showTitle=false&size=244849&status=done&style=none&taskId=ue74ef2f0-8077-4aa1-9549-bd46c72f700&title=" alt="image-20220525164930084.png"><br><img src="https://cdn.nlark.com/yuque/0/2022/png/22222537/1658157550287-c44edf86-87c9-4b8c-a08a-e68e736df1ee.png#clientId=u068474b6-549f-4&crop=0&crop=0&crop=1&crop=1&from=ui&id=u6b9b0059&margin=%5Bobject%20Object%5D&name=image-20220525165309802.png&originHeight=614&originWidth=948&originalType=binary&ratio=1&rotation=0&showTitle=false&size=236851&status=done&style=none&taskId=uecffc3ed-56fc-4627-856d-642b262fed8&title=" alt="image-20220525165309802.png"><br><img src="https://cdn.nlark.com/yuque/0/2022/png/22222537/1658157564861-c16c83be-d673-417d-831e-b50617f728e7.png#clientId=u068474b6-549f-4&crop=0&crop=0&crop=1&crop=1&from=ui&id=u4b4397c5&margin=%5Bobject%20Object%5D&name=image-20220525165945660.png&originHeight=497&originWidth=1109&originalType=binary&ratio=1&rotation=0&showTitle=false&size=260027&status=done&style=none&taskId=uf403c034-a451-4fa1-9a50-39e2f37ed32&title=" alt="image-20220525165945660.png"><br><img src="https://cdn.nlark.com/yuque/0/2022/png/22222537/1658157596450-42cb6f02-711c-49b8-ab9c-e87fec40db9a.png#clientId=u068474b6-549f-4&crop=0&crop=0&crop=1&crop=1&from=ui&id=udcd8f521&margin=%5Bobject%20Object%5D&name=image-20220525170637277.png&originHeight=615&originWidth=931&originalType=binary&ratio=1&rotation=0&showTitle=false&size=348930&status=done&style=none&taskId=u58c1c028-2838-4e4a-8ebf-ceddb7fa296&title=" alt="image-20220525170637277.png"></p>
+<h2 id="进程的状态"><a href="#进程的状态" class="headerlink" title="进程的状态"></a>进程的状态</h2><ul>
+<li><strong>其实是七状态，还有阻塞挂起和就绪挂起</strong></li>
+</ul>
+<p><img src="https://cdn.nlark.com/yuque/0/2022/png/22222537/1658157617052-e7ab12d7-76a6-4ea5-a3f8-7a6c3fb9fbf8.png#clientId=u068474b6-549f-4&crop=0&crop=0&crop=1&crop=1&from=ui&id=u26b13f01&margin=%5Bobject%20Object%5D&name=image-20220525170929110.png&originHeight=629&originWidth=1106&originalType=binary&ratio=1&rotation=0&showTitle=false&size=463512&status=done&style=none&taskId=u4a388746-9222-44e2-8693-cbb9c550366&title=" alt="image-20220525170929110.png"><br><img src="https://cdn.nlark.com/yuque/0/2022/png/22222537/1658157633365-8807891a-c046-45a4-bc2d-ef207c45ce82.png#clientId=u068474b6-549f-4&crop=0&crop=0&crop=1&crop=1&from=ui&id=u63a830e7&margin=%5Bobject%20Object%5D&name=image-20220525195936026.png&originHeight=143&originWidth=1056&originalType=binary&ratio=1&rotation=0&showTitle=false&size=81487&status=done&style=none&taskId=u70c0161e-2a86-499a-a038-4d823fdc5f7&title=" alt="image-20220525195936026.png"><br><img src="https://cdn.nlark.com/yuque/0/2022/png/22222537/1658157649661-df255dd3-3482-4cc6-9d42-59cf5407d02e.png#clientId=u068474b6-549f-4&crop=0&crop=0&crop=1&crop=1&from=ui&id=uf79f5f54&margin=%5Bobject%20Object%5D&name=image-20220525200427699.png&originHeight=591&originWidth=975&originalType=binary&ratio=1&rotation=0&showTitle=false&size=338518&status=done&style=none&taskId=u69d6daa4-d35c-44aa-b737-018bcbf8542&title=" alt="image-20220525200427699.png"><br><img src="https://cdn.nlark.com/yuque/0/2022/png/22222537/1658157658029-8e23f390-085d-4784-9661-611d2d31bc04.png#clientId=u068474b6-549f-4&crop=0&crop=0&crop=1&crop=1&from=ui&id=u825c1200&margin=%5Bobject%20Object%5D&name=image-20220526202809705.png&originHeight=578&originWidth=1502&originalType=binary&ratio=1&rotation=0&showTitle=false&size=314764&status=done&style=none&taskId=u755cda91-f380-44be-ac8b-439ae124842&title=" alt="image-20220526202809705.png"><br><img src="https://cdn.nlark.com/yuque/0/2022/png/22222537/1658157672128-4ced56fb-a58e-449a-9b0b-66523b85dffe.png#clientId=u068474b6-549f-4&crop=0&crop=0&crop=1&crop=1&from=ui&id=u84b280f2&margin=%5Bobject%20Object%5D&name=image-20220525200613571.png&originHeight=524&originWidth=1005&originalType=binary&ratio=1&rotation=0&showTitle=false&size=305102&status=done&style=none&taskId=ufe7dbde0-18fe-46ca-9a48-8927c9e87b0&title=" alt="image-20220525200613571.png"></p>
+<h2 id="进程间通信"><a href="#进程间通信" class="headerlink" title="进程间通信"></a>进程间通信</h2><h3 id="共享存储：共享空间对于多个进程访问是互斥的"><a href="#共享存储：共享空间对于多个进程访问是互斥的" class="headerlink" title="共享存储：共享空间对于多个进程访问是互斥的"></a><strong>共享存储</strong>：共享空间对于多个进程访问是互斥的</h3><p><img src="https://cdn.nlark.com/yuque/0/2022/png/22222537/1658157690879-ac5982b5-e22a-4fb1-b25a-bcb992b488fa.png#clientId=u068474b6-549f-4&crop=0&crop=0&crop=1&crop=1&from=ui&id=u35beb21b&margin=%5Bobject%20Object%5D&name=image-20220525204346552.png&originHeight=573&originWidth=1047&originalType=binary&ratio=1&rotation=0&showTitle=false&size=299312&status=done&style=none&taskId=uc4c3ce24-e431-4557-b107-ee11a27effe&title=" alt="image-20220525204346552.png"></p>
+<h3 id="管道通信：没写满的时候是不允许读的，没读完也是不允许写的。"><a href="#管道通信：没写满的时候是不允许读的，没读完也是不允许写的。" class="headerlink" title="管道通信：没写满的时候是不允许读的，没读完也是不允许写的。"></a><strong>管道通信</strong>：没写满的时候是不允许读的，没读完也是不允许写的。</h3><p><img src="https://cdn.nlark.com/yuque/0/2022/png/22222537/1658157704285-3c4bd803-d8f0-40a0-8f2b-0cb9ebf26a35.png#clientId=u068474b6-549f-4&crop=0&crop=0&crop=1&crop=1&from=ui&id=uedf68a63&margin=%5Bobject%20Object%5D&name=image-20220525203242051.png&originHeight=521&originWidth=1044&originalType=binary&ratio=1&rotation=0&showTitle=false&size=291698&status=done&style=none&taskId=ufc51f880-ffbd-4b2a-9d8f-fc5bc42a467&title=" alt="image-20220525203242051.png"></p>
+<h3 id="消息队列：消息头里包含了传递信息，不会传错给别的进程"><a href="#消息队列：消息头里包含了传递信息，不会传错给别的进程" class="headerlink" title="消息队列：消息头里包含了传递信息，不会传错给别的进程"></a><strong>消息队列</strong>：消息头里包含了传递信息，不会传错给别的进程</h3><p><img src="https://cdn.nlark.com/yuque/0/2022/png/22222537/1658157716803-dc8e2ce0-7f82-431a-8500-46e56df8bbc6.png#clientId=u068474b6-549f-4&crop=0&crop=0&crop=1&crop=1&from=ui&id=u7e0f2b99&margin=%5Bobject%20Object%5D&name=image-20220525204132095.png&originHeight=614&originWidth=1070&originalType=binary&ratio=1&rotation=0&showTitle=false&size=366893&status=done&style=none&taskId=u2c6b1bfe-109f-45c2-9efc-cf3417bacbb&title=" alt="image-20220525204132095.png"></p>
+<h3 id="信号"><a href="#信号" class="headerlink" title="信号"></a>信号</h3><h3 id="套接字-socket"><a href="#套接字-socket" class="headerlink" title="套接字 socket"></a>套接字 socket</h3><h1 id="线程"><a href="#线程" class="headerlink" title="线程"></a>线程</h1><p><img src="https://cdn.nlark.com/yuque/0/2022/png/22222537/1658157761743-17c43c42-06a3-4ca3-b39b-cf3483774828.png#clientId=u068474b6-549f-4&crop=0&crop=0&crop=1&crop=1&from=ui&id=ub0ea09cd&margin=%5Bobject%20Object%5D&name=image-20220525205412434.png&originHeight=477&originWidth=1066&originalType=binary&ratio=1&rotation=0&showTitle=false&size=274095&status=done&style=none&taskId=ub12a79dc-bc9f-42eb-b256-a3905dfd85e&title=" alt="image-20220525205412434.png"><br><img src="https://cdn.nlark.com/yuque/0/2022/png/22222537/1658157779581-9aa43107-f932-42a6-9c1d-af2335e158f8.png#clientId=u068474b6-549f-4&crop=0&crop=0&crop=1&crop=1&from=ui&id=u6f1636db&margin=%5Bobject%20Object%5D&name=image-20220525205605157.png&originHeight=600&originWidth=823&originalType=binary&ratio=1&rotation=0&showTitle=false&size=256171&status=done&style=none&taskId=u08cd2cab-cfb5-4a25-b0db-b7a049d3e87&title=" alt="image-20220525205605157.png"></p>
+<h2 id="线程的实现方式（用户级线程、内核级线程、组合方式）"><a href="#线程的实现方式（用户级线程、内核级线程、组合方式）" class="headerlink" title="线程的实现方式（用户级线程、内核级线程、组合方式）"></a>线程的实现方式（用户级线程、内核级线程、组合方式）</h2><p><img src="https://cdn.nlark.com/yuque/0/2022/png/22222537/1658157836867-f256ed5c-6a60-42f0-a520-d4bc1a50bc5e.png#clientId=u068474b6-549f-4&crop=0&crop=0&crop=1&crop=1&from=ui&id=uc3d69939&margin=%5Bobject%20Object%5D&name=image-20220525210223773.png&originHeight=464&originWidth=1017&originalType=binary&ratio=1&rotation=0&showTitle=false&size=239131&status=done&style=none&taskId=uca08741e-478f-4aba-9405-4a6c9837489&title=" alt="image-20220525210223773.png"><br><img src="https://cdn.nlark.com/yuque/0/2022/png/22222537/1658157860633-7ac128c9-a0e4-4166-bc2c-db2c029e9b76.png#clientId=u068474b6-549f-4&crop=0&crop=0&crop=1&crop=1&from=ui&id=u32498fe8&margin=%5Bobject%20Object%5D&name=image-20220525210316650.png&originHeight=492&originWidth=979&originalType=binary&ratio=1&rotation=0&showTitle=false&size=209051&status=done&style=none&taskId=ued023365-42c9-4575-95ca-07254b5ebb8&title=" alt="image-20220525210316650.png"><br><img src="https://cdn.nlark.com/yuque/0/2022/png/22222537/1658157876158-13a6e076-5253-4e59-8604-0bdfce151a9b.png#clientId=u068474b6-549f-4&crop=0&crop=0&crop=1&crop=1&from=ui&id=u6edfbf5c&margin=%5Bobject%20Object%5D&name=image-20220525210458965.png&originHeight=523&originWidth=964&originalType=binary&ratio=1&rotation=0&showTitle=false&size=280422&status=done&style=none&taskId=uc9375d49-403b-43ef-8bfe-7afb2086442&title=" alt="image-20220525210458965.png"></p>
+<h2 id="多线程模型：多对一、一对多"><a href="#多线程模型：多对一、一对多" class="headerlink" title="多线程模型：多对一、一对多"></a>多线程模型：多对一、一对多</h2><p>n个用户级线程映射到内核级线程上</p>
+<h1 id="处理机调度（线程调度）"><a href="#处理机调度（线程调度）" class="headerlink" title="处理机调度（线程调度）"></a>处理机调度（线程调度）</h1><p><img src="https://cdn.nlark.com/yuque/0/2022/png/22222537/1658157951018-84ad97a5-07db-48f8-a6dc-6fb440d6c976.png#clientId=u068474b6-549f-4&crop=0&crop=0&crop=1&crop=1&from=ui&id=u28f6ead9&margin=%5Bobject%20Object%5D&name=image-20220525211800128.png&originHeight=449&originWidth=873&originalType=binary&ratio=1&rotation=0&showTitle=false&size=160221&status=done&style=none&taskId=uda13089d-b920-4a3d-9a5f-348eaa04758&title=" alt="image-20220525211800128.png"><br><img src="https://cdn.nlark.com/yuque/0/2022/png/22222537/1658157983980-95ed9a46-5767-4537-a9fc-3fba4a51546b.png#clientId=u068474b6-549f-4&crop=0&crop=0&crop=1&crop=1&from=ui&id=u22e76de3&margin=%5Bobject%20Object%5D&name=image-20220525214332583.png&originHeight=467&originWidth=957&originalType=binary&ratio=1&rotation=0&showTitle=false&size=296665&status=done&style=none&taskId=u409e8a9f-d852-4a81-a4ab-ebec4581de8&title=" alt="image-20220525214332583.png"></p>
+<h1 id="进程同步"><a href="#进程同步" class="headerlink" title="进程同步"></a>进程同步</h1><ol>
+<li>**互斥量(Mutex)**：采用互斥对象机制，只有拥有互斥对象的线程才有访问公共资源的权限。因为互斥对象只有一个，所以可以保证公共资源不会被多个线程同时访问。比如 Java 中的 synchronized 关键词和各种 Lock 都是这种机制。</li>
+<li><strong>信号量(Semaphore)</strong> ：它允许同一时刻多个线程访问同一资源，但是需要控制同一时刻访问此资源的最大线程数量。</li>
+<li><strong>事件(Event)</strong> :Wait/Notify：通过通知操作的方式来保持多线程同步，还可以方便的实现多线程优先级的比较操作。</li>
+<li><strong>临界区</strong>：拥有临界区的线程可以访问被保护资源，其他访问会被挂起。<ol>
+<li>双标志前检查法：先检查其他进程是否想要临界区，再上锁</li>
+<li>双标志后检查法：先上锁在检查其他进程是否想要临界区</li>
+<li>Peterson算法：双方都争着使用临界区的话，可以尝试让一方主动让对方先使用临界区<h2 id="进程互斥"><a href="#进程互斥" class="headerlink" title="进程互斥"></a>进程互斥</h2><img src="https://cdn.nlark.com/yuque/0/2022/png/22222537/1658158012726-ffb3adac-99e8-4330-b9f7-9a4daf0aa9e3.png#clientId=u068474b6-549f-4&crop=0&crop=0&crop=1&crop=1&from=ui&id=uc5ce4363&margin=%5Bobject%20Object%5D&name=image-20220526102104927.png&originHeight=549&originWidth=1072&originalType=binary&ratio=1&rotation=0&showTitle=false&size=443187&status=done&style=none&taskId=u443d8b4c-2b89-4c41-baaf-29d6c5040d2&title=" alt="image-20220526102104927.png"><h2 id="临界区冲突"><a href="#临界区冲突" class="headerlink" title="临界区冲突"></a>临界区冲突</h2></li>
+</ol>
+</li>
+</ol>
+<ul>
+<li><p>空闲让进：一次进一个，进不来的挂起</p>
+</li>
+<li><p>忙则等待：</p>
+</li>
+<li><p>有限等待：有限时间内退出</p>
+</li>
+<li><p>让权等待：进程不能进入自己的临界区，则应该让出CPU，避免出现忙等现象</p>
+<h1 id="死锁"><a href="#死锁" class="headerlink" title="死锁"></a>死锁</h1></li>
+<li><p>互斥条件：对必须互斥资源的争抢才会导致死锁</p>
+</li>
+<li><p>不剥夺条件：进程获得的资源在未使用完之前不能由其他进程强行夺走，只能主动释放</p>
+</li>
+<li><p>请求和保持条件：进程已经保持至少一个资源，但又提出了新的资源请求，而该资源又被其他进程占有，此时请求被阻塞，但又对自己的资源保持不放</p>
+</li>
+<li><p>循环等待条件：存在资源的循环等待链</p>
+<h2 id="预防死锁"><a href="#预防死锁" class="headerlink" title="预防死锁"></a>预防死锁</h2><p><img src="https://cdn.nlark.com/yuque/0/2022/png/22222537/1658158043661-63ad5a48-4ece-4133-95a2-6ee28bdb9bc1.png#clientId=u068474b6-549f-4&crop=0&crop=0&crop=1&crop=1&from=ui&id=uc9c6d6f6&margin=%5Bobject%20Object%5D&name=image-20220526151022177.png&originHeight=371&originWidth=1014&originalType=binary&ratio=1&rotation=0&showTitle=false&size=171353&status=done&style=none&taskId=u725231fc-9454-460b-8212-0b2933e6db6&title=" alt="image-20220526151022177.png"><img src="https://cdn.nlark.com/yuque/0/2022/png/22222537/1658158043696-c61c58b3-30e2-48f7-b5a2-7e596c8bd975.png#clientId=u068474b6-549f-4&crop=0&crop=0&crop=1&crop=1&from=ui&id=u0912ba33&margin=%5Bobject%20Object%5D&name=image-20220526152601282.png&originHeight=501&originWidth=1064&originalType=binary&ratio=1&rotation=0&showTitle=false&size=305555&status=done&style=none&taskId=ucceeded2-8950-4b61-a11b-99d546668ce&title=" alt="image-20220526152601282.png"></p>
+<h2 id="避免死锁（银行家算法）"><a href="#避免死锁（银行家算法）" class="headerlink" title="避免死锁（银行家算法）"></a>避免死锁（银行家算法）</h2><p><img src="https://cdn.nlark.com/yuque/0/2022/png/22222537/1658158064389-438c1ea3-03e4-4ff8-885d-2c9dfd794d49.png#clientId=u068474b6-549f-4&crop=0&crop=0&crop=1&crop=1&from=ui&id=ud29e1262&margin=%5Bobject%20Object%5D&name=image-20220526163027478.png&originHeight=576&originWidth=952&originalType=binary&ratio=1&rotation=0&showTitle=false&size=336341&status=done&style=none&taskId=u33fa1c51-ac8b-4032-ab89-d2ba3875719&title=" alt="image-20220526163027478.png"></p>
+<h2 id="死锁的检测"><a href="#死锁的检测" class="headerlink" title="死锁的检测"></a>死锁的检测</h2><h1 id="内存"><a href="#内存" class="headerlink" title="内存"></a>内存</h1><p><img src="https://cdn.nlark.com/yuque/0/2022/png/22222537/1658158081123-76c74a83-6e9d-4ee9-9ecf-0e2f2341ddab.png#clientId=u068474b6-549f-4&crop=0&crop=0&crop=1&crop=1&from=ui&id=u5bcd1ed5&margin=%5Bobject%20Object%5D&name=image-20220526194427027.png&originHeight=850&originWidth=1449&originalType=binary&ratio=1&rotation=0&showTitle=false&size=712438&status=done&style=none&taskId=uac83ff04-0d70-4e4c-806e-ccd65168a6c&title=" alt="image-20220526194427027.png"></p>
+<h2 id="内存管理"><a href="#内存管理" class="headerlink" title="内存管理"></a>内存管理</h2><p><img src="https://cdn.nlark.com/yuque/0/2022/png/22222537/1658158151854-76a4639d-52ca-47a8-9d62-b0460c969d29.png#clientId=u068474b6-549f-4&crop=0&crop=0&crop=1&crop=1&from=ui&id=u6263e228&margin=%5Bobject%20Object%5D&name=image-20220526203250307.png&originHeight=699&originWidth=1525&originalType=binary&ratio=1&rotation=0&showTitle=false&size=452621&status=done&style=none&taskId=u18a028b8-659b-4f16-901e-0756f68e6fd&title=" alt="image-20220526203250307.png"></p>
+<h2 id="覆盖技术"><a href="#覆盖技术" class="headerlink" title="覆盖技术"></a>覆盖技术</h2><p>下图A调用B、C是依次调用的，因此B、C可以共同使用程序X的覆盖区0（图中绿色），从逻辑上看，物理内存是被”拓展“了<img src="https://cdn.nlark.com/yuque/0/2022/png/22222537/1658158112508-a2f932c5-e6f0-4068-a508-383bcbcf32d2.png#clientId=u068474b6-549f-4&crop=0&crop=0&crop=1&crop=1&from=ui&id=u33c9fd4e&margin=%5Bobject%20Object%5D&name=image-20220526202251183.png&originHeight=630&originWidth=1517&originalType=binary&ratio=1&rotation=0&showTitle=false&size=255137&status=done&style=none&taskId=u6c308709-5ae7-4ebf-9737-3ca7745c4c2&title=" alt="image-20220526202251183.png"></p>
+<h2 id="交换技术"><a href="#交换技术" class="headerlink" title="交换技术"></a>交换技术<img src="https://cdn.nlark.com/yuque/0/2022/png/22222537/1658158172464-cc257844-d0b8-4a33-af13-b1ee6ac8607a.png#clientId=u068474b6-549f-4&crop=0&crop=0&crop=1&crop=1&from=ui&id=ua86db87e&margin=%5Bobject%20Object%5D&name=image-20220526202706608.png&originHeight=765&originWidth=1485&originalType=binary&ratio=1&rotation=0&showTitle=false&size=559808&status=done&style=none&taskId=ueb24dbf5-c0d8-4bce-b0b9-1eb66640783&title=" alt="image-20220526202706608.png"></h2></li>
+</ul>
+<p><strong>换入、换出</strong></p>
+<h2 id="内存分配管理方式（单一连续分配、固定分区分配方式）"><a href="#内存分配管理方式（单一连续分配、固定分区分配方式）" class="headerlink" title="内存分配管理方式（单一连续分配、固定分区分配方式）"></a>内存分配<img src="https://cdn.nlark.com/yuque/0/2022/png/22222537/1658158204808-b681f6db-c97a-429b-bc25-83c3284341ae.png#clientId=u068474b6-549f-4&crop=0&crop=0&crop=1&crop=1&from=ui&id=u1e8d79a3&margin=%5Bobject%20Object%5D&name=image-20220526203141172-1658158190522.png&originHeight=740&originWidth=1468&originalType=binary&ratio=1&rotation=0&showTitle=false&size=872880&status=done&style=none&taskId=ue4a47692-8fb1-4f68-aae5-acb50a39afe&title=" alt="image-20220526203141172-1658158190522.png">管理方式（单一连续分配、固定分区分配方式）</h2><p><img src="https://cdn.nlark.com/yuque/0/2022/png/22222537/1658158224980-b659fd89-1faf-4643-a5cb-03eed5a12e68.png#clientId=u068474b6-549f-4&crop=0&crop=0&crop=1&crop=1&from=drop&id=uf717c9df&margin=%5Bobject%20Object%5D&name=image-20220526203805939.png&originHeight=817&originWidth=1554&originalType=binary&ratio=1&rotation=0&showTitle=false&size=522217&status=done&style=none&taskId=uaf707f57-b708-4802-a48f-ebf3283d74d&title=" alt="image-20220526203805939.png"><br><img src="https://cdn.nlark.com/yuque/0/2022/png/22222537/1658158234845-b04bc958-e489-49da-8b3f-9f721527a0d9.png#clientId=u068474b6-549f-4&crop=0&crop=0&crop=1&crop=1&from=drop&id=u98516630&margin=%5Bobject%20Object%5D&name=image-20220526220742042.png&originHeight=904&originWidth=1601&originalType=binary&ratio=1&rotation=0&showTitle=false&size=508746&status=done&style=none&taskId=u3cc435ba-b4ba-4981-96e0-bcd54004eea&title=" alt="image-20220526220742042.png"></p>
+<h1 id="分页"><a href="#分页" class="headerlink" title="分页"></a>分页</h1><p><img src="https://cdn.nlark.com/yuque/0/2022/png/22222537/1658158250381-97177780-526d-4d9d-9cd8-dfb93620167d.png#clientId=u068474b6-549f-4&crop=0&crop=0&crop=1&crop=1&from=drop&id=uc0e1c783&margin=%5Bobject%20Object%5D&name=image-20220526194427027.png&originHeight=850&originWidth=1449&originalType=binary&ratio=1&rotation=0&showTitle=false&size=712438&status=done&style=none&taskId=u009c08e3-d83d-49fd-a1d2-4314f8e7e41&title=" alt="image-20220526194427027.png"><br>不同的页面是<strong>离散</strong>地存放在内存中</p>
+<h2 id="页表"><a href="#页表" class="headerlink" title="页表"></a>页表</h2><p><strong>每个进程都有自己的页表</strong><br><img src="https://cdn.nlark.com/yuque/0/2022/png/22222537/1658158280081-393ad2c7-c4d6-4f99-868a-0e459b444219.png#clientId=u068474b6-549f-4&crop=0&crop=0&crop=1&crop=1&from=drop&id=u1b2946fc&margin=%5Bobject%20Object%5D&name=image-20220526221528143.png&originHeight=827&originWidth=1576&originalType=binary&ratio=1&rotation=0&showTitle=false&size=423313&status=done&style=none&taskId=udb6205f3-67f6-468e-9b2c-7c8a14022ec&title=" alt="image-20220526221528143.png"></p>
+<h2 id="两级页表"><a href="#两级页表" class="headerlink" title="两级页表"></a>两级页表</h2><p><strong>问题：</strong><br><img src="https://cdn.nlark.com/yuque/0/2022/png/22222537/1658158298806-2e2738db-5545-415b-b57b-688ee329aa0d.png#clientId=u068474b6-549f-4&crop=0&crop=0&crop=1&crop=1&from=drop&id=u8914cab1&margin=%5Bobject%20Object%5D&name=image-20220526222736301.png&originHeight=249&originWidth=1486&originalType=binary&ratio=1&rotation=0&showTitle=false&size=250992&status=done&style=none&taskId=u99199451-2fee-4d6a-80bb-cd9b79c4c6c&title=" alt="image-20220526222736301.png"><br><img src="https://cdn.nlark.com/yuque/0/2022/png/22222537/1658158311748-de2659ab-ad99-460a-82e0-816c56a39ac7.png#clientId=u068474b6-549f-4&crop=0&crop=0&crop=1&crop=1&from=drop&id=ub8e1999f&margin=%5Bobject%20Object%5D&name=image-20220526222416837.png&originHeight=928&originWidth=1522&originalType=binary&ratio=1&rotation=0&showTitle=false&size=528126&status=done&style=none&taskId=u841f4286-1fda-40dc-b6cd-878f60e33bc&title=" alt="image-20220526222416837.png"><br><strong>相当于把以前的页表查分成多个页表，并为多个页表加一个目录，叫做”页目录表“</strong><br><img src="https://cdn.nlark.com/yuque/0/2022/png/22222537/1658158322354-aa473fff-e254-475e-bb59-9bc64e655325.png#clientId=u068474b6-549f-4&crop=0&crop=0&crop=1&crop=1&from=drop&id=u34d1b72b&margin=%5Bobject%20Object%5D&name=image-20220526222554067.png&originHeight=915&originWidth=1589&originalType=binary&ratio=1&rotation=0&showTitle=false&size=449144&status=done&style=none&taskId=u3054325a-e94c-4d18-b816-120085b9d1f&title=" alt="image-20220526222554067.png"></p>
+<h1 id="虚拟内存"><a href="#虚拟内存" class="headerlink" title="虚拟内存"></a>虚拟内存</h1><h2 id="传统存储"><a href="#传统存储" class="headerlink" title="传统存储"></a>传统存储</h2><p><img src="https://cdn.nlark.com/yuque/0/2022/png/22222537/1658158335651-40908ec2-147a-4fbd-9488-1cc4617e521a.png#clientId=u068474b6-549f-4&crop=0&crop=0&crop=1&crop=1&from=drop&id=u72d75be3&margin=%5Bobject%20Object%5D&name=image-20220527091648088.png&originHeight=829&originWidth=1509&originalType=binary&ratio=1&rotation=0&showTitle=false&size=610335&status=done&style=none&taskId=ubf0ff98c-c343-4b6f-a3db-cc3c37dc5e7&title=" alt="image-20220527091648088.png"><br><strong>例如，GTA游戏一共60G，电脑是4G的，如果要玩的话需要全部加载到内存中，显然是不够的，但是我在A场景时只用放入A场景的资源就可以了，而这种传统方式会需要整个游戏全部加驻留在内存中。</strong><br>虚拟内存基于<strong>局部性原理</strong><br><img src="https://cdn.nlark.com/yuque/0/2022/png/22222537/1658158355786-1e819fc4-b028-4465-8351-d0375c4970e4.png#clientId=u068474b6-549f-4&crop=0&crop=0&crop=1&crop=1&from=drop&id=u54fd0200&margin=%5Bobject%20Object%5D&name=image-20220527193637544-1658158331590.png&originHeight=697&originWidth=1560&originalType=binary&ratio=1&rotation=0&showTitle=false&size=497137&status=done&style=none&taskId=ue7bc9a9c-1327-433d-ba39-bbe56a381a0&title=" alt="image-20220527193637544-1658158331590.png"><img src="https://cdn.nlark.com/yuque/0/2022/png/22222537/1658158362257-e8928b4e-20f6-4df5-bac6-3e4fe059d1fb.png#clientId=u068474b6-549f-4&crop=0&crop=0&crop=1&crop=1&from=drop&id=ufe21d839&margin=%5Bobject%20Object%5D&name=image-20220527193731260.png&originHeight=788&originWidth=1668&originalType=binary&ratio=1&rotation=0&showTitle=false&size=647026&status=done&style=none&taskId=u7a9513f5-fef7-4d04-8bcd-2c81d740765&title=" alt="image-20220527193731260.png"></p>
+<h1 id="实现虚拟内存的技术"><a href="#实现虚拟内存的技术" class="headerlink" title="实现虚拟内存的技术"></a>实现虚拟内存的技术</h1><h2 id="请求分页存储管理"><a href="#请求分页存储管理" class="headerlink" title="请求分页存储管理"></a>请求分页存储管理</h2><p><img src="https://cdn.nlark.com/yuque/0/2022/png/22222537/1658158371530-afdb3c2c-c7e4-4171-9c3e-c5f0076974bc.png#clientId=u068474b6-549f-4&crop=0&crop=0&crop=1&crop=1&from=drop&id=u34992cdd&margin=%5Bobject%20Object%5D&name=image-20220527201223969.png&originHeight=866&originWidth=1537&originalType=binary&ratio=1&rotation=0&showTitle=false&size=446457&status=done&style=none&taskId=u712ec820-11b4-419b-b320-c47c8dc2700&title=" alt="image-20220527201223969.png"></p>
+<h2 id="内存有空闲的情况"><a href="#内存有空闲的情况" class="headerlink" title="内存有空闲的情况"></a>内存有空闲的情况</h2><p><img src="https://cdn.nlark.com/yuque/0/2022/png/22222537/1658158380064-7c1ffdd6-4694-4eb9-988a-83e5c2913470.png#clientId=u068474b6-549f-4&crop=0&crop=0&crop=1&crop=1&from=drop&id=u09e01d50&margin=%5Bobject%20Object%5D&name=image-20220527201223969.png&originHeight=866&originWidth=1537&originalType=binary&ratio=1&rotation=0&showTitle=false&size=446457&status=done&style=none&taskId=u5214606b-a3be-4632-a10b-a712daf7cb6&title=" alt="image-20220527201223969.png"></p>
+<h2 id="内存没空闲的情况"><a href="#内存没空闲的情况" class="headerlink" title="内存没空闲的情况"></a>内存没空闲的情况</h2><p><img src="https://cdn.nlark.com/yuque/0/2022/png/22222537/1658158388208-d4925211-477e-4e0c-8aef-67192ab0e4b5.png#clientId=u068474b6-549f-4&crop=0&crop=0&crop=1&crop=1&from=drop&id=ubfa7fba9&margin=%5Bobject%20Object%5D&name=image-20220527201424083.png&originHeight=848&originWidth=1520&originalType=binary&ratio=1&rotation=0&showTitle=false&size=566084&status=done&style=none&taskId=u4124c0a4-ddd1-4d50-9523-5e0b167c3c3&title=" alt="image-20220527201424083.png"></p>
+<h2 id="请求分段存储管理"><a href="#请求分段存储管理" class="headerlink" title="请求分段存储管理"></a>请求分段存储管理</h2><h2 id="请求段页式存储管理"><a href="#请求段页式存储管理" class="headerlink" title="请求段页式存储管理"></a>请求段页式存储管理</h2><h1 id="页面替换算法"><a href="#页面替换算法" class="headerlink" title="页面替换算法"></a>页面替换算法</h1><h2 id="最佳置换算法（OPT）"><a href="#最佳置换算法（OPT）" class="headerlink" title="最佳置换算法（OPT）"></a>最佳置换算法（OPT）</h2><p><img src="https://cdn.nlark.com/yuque/0/2022/png/22222537/1658158399204-b53877bb-9c91-4d04-91b7-52d51625e80b.png#clientId=u068474b6-549f-4&crop=0&crop=0&crop=1&crop=1&from=drop&id=u7e32db34&margin=%5Bobject%20Object%5D&name=image-20220527221215278.png&originHeight=885&originWidth=1528&originalType=binary&ratio=1&rotation=0&showTitle=false&size=663415&status=done&style=none&taskId=ubbc10ec2-9b2a-4de1-855b-0c297ef0e9d&title=" alt="image-20220527221215278.png"></p>
+<h2 id="先进先出置换算法（FIFO）"><a href="#先进先出置换算法（FIFO）" class="headerlink" title="先进先出置换算法（FIFO）"></a>先进先出置换算法（FIFO）</h2><p><img src="https://cdn.nlark.com/yuque/0/2022/png/22222537/1658158408049-8a0291b7-ebfb-4cdb-808c-3e14a3a164a0.png#clientId=u068474b6-549f-4&crop=0&crop=0&crop=1&crop=1&from=drop&id=u0daff84a&margin=%5Bobject%20Object%5D&name=image-20220527224415852.png&originHeight=868&originWidth=1554&originalType=binary&ratio=1&rotation=0&showTitle=false&size=761454&status=done&style=none&taskId=ua328fcbc-98ba-4803-889e-626f6c6b466&title=" alt="image-20220527224415852.png"></p>
+<h2 id="最近最久未使用置换算法（LRU）"><a href="#最近最久未使用置换算法（LRU）" class="headerlink" title="最近最久未使用置换算法（LRU）"></a>最近最久未使用置换算法（LRU）</h2><p><img src="https://cdn.nlark.com/yuque/0/2022/png/22222537/1658158417644-270d71f9-8e6f-4a09-9336-374fd69186e7.png#clientId=u068474b6-549f-4&crop=0&crop=0&crop=1&crop=1&from=drop&id=u5e412019&margin=%5Bobject%20Object%5D&name=image-20220527224415852.png&originHeight=868&originWidth=1554&originalType=binary&ratio=1&rotation=0&showTitle=false&size=761454&status=done&style=none&taskId=u41ef3023-e663-4a37-ad1f-edbe4432663&title=" alt="image-20220527224415852.png"></p>
+<h2 id="时钟置换算法（CLOCK）"><a href="#时钟置换算法（CLOCK）" class="headerlink" title="时钟置换算法（CLOCK）"></a>时钟置换算法（CLOCK）</h2><p><img src="https://cdn.nlark.com/yuque/0/2022/png/22222537/1658158427495-5547f211-e57d-40fd-8ffe-680af304a7a4.png#clientId=u068474b6-549f-4&crop=0&crop=0&crop=1&crop=1&from=drop&id=u3be68235&margin=%5Bobject%20Object%5D&name=image-20220527224856710.png&originHeight=879&originWidth=1596&originalType=binary&ratio=1&rotation=0&showTitle=false&size=865996&status=done&style=none&taskId=u1d980b5a-0a16-48dc-99fc-1e51b86163f&title=" alt="image-20220527224856710.png"></p>
+<ul>
+<li>内存块排布类似于循环链表</li>
+<li>到6页面的时候，由于5个内存块都满了，就需要先箭头转一圈全部置为0，然后替换最开始的位置，后面用到的继续置为1，全为1的时候再转一圈变为0，然后又从队首开始替换。箭头扫描的过程有点像时钟转，故命名为时钟置换算法。<h2 id="改造型的时钟置换算法"><a href="#改造型的时钟置换算法" class="headerlink" title="改造型的时钟置换算法"></a>改造型的时钟置换算法</h2><img src="https://cdn.nlark.com/yuque/0/2022/png/22222537/1658158438287-b7ac793f-f05c-4393-82c7-b5faae306617.png#clientId=u068474b6-549f-4&crop=0&crop=0&crop=1&crop=1&from=drop&id=u2cb345c3&margin=%5Bobject%20Object%5D&name=image-20220527230209377.png&originHeight=854&originWidth=1600&originalType=binary&ratio=1&rotation=0&showTitle=false&size=1253265&status=done&style=none&taskId=uc2910acd-827b-4450-987d-9ddb51421b9&title=" alt="image-20220527230209377.png"><br>因为之前说到分页存储的时候，再替换过程中如果一个页面被修改过，则需要写入外存中去。这个时候给他加一个标记，被修改过的时候修改位标记为1。<h1 id="磁盘结构"><a href="#磁盘结构" class="headerlink" title="磁盘结构"></a>磁盘结构</h1><img src="https://cdn.nlark.com/yuque/0/2022/png/22222537/1658158450843-3a53646d-0ca9-4780-b220-58ca5b7e7722.png#clientId=u068474b6-549f-4&crop=0&crop=0&crop=1&crop=1&from=drop&id=u73551c47&margin=%5Bobject%20Object%5D&name=image-20220528100812196.png&originHeight=595&originWidth=1073&originalType=binary&ratio=1&rotation=0&showTitle=false&size=530392&status=done&style=none&taskId=u5899ae06-e451-4ac5-8158-6973d85408c&title=" alt="image-20220528100812196.png"><br><img src="https://cdn.nlark.com/yuque/0/2022/png/22222537/1658158483090-1d3ac7fd-23c4-45a1-90f8-2944000246a5.png#clientId=u068474b6-549f-4&crop=0&crop=0&crop=1&crop=1&from=drop&id=u9bc71317&margin=%5Bobject%20Object%5D&name=image-20220528101050210.png&originHeight=443&originWidth=955&originalType=binary&ratio=1&rotation=0&showTitle=false&size=154230&status=done&style=none&taskId=ue75c4d2a-0998-450d-b664-5535e32270c&title=" alt="image-20220528101050210.png"><h2 id="活动头磁盘、固定头磁盘"><a href="#活动头磁盘、固定头磁盘" class="headerlink" title="活动头磁盘、固定头磁盘"></a>活动头磁盘、固定头磁盘</h2><img src="https://cdn.nlark.com/yuque/0/2022/png/22222537/1658158469108-6cf624dd-7ce3-444c-873d-a216fd36f049.png#clientId=u068474b6-549f-4&crop=0&crop=0&crop=1&crop=1&from=drop&id=ua862161f&margin=%5Bobject%20Object%5D&name=image-20220528100916094.png&originHeight=599&originWidth=1021&originalType=binary&ratio=1&rotation=0&showTitle=false&size=605959&status=done&style=none&taskId=ua4482f94-afc9-496a-b1d4-32031777028&title=" alt="image-20220528100916094.png"><h2 id="写磁盘需要的时间流程（寻道时间、延迟时间、传输时间）"><a href="#写磁盘需要的时间流程（寻道时间、延迟时间、传输时间）" class="headerlink" title="写磁盘需要的时间流程（寻道时间、延迟时间、传输时间）"></a>写磁盘需要的时间流程（寻道时间、延迟时间、传输时间）</h2><img src="https://cdn.nlark.com/yuque/0/2022/png/22222537/1658158501047-04a2ca45-549f-4ed6-a8d8-2d51bd28fdb8.png#clientId=u068474b6-549f-4&crop=0&crop=0&crop=1&crop=1&from=drop&id=u456e6dff&margin=%5Bobject%20Object%5D&name=image-20220528101301185.png&originHeight=576&originWidth=1097&originalType=binary&ratio=1&rotation=0&showTitle=false&size=411407&status=done&style=none&taskId=ufe61b8d8-00d2-4a6c-9f95-b9b834479cb&title=" alt="image-20220528101301185.png"><h2 id="磁盘调度算法"><a href="#磁盘调度算法" class="headerlink" title="磁盘调度算法"></a>磁盘调度算法</h2><h2 id="先来先服务"><a href="#先来先服务" class="headerlink" title="先来先服务"></a>先来先服务</h2><img src="https://cdn.nlark.com/yuque/0/2022/png/22222537/1658158511402-76048f2b-c6c7-4450-ac58-9e1812682d74.png#clientId=u068474b6-549f-4&crop=0&crop=0&crop=1&crop=1&from=drop&id=ud0420beb&margin=%5Bobject%20Object%5D&name=image-20220528113135927.png&originHeight=596&originWidth=1039&originalType=binary&ratio=1&rotation=0&showTitle=false&size=342069&status=done&style=none&taskId=u4fd5f6bd-84c9-4ea0-bfe2-60e81f1cf5b&title=" alt="image-20220528113135927.png"><h2 id="最短寻找时间优先"><a href="#最短寻找时间优先" class="headerlink" title="最短寻找时间优先"></a>最短寻找时间优先</h2><img src="https://cdn.nlark.com/yuque/0/2022/png/22222537/1658158518539-3d68ccd1-321e-41f8-b3db-b9df757810bb.png#clientId=u068474b6-549f-4&crop=0&crop=0&crop=1&crop=1&from=drop&id=u2fcc312e&margin=%5Bobject%20Object%5D&name=image-20220528113135927.png&originHeight=596&originWidth=1039&originalType=binary&ratio=1&rotation=0&showTitle=false&size=342069&status=done&style=none&taskId=u5ed8bf5a-3e19-406e-8c37-b42fd908298&title=" alt="image-20220528113135927.png"><h2 id="扫描算法"><a href="#扫描算法" class="headerlink" title="扫描算法"></a>扫描算法</h2><img src="https://cdn.nlark.com/yuque/0/2022/png/22222537/1658158559714-a5dc5914-614c-4e1d-8698-60bbd7bfa485.png#clientId=u068474b6-549f-4&crop=0&crop=0&crop=1&crop=1&from=drop&id=uf2e9be6b&margin=%5Bobject%20Object%5D&name=image-20220528113512693.png&originHeight=603&originWidth=1066&originalType=binary&ratio=1&rotation=0&showTitle=false&size=464102&status=done&style=none&taskId=u84444488-0f4e-4772-8378-84d15633ed8&title=" alt="image-20220528113512693.png"><h2 id="LOOK调度算法（扫描算法改进）"><a href="#LOOK调度算法（扫描算法改进）" class="headerlink" title="LOOK调度算法（扫描算法改进）"></a>LOOK调度算法（扫描算法改进）<img src="https://cdn.nlark.com/yuque/0/2022/png/22222537/1658158526101-4f39919e-b815-4ca2-b63d-c0e554fff524.png#clientId=u068474b6-549f-4&crop=0&crop=0&crop=1&crop=1&from=drop&id=ud228e959&margin=%5Bobject%20Object%5D&name=image-20220528122404860.png&originHeight=569&originWidth=1022&originalType=binary&ratio=1&rotation=0&showTitle=false&size=312028&status=done&style=none&taskId=u7fcb17c5-84dc-453c-aaf6-0e23d59b6f2&title=" alt="image-20220528122404860.png"></h2><h2 id="循环扫描算法（扫描算法改进）主要是各个磁道响应时间比较平均"><a href="#循环扫描算法（扫描算法改进）主要是各个磁道响应时间比较平均" class="headerlink" title="循环扫描算法（扫描算法改进）主要是各个磁道响应时间比较平均"></a>循环扫描算法（扫描算法改进）主要是各个磁道响应时间比较平均<img src="https://cdn.nlark.com/yuque/0/2022/png/22222537/1658158534958-e576259b-88f5-4d33-b8d6-9df4e626d1d0.png#clientId=u068474b6-549f-4&crop=0&crop=0&crop=1&crop=1&from=drop&id=u8119782c&margin=%5Bobject%20Object%5D&name=image-20220528122629933.png&originHeight=559&originWidth=1064&originalType=binary&ratio=1&rotation=0&showTitle=false&size=314301&status=done&style=none&taskId=u64c364f5-e660-48f8-9785-2a06bc53900&title=" alt="image-20220528122629933.png"></h2><h2 id="C-LOOK调度算法"><a href="#C-LOOK调度算法" class="headerlink" title="C-LOOK调度算法"></a>C-LOOK调度算法<img src="https://cdn.nlark.com/yuque/0/2022/png/22222537/1658158580532-848e4291-1772-4116-9e1f-d2818f5b2613.png#clientId=u068474b6-549f-4&crop=0&crop=0&crop=1&crop=1&from=drop&id=u516197a7&margin=%5Bobject%20Object%5D&name=image-20220528122824178.png&originHeight=557&originWidth=1049&originalType=binary&ratio=1&rotation=0&showTitle=false&size=370008&status=done&style=none&taskId=u0c160cd6-eae7-423f-8aa8-397cee0d9d4&title=" alt="image-20220528122824178.png"></h2><h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><img src="https://cdn.nlark.com/yuque/0/2022/png/22222537/1658158591526-1b1a6d83-631f-4e5f-a7f2-692bd85bc18d.png#clientId=u068474b6-549f-4&crop=0&crop=0&crop=1&crop=1&from=drop&id=uac63570a&margin=%5Bobject%20Object%5D&name=image-20220528122851103-1658158587411.png&originHeight=497&originWidth=1125&originalType=binary&ratio=1&rotation=0&showTitle=false&size=297642&status=done&style=none&taskId=uaed989ba-626b-49a9-9754-60ecaad5aa1&title=" alt="image-20220528122851103-1658158587411.png"><h2 id="减少磁盘延迟时间的方法"><a href="#减少磁盘延迟时间的方法" class="headerlink" title="减少磁盘延迟时间的方法"></a>减少磁盘延迟时间的方法</h2><h3 id="交替编号：在读取连续扇区时，每读完一个扇区需要时间处理读取的内容，由于磁头还没有准备好，可能在处理过程中就错过了连续扇区的内容，这个时候需要再转一圈转到未读的地方，所以一般间隔编号依次交替解决问题"><a href="#交替编号：在读取连续扇区时，每读完一个扇区需要时间处理读取的内容，由于磁头还没有准备好，可能在处理过程中就错过了连续扇区的内容，这个时候需要再转一圈转到未读的地方，所以一般间隔编号依次交替解决问题" class="headerlink" title="交替编号：在读取连续扇区时，每读完一个扇区需要时间处理读取的内容，由于磁头还没有准备好，可能在处理过程中就错过了连续扇区的内容，这个时候需要再转一圈转到未读的地方，所以一般间隔编号依次交替解决问题"></a>交替编号：在读取连续扇区时，每读完一个扇区需要时间处理读取的内容，由于磁头还没有准备好，可能在处理过程中就错过了连续扇区的内容，这个时候需要再转一圈转到未读的地方，所以一般间隔编号依次交替解决问题</h3><img src="https://cdn.nlark.com/yuque/0/2022/png/22222537/1658158602935-29af1c8b-e82e-401f-a5a1-b6403477c4e2.png#clientId=u068474b6-549f-4&crop=0&crop=0&crop=1&crop=1&from=drop&id=u30a499a1&margin=%5Bobject%20Object%5D&name=image-20220528123916465.png&originHeight=503&originWidth=1072&originalType=binary&ratio=1&rotation=0&showTitle=false&size=241824&status=done&style=none&taskId=uf248d84d-2d32-4712-b2bc-9d16890ee00&title=" alt="image-20220528123916465.png"><br><img src="https://cdn.nlark.com/yuque/0/2022/png/22222537/1658158617736-267af6e6-4c29-4018-b47f-cc5d2bbd8ebc.png#clientId=u068474b6-549f-4&crop=0&crop=0&crop=1&crop=1&from=drop&id=uad591592&margin=%5Bobject%20Object%5D&name=image-20220528124153707.png&originHeight=553&originWidth=1107&originalType=binary&ratio=1&rotation=0&showTitle=false&size=406246&status=done&style=none&taskId=u3a93368b-723f-486a-8c36-db47978234f&title=" alt="image-20220528124153707.png"><h3 id="错位命名"><a href="#错位命名" class="headerlink" title="错位命名"></a>错位命名</h3><img src="https://cdn.nlark.com/yuque/0/2022/png/22222537/1658158624171-04575605-acb3-4674-b007-27604d30e4e6.png#clientId=u068474b6-549f-4&crop=0&crop=0&crop=1&crop=1&from=drop&id=uedddc3af&margin=%5Bobject%20Object%5D&name=image-20220528124458638.png&originHeight=611&originWidth=1086&originalType=binary&ratio=1&rotation=0&showTitle=false&size=386465&status=done&style=none&taskId=u5e4fb348-f2c3-4ee8-985c-9a2efc2b5df&title=" alt="image-20220528124458638.png"></li>
+</ul>
+<h1 id="IO"><a href="#IO" class="headerlink" title="IO"></a>IO<img src="https://cdn.nlark.com/yuque/0/2022/png/22222537/1658158633543-d2a53e44-a662-4432-8002-c75cad6e4eec.png#clientId=u068474b6-549f-4&crop=0&crop=0&crop=1&crop=1&from=drop&id=ud30874ed&margin=%5Bobject%20Object%5D&name=image-20220528124634861.png&originHeight=493&originWidth=1103&originalType=binary&ratio=1&rotation=0&showTitle=false&size=247807&status=done&style=none&taskId=u2c3636fd-de6f-4263-bebc-b8b638a72bf&title=" alt="image-20220528124634861.png"></h1><h1 id=""><a href="#" class="headerlink" title=""></a></h1><p>select poll epoll<br><img src="https://cdn.nlark.com/yuque/0/2022/png/22222537/1660451847923-06791649-8b89-47b1-a15b-681028a98022.png#clientId=u5203beb5-81e4-4&crop=0&crop=0&crop=1&crop=1&from=paste&height=903&id=u90997dad&margin=%5Bobject%20Object%5D&name=image.png&originHeight=813&originWidth=1598&originalType=binary&ratio=1&rotation=0&showTitle=false&size=577101&status=done&style=none&taskId=u1ca76adc-9dde-4c32-8c96-18822b3d30a&title=&width=1775.555602591716" alt="image.png"><br><img src="https://cdn.nlark.com/yuque/0/2022/png/22222537/1660452134996-339c0cca-443a-48ad-ae35-341acd62e413.png#clientId=u5203beb5-81e4-4&crop=0&crop=0&crop=1&crop=1&from=paste&height=840&id=u532da586&margin=%5Bobject%20Object%5D&name=image.png&originHeight=756&originWidth=1582&originalType=binary&ratio=1&rotation=0&showTitle=false&size=444524&status=done&style=none&taskId=u6aad4b0a-b62f-444b-8d2c-c2c6ec0852d&title=&width=1757.777824342988" alt="image.png"><br><img src="https://cdn.nlark.com/yuque/0/2022/png/22222537/1660452275840-a5850af5-955f-4084-be8e-8ed4e1b25d0c.png#clientId=u5203beb5-81e4-4&crop=0&crop=0&crop=1&crop=1&from=paste&height=900&id=uad1c4763&margin=%5Bobject%20Object%5D&name=image.png&originHeight=810&originWidth=1557&originalType=binary&ratio=1&rotation=0&showTitle=false&size=698907&status=done&style=none&taskId=u20661420-6169-4fac-9900-1c00c823a71&title=&width=1730.0000458293503" alt="image.png"><br><img src="https://cdn.nlark.com/yuque/0/2022/png/22222537/1660452616552-0d03877d-ca4e-4348-b0d8-e08f572a79b9.png#clientId=u5203beb5-81e4-4&crop=0&crop=0&crop=1&crop=1&from=paste&height=423&id=ua6717c29&margin=%5Bobject%20Object%5D&name=image.png&originHeight=381&originWidth=504&originalType=binary&ratio=1&rotation=0&showTitle=false&size=110182&status=done&style=none&taskId=u26c29054-316c-4876-95f1-c532639a7dc&title=&width=560.0000148349342" alt="image.png"></p>
+<h2 id="什么是操作系统？请简要概述一下"><a href="#什么是操作系统？请简要概述一下" class="headerlink" title="什么是操作系统？请简要概述一下"></a>什么是操作系统？请简要概述一下</h2><p>操作系统是管理计算机硬件和软件资源的计算机程序，提供一个计算机用户与计算机硬件系统之间的接口。<br>向上对用户程序提供接口，向下接管硬件资源。<br>操作系统本质上也是一个软件，作为最接近硬件的系统软件，负责处理器管理、存储器管理、设备管理、文件管理和提供用户接口。 </p>
+<h2 id="操作系统有哪些分类？"><a href="#操作系统有哪些分类？" class="headerlink" title="操作系统有哪些分类？"></a>操作系统有哪些分类？</h2><p>操作系统常规可分为批处理操作系统、分时操作系统、实时操作系统。<br>若一个操作系统兼顾批操作和分时的功能，则称该系统为通用操作系统。<br>常见的通用操作系统有：Windows、Linux、MacOS等。 </p>
+<h2 id="什么是内核态和用户态？"><a href="#什么是内核态和用户态？" class="headerlink" title="什么是内核态和用户态？"></a>什么是内核态和用户态？</h2><p>为了避免操作系统和关键数据被用户程序破坏，将处理器的执行状态分为内核态和用户态。<br>内核态是操作系统管理程序执行时所处的状态，能够执行包含特权指令在内的一切指令，能够访问系统内所有的存储空间。<br>用户态是用户程序执行时处理器所处的状态，不能执行特权指令，只能访问用户地址空间。<br>用户程序运行在用户态,操作系统内核运行在内核态。 </p>
+<h2 id="如何实现内核态和用户态的切换？"><a href="#如何实现内核态和用户态的切换？" class="headerlink" title="如何实现内核态和用户态的切换？"></a>如何实现内核态和用户态的切换？</h2><p>处理器从用户态切换到内核态的方法有三种：系统调用、异常和外部中断。 </p>
+<ol>
+<li><p>系统调用是操作系统的最小功能单位，是操作系统提供的用户接口，系统调用本身是一种软中断。 </p>
+</li>
+<li><p>异常，也叫做内中断，是由错误引起的，如文件损坏、缺页故障等。 </p>
+</li>
+<li><p>外部中断，是通过两根信号线来通知处理器外设的状态变化，是硬中断。 </p>
+<h2 id="并发和并行的区别"><a href="#并发和并行的区别" class="headerlink" title="并发和并行的区别"></a>并发和并行的区别</h2></li>
+<li><p>并发（concurrency）：指宏观上看起来两个程序在同时运行，比如说在单核cpu上的多任务。但是从微观上看两个程序的指令是交织着运行的，指令之间交错执行，在单个周期内只运行了一个指令。这种并发并不能提高计算机的性能，只能提高效率（如降低某个进程的相应时间）。 </p>
+</li>
+<li><p>并行（parallelism）：指严格物理意义上的同时运行，比如多核cpu，两个程序分别运行在两个核上，两者之间互不影响，单个周期内每个程序都运行了自己的指令，也就是运行了两条指令。这样说来并行的确提高了计算机的效率。所以现在的cpu都是往多核方面发展。 </p>
+<h2 id="什么是进程？"><a href="#什么是进程？" class="headerlink" title="什么是进程？"></a>什么是进程？</h2><p>进程是操作系统中最重要的抽象概念之一，是资源分配的基本单位，是独立运行的基本单位。<br>进程的经典定义就是一个执行中程序的实例。系统中的每个程序都运行在某个进程的上下文（context）中。<br>上下文是由程序正确运行所需的状态组成的。这个状态包括存放在内存中的程序的代码和数据，它的栈、通用目的寄存器的内容、程序计数器、环境变量以及打开文件描述符的集合。<br>进程一般由以下的部分组成： </p>
+</li>
+<li><p>进程控制块PCB，是进程存在的唯一标志，包含进程标识符PID，进程当前状态，程序和数据地址，进程优先级、CPU现场保护区（用于进程切换），占有的资源清单等。 </p>
+</li>
+<li><p>程序段 </p>
+</li>
+<li><p>数据段 </p>
+<h2 id="进程的基本操作"><a href="#进程的基本操作" class="headerlink" title="进程的基本操作"></a>进程的基本操作</h2><p>以Unix系统举例： </p>
+</li>
+<li><p> 进程的创建：fork()。新创建的子进程几乎但不完全与父进程相同。子进程得到与父进程用户级虚拟地址空间相同的(但是独立的)一份副本，包括代码和数据段、堆、共享库以及用户栈。子进程还获得与父进程任何打开文件描述符相同的副本，这就意味着当父进程调用 fork 时，子进程可以读写父进程中打开的任何文件。父进程和新创建的子进程之间最大的区别在于它们有不同的 PID。fork函数是有趣的（也常常令人迷惑）， 因为它只被调用一次，却会返回两次：一次是在调用进程（父进程）中，一次是在新创建的子进程中。在父进程中，fork 返回子进程的 PID。在子进程中，fork 返回 0。因为子进程的 PID 总是为非零，返回值就提供一个明 确的方法来分辨程序是在父进程还是在子进程中执行。 </p>
+</li>
+<li><p><a href="#">复制代码</a>回收子进程：当一个进程由于某种原因终止时，内核并不是立即把它从系统中清除。相反，进程被保持在一种已终止的状态中，直到被它的父进程回收（reaped）。当父进程回收已终止的子进程时，内核将子进程的退出状态传递给父进程，然后抛弃已终止的进程。一个进程可以通过调用 waitpid 函数来等待它的子进程终止或者停止。</p>
+<table>
+<thead>
+<tr>
+<th>1</th>
+<th>pid_t fork(void);</th>
+</tr>
+</thead>
+</table>
+</li>
+<li><p><a href="#">复制代码</a>加载并运行程序：execve 函数在当前进程的上下文中加载并运行一个新程序。<br><a href="#">复制代码</a>进程终止：</p>
+<table>
+<thead>
+<tr>
+<th>1</th>
+<th>pid_t waitpid(pid_t pid, int *statusp, int options);</th>
+</tr>
+</thead>
+</table>
+</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th>1</th>
+<th>int execve(const char *filename, const char *argv[], const char *envp[]);</th>
+</tr>
+</thead>
+</table>
+<ol start="4">
+<li><a href="#">复制代码</a><br>每个进程各自有不同的用户地址空间,任何一个进程的全局变量在另一个进程中都看不到，所以进程之间要交换数据必须通过内核,在内核中开辟一块缓冲区,进程A把数据从用户空间拷到内核缓冲区,进程B再从内核缓冲区把数据读走,内核提供的这种机制称为进程间通信。 不同进程间的通信本质：进程之间可以看到一份公共资源；而提供这份资源的形式或者提供者不同，造成了通信方式不同。 进程间通信主要包括管道、系统IPC（包括消息队列、信号量、信号、共享内存等）、以及套接字socket。 管道是一种最基本的IPC机制，作用于有血缘关系的进程之间，完成数据传递。调用pipe系统函数即可创建一个管道。有如下特质： 管道的原理: 管道实为内核使用环形队列机制，借助内核缓冲区实现。 管道的局限性： 它使得多个进程可以访问同一块内存空间，不同进程可以及时看到对方进程中对共享内存中数据得更新。这种方式需要依靠某种同步操作，如互斥锁和信号量等。 特点： 一个信号就是一条小消息，它通知进程系统中发生了一个某种类型的事件。Linux 系统上支持的30 种不同类型的信号。每种信号类型都对应于某种系统事件。低层的硬件异常是由内核异常处理程序处理的，正常情况下，对用户进程而言是不可见的。信号提供了一种机制，通知用户进程发生了这些异常。 <a href="#">复制代码</a>进程在运行时有三种基本状态：就绪态、运行态和阻塞态。 2.就绪（ready）态：进程具备运行条件，等待系统分配处理器以便运行的状态。 当进程已分配到除CPU以外的所有必要资源后，只要再获得CPU，便可立即执行，进程这时的状态称为就绪状态。在一个系统中处于就绪状态的进程可能有多个，通常将它们排成一个队列，称为就绪队列。 3.阻塞（wait）态：又称等待态或睡眠态，指进程不具备运行条件，正在等待某个时间完成的状态。 各状态之间的转换： 2。僵尸进程：进程使用fork创建子进程，如果子进程退出，而父进程并没有调用wait 获waitpid 获取子进程的状态信息，那么子进程的进程描述符仍然保存在系统中的这些进程是僵尸进程。 线程产生的原因：进程可以使多个程序能并发执行，以提高资源的利用率和系统的吞吐量；但是其具有一些缺点： 引入线程就是为了解决以上进程的不足，线程具有以下的优点： 进程API以Unix系统为例，线程相关的API属于Posix线程(Pthreads)标准接口。 <img src="https://cdn.nlark.com/yuque/0/2022/png/22222537/1659883620324-de53a65b-003b-4a6d-88df-e92155156f45.png#clientId=u3e33a899-2e55-4&crop=0&crop=0&crop=1&crop=1&from=paste&id=uc1206f0f&margin=%5Bobject%20Object%5D&originHeight=291&originWidth=670&originalType=url&ratio=1&rotation=0&showTitle=false&status=done&style=none&taskId=ua22cf357-d46c-4b3c-8b62-a979f2df0b4&title="><table>
+<thead>
+<tr>
+<th>1</th>
+<th>void exit(int status);</th>
+</tr>
+</thead>
+</table>
+</li>
+</ol>
+<h2 id="简述进程间通信方法"><a href="#简述进程间通信方法" class="headerlink" title="简述进程间通信方法"></a>简述进程间通信方法</h2><h2 id="进程如何通过管道进行通信"><a href="#进程如何通过管道进行通信" class="headerlink" title="进程如何通过管道进行通信"></a>进程如何通过管道进行通信</h2><ol>
+<li><p>其本质是一个伪文件(实为内核缓冲区) </p>
+</li>
+<li><p>由两个文件描述符引用，一个表示读端，一个表示写端。 </p>
+</li>
+<li><p>规定数据从管道的写端流入管道，从读端流出。 </p>
+</li>
+<li><p>数据自己读不能自己写。 </p>
+</li>
+<li><p>数据一旦被读走，便不在管道中存在，不可反复读取。 </p>
+</li>
+<li><p>由于管道采用半双工通信方式。因此，数据只能在一个方向上流动。 </p>
+</li>
+<li><p>只能在有公共祖先的进程间使用管道。 </p>
+<h2 id="进程如何通过共享内存通信？"><a href="#进程如何通过共享内存通信？" class="headerlink" title="进程如何通过共享内存通信？"></a>进程如何通过共享内存通信？</h2></li>
+<li><p>共享内存是最快的一种IPC，因为进程是直接对内存进行操作来实现通信，避免了数据在用户空间和内核空间来回拷贝。 </p>
+</li>
+<li><p>因为多个进程可以同时操作，所以需要进行同步处理。 </p>
+</li>
+<li><p>信号量和共享内存通常结合在一起使用，信号量用来同步对共享内存的访问。 </p>
+<h2 id="什么是信号"><a href="#什么是信号" class="headerlink" title="什么是信号"></a>什么是信号</h2></li>
+<li><p>发送信号：内核通过更新目的进程上下文中的某个状态，发送（递送）一个信号给目的进程。发送信号可以有如下两种原因： </p>
+<ul>
+<li>内核检测到一个系统事件，比如除零错误或者子进程终止。 </li>
+<li>—个进程调用了kill 函数， 显式地要求内核发送一个信号给目的进程。一个进程可以发送信号给它自己。 </li>
+</ul>
+</li>
+<li><p>接收信号：当目的进程被内核强迫以某种方式对信号的发送做出反应时，它就接收了信号。进程可以忽略这个信号，终止或者通过执行一个称为信号处理程序(signal handler)的用户层函数捕获这个信号。 </p>
+<h2 id="如何编写正确且安全的信号处理函数"><a href="#如何编写正确且安全的信号处理函数" class="headerlink" title="如何编写正确且安全的信号处理函数"></a>如何编写正确且安全的信号处理函数</h2></li>
+<li><p>处理程序要尽可能简单。避免麻烦的最好方法是保持处理程序尽可能小和简单。例如，处理程序可能只是简单地设置全局标志并立即返回；所有与接收信号相关的处理都由主程序执行，它周期性地检查(并重置)这个标志。 </p>
+</li>
+<li><p>在处理程序中只调用异步信号安全的函数。所谓异步信号安全的函数(或简称安全的函数)能够被信号处理程序安全地调用，原因有二：要么它是可重入的(例如只访问局部变量），要么它不能被信号处理程序中断。 </p>
+</li>
+<li><p>保存和恢复errno。许多Linux 异步信号安全的函数都会在出错返回时设置errno在处理程序中调用这样的函数可能会干扰主程序中其他依赖于分。解决方法是在进人处理程序时把errno 保存在一个局部变量中，在处理程序返回前恢复它。注意，只有在处理程序要返回时才有此必要。如果处理程序调用_exit终止该进程，那么就不需要这样做了。 </p>
+</li>
+<li><p>阻塞所有的信号，保护对共享全局数据结构的访问。如果处理程序和主程序或其他处理程序共享一个全局数据结构，那么在访问(读或者写)该数据结构时，你的处理程序和主程序应该暂时阻塞所有的信号。这条规则的原因是从主程序访问一个数据结构d 通常需要一系列的指令，如果指令序列被访问d 的处理程序中断，那么处理程序可能会发现d 的状态不一致，得到不可预知的结果。在访问d 时暂时阻塞信号保证了处理程序不会中断该指令序列。 </p>
+</li>
+<li><p>用volatile 声明全局变量。考虑一个处理程序和一个main 函数，它们共享一个全局变量g 。处理程序更新g，main 周期性地读g， 对于一个优化编译器而言，main 中g的值看上去从来没有变化过，因此使用缓存在寄存器中g 的副本来满足对g 的每次引用是很安全的。如果这样，main 函数可能永远都无法看到处理程序更新过的值。可以用volatile 类型限定符来定义一个变量，告诉编译器不要缓存这个变量。例如：volatile 限定符强迫编译器毎次在代码中引用g时，都要从内存中读取g的值。一般来说，和其他所有共享数据结构一样，应该暂时阻塞信号，保护每次对全局变量的访问。 </p>
+<table>
+<thead>
+<tr>
+<th>1</th>
+<th>volatile int g;</th>
+</tr>
+</thead>
+</table>
+</li>
+<li><p>用sig_atomic_t声明标志。在常见的处理程序设计中，处理程序会写全局标志来记录收到了信号。主程序周期性地读这个标志，响应信号，再清除该标志。对于通过这种方式来共享的标志，C 提供一种整型数据类型sig_atomic_t对它的读和写保证会是原子的（不可中断的）。 </p>
+</li>
+<li><p>信号的一个与直觉不符的方面是未处理的信号是不排队的。因为 pending 位向量中每种类型的信号只对应有一位，所以每种类型最多只能有一个未处理的信号。关键思想是如果存在一个未处理的信号就表明至少有一个信号到达了。 </p>
+<h2 id="进程调度的时机"><a href="#进程调度的时机" class="headerlink" title="进程调度的时机"></a>进程调度的时机</h2></li>
+<li><p>当前运行的进程运行结束。 </p>
+</li>
+<li><p>当前运行的进程由于某种原因阻塞。 </p>
+</li>
+<li><p>执行完系统调用等系统程序后返回用户进程。 </p>
+</li>
+<li><p>在使用抢占调度的系统中，具有更高优先级的进程就绪时。 </p>
+</li>
+<li><p>分时系统中，分给当前进程的时间片用完。 </p>
+<h2 id="不能进行进程调度的情况"><a href="#不能进行进程调度的情况" class="headerlink" title="不能进行进程调度的情况"></a>不能进行进程调度的情况</h2></li>
+<li><p>在中断处理程序执行时。 </p>
+</li>
+<li><p>在操作系统的内核程序临界区内。 </p>
+</li>
+<li><p>其它需要完全屏蔽中断的原子操作过程中。 </p>
+<h2 id="进程的调度策略"><a href="#进程的调度策略" class="headerlink" title="进程的调度策略"></a>进程的调度策略</h2></li>
+<li><p>先到先服务调度<a href="/jump/super-jump/word?word=%E7%AE%97%E6%B3%95">算法</a></p>
+</li>
+<li><p>短作业优先调度<a href="/jump/super-jump/word?word=%E7%AE%97%E6%B3%95">算法</a></p>
+</li>
+<li><p>优先级调度<a href="/jump/super-jump/word?word=%E7%AE%97%E6%B3%95">算法</a></p>
+</li>
+<li><p>时间片轮转调度<a href="/jump/super-jump/word?word=%E7%AE%97%E6%B3%95">算法</a></p>
+</li>
+<li><p>高响应比优先调度<a href="/jump/super-jump/word?word=%E7%AE%97%E6%B3%95">算法</a></p>
+</li>
+<li><p>多级队列调度<a href="/jump/super-jump/word?word=%E7%AE%97%E6%B3%95">算法</a></p>
+</li>
+<li><p>多级反馈队列调度<a href="/jump/super-jump/word?word=%E7%AE%97%E6%B3%95">算法</a></p>
+<h2 id="进程调度策略的基本设计指标"><a href="#进程调度策略的基本设计指标" class="headerlink" title="进程调度策略的基本设计指标"></a>进程调度策略的基本设计指标</h2></li>
+<li><p>CPU利用率 </p>
+</li>
+<li><p>系统吞吐率，即单位时间内CPU完成的作业的数量。 </p>
+</li>
+<li><p>响应时间。 </p>
+</li>
+<li><p>周转时间。是指作业从提交到完成的时间间隔。从每个作业的角度看，完成每个作业的时间也是很关键 </p>
+<ul>
+<li>平均周转时间 </li>
+<li>带权周转时间 </li>
+<li>平均带权周转时间 <h2 id="进程的状态与状态转换"><a href="#进程的状态与状态转换" class="headerlink" title="进程的状态与状态转换"></a>进程的状态与状态转换</h2></li>
+</ul>
+</li>
+<li><p> 运行（running）态：进程占有处理器正在运行的状态。进程已获得CPU，其程序正在执行。在单处理机系统中，只有一个进程处于执行状态；在多处理机系统中，则有多个进程处于执行状态。 </p>
+</li>
+<li><p>就绪→执行  处于就绪状态的进程，当进程调度程序为之分配了处理机后，该进程便由就绪状态转变成执行状态。 </p>
+</li>
+<li><p>执行→就绪  处于执行状态的进程在其执行过程中，因分配给它的一个时间片已用完而不得不让出处理机，于是进程从执行状态转变成就绪状态。 </p>
+</li>
+<li><p>执行→阻塞  正在执行的进程因等待某种事件发生而无法继续执行时，便从执行状态变成阻塞状态。 </p>
+</li>
+<li><p>阻塞→就绪  处于阻塞状态的进程，若其等待的事件已经发生，于是进程由阻塞状态转变为就绪状态。 </p>
+<h2 id="什么是孤儿进程？僵尸进程"><a href="#什么是孤儿进程？僵尸进程" class="headerlink" title="什么是孤儿进程？僵尸进程?"></a>什么是孤儿进程？僵尸进程?</h2></li>
+<li><p> 孤儿进程：父进程退出，子进程还在运行的这些子进程都是孤儿进程，孤儿进程将被init进程（1号进程）所收养，并由init进程对他们完成状态收集工作。 </p>
+<h2 id="什么是线程？"><a href="#什么是线程？" class="headerlink" title="什么是线程？"></a>什么是线程？</h2></li>
+<li><p>是进程划分的任务，是一个进程内可调度的实体，是CPU调度的基本单位，用于保证程序的实时性，实现进程内部的并发。 </p>
+</li>
+<li><p>线程是操作系统可识别的最小执行和调度单位。每个线程都独自占用一个虚拟处理器：独自的寄存器组，指令计数器和处理器状态。 </p>
+</li>
+<li><p>每个线程完成不同的任务，但是属于同一个进程的不同线程之间共享同一地址空间（也就是同样的动态内存，映射文件，目标代码等等），打开的文件队列和其他内核资源。 </p>
+<h2 id="为什么需要线程？"><a href="#为什么需要线程？" class="headerlink" title="为什么需要线程？"></a>为什么需要线程？</h2></li>
+<li><p>进程在同一时刻只能做一个任务，很多时候不能充分利用CPU资源。 </p>
+</li>
+<li><p>进程在执行的过程中如果发生阻塞，整个进程就会挂起，即使进程中其它任务不依赖于等待的资源，进程仍会被阻塞。 </p>
+</li>
+<li><p>从资源上来讲，开辟一个线程所需要的资源要远小于一个进程。 </p>
+</li>
+<li><p>从切换效率上来讲，运行于一个进程中的多个线程，它们之间使用相同的地址空间，而且线程间彼此切换所需时间也远远小于进程间切换所需要的时间（这种时间的差异主要由于缓存的大量未命中导致）。 </p>
+</li>
+<li><p>从通信机制上来讲，线程间方便的通信机制。对不同进程来说，它们具有独立的地址空间，要进行数据的传递只能通过进程间通信的方式进行。线程则不然，属于同一个进程的不同线程之间共享同一地址空间，所以一个线程的数据可以被其它线程感知，线程间可以直接读写进程数据段（如全局变量）来进行通信（需要一些同步措施）。 </p>
+<h2 id="简述线程和进程的区别和联系"><a href="#简述线程和进程的区别和联系" class="headerlink" title="简述线程和进程的区别和联系"></a>简述线程和进程的区别和联系</h2></li>
+<li><p>一个线程只能属于一个进程，而一个进程可以有多个线程，但至少有一个线程。线程依赖于进程而存在。 </p>
+</li>
+<li><p>进程在执行过程中拥有独立的地址空间，而多个线程共享进程的地址空间。（资源分配给进程，同一进程的所有线程共享该进程的所有资源。同一进程中的多个线程共享代码段（代码和常量），数据段（全局变量和静态变量），扩展段（堆存储）。但是每个线程拥有自己的栈段，栈段又叫运行时段，用来存放所有局部变量和临时变量。） </p>
+</li>
+<li><p>进程是资源分配的最小单位，线程是CPU调度的最小单位。 </p>
+</li>
+<li><p>通信：由于同一进程中的多个线程具有相同的地址空间，使它们之间的同步和通信的实现，也变得比较容易。进程间通信IPC，线程间可以直接读写进程数据段（如全局变量）来进行通信（需要一些同步方法，以保证数据的一致性）。 </p>
+</li>
+<li><p>进程编程调试简单可靠性高，但是创建销毁开销大；线程正相反，开销小，切换速度快，但是编程调试相对复杂。 </p>
+</li>
+<li><p>进程间不会相互影响；一个进程内某个线程挂掉将导致整个进程挂掉。 </p>
+</li>
+<li><p>进程适应于多核、多机分布；线程适用于多核。 </p>
+<h2 id="进程和线程的基本API"><a href="#进程和线程的基本API" class="headerlink" title="进程和线程的基本API"></a>进程和线程的基本API</h2></li>
+<li><p>操作系统中，进程是具有不同的地址空间的，两个进程是不能感知到对方的存在的。有时候，需要多个进程来协同完成一些任务。当多个进程需要对同一个内核资源进行操作时，这些进程便是竞争的关系，操作系统必须协调各个进程对资源的占用，进程的互斥是解决进程间竞争关系的方法。进程互斥指若干个进程要使用同一共享资源时，任何时刻最多允许一个进程去使用，其他要使用该资源的进程必须等待，直到占有资源的进程释放该资源。当多个进程协同完成一些任务时，不同进程的执行进度不一致，这便产生了进程的同步问题。需要操作系统干预，在特定的同步点对所有进程进行同步，这种协作进程之间相互等待对方消息或信号的协调关系称为进程同步。进程互斥本质上也是一种进程同步。进程的同步方法： 操作系统中，属于同一进程的线程之间具有相同的地址空间，线程之间共享数据变得简单高效。遇到竞争的线程同时修改同一数据或是协作的线程设置同步点的问题时，需要使用一些线程同步的方法来解决这些问题。 线程同步的方法： 进程之间地址空间不同，不能感知对方的存在，同步时需要将锁放在多进程共享的空间。而线程之间共享同一地址空间，同步时把锁放在所属的同一进程空间即可。 死锁是指两个或两个以上进程在执行过程中，因争夺资源而造成的下相互等待的现象。产生死锁需要满足下面四个条件： 解决死锁的方法即破坏产生死锁的四个必要条件之一，主要方法如下: 地址空间是一个非负整数地址的有序集合。 在一个带虚拟内存的系统中，CPU 从一个有N=pow(2,n)个地址的地址空间中生成虚拟地址，这个地址空间称为虚拟地址空间（virtual address space）,现代系统通常支持 32 位或者 64 位虚拟地址空间。 一个系统还有一个物理地址空间（physical address space），对应于系统中物理内存的M 个字节。 地址空间的概念是很重要的，因为它清楚地区分了数据对象（字节）和它们的属性（地址）。 一旦认识到了这种区别，那么我们就可以将其推广，允许每个数据对象有多个独立的地址，其中每个地址都选自一个不同的地址空间。这就是虚拟内存的基本思想。 主存中的每字节都有一个选自虚拟地址空间的虚拟地址和一个选自物理地址空间的物理地址。 为了更加有效地管理内存并且少出错，现代系统提供了一种对主存的抽象概念，叫做虚拟内存(VM)。虚拟内存是硬件异常、硬件地址翻译、主存、磁盘文件和内核软件的完美交互，它为每个进程提供了一个大的、一致的和私有的地址空间。通过一个很清晰的机制，虚拟内存提供了三个重要的能力： 当访问一个内存中不存在的页，并且内存已满，则需要从内存中调出一个页或将数据送至磁盘对换区，替换一个页，这种现象叫做缺页置换。当前操作系统最常采用的缺页置换<a href="/jump/super-jump/word?word=%E7%AE%97%E6%B3%95">算法</a>如下： 当前最常采用的就是LRU<a href="/jump/super-jump/word?word=%E7%AE%97%E6%B3%95">算法</a>。 实时操作系统（Real-time operating system, RTOS），又称即时操作系统，它会按照<a href="/jump/super-jump/word?word=%E6%8E%92%E5%BA%8F">排序</a>运行、管理系统资源，并为开发应用程序提供一致的基础。实时操作系统与一般的操作系统相比，最大的特色就是“实时性”，如果有一个任务需要执行，实时操作系统会马上（在较短时间内）执行该任务，不会有较长的延时。这种特性保证了各个任务的及时执行。 由于多进程共享资源，具有最高优先权的进程被低优先级进程阻塞，反而使具有中优先级的进程先于高优先级的进程执行，导致系统的崩溃。这就是所谓的优先级反转(Priority Inversion)。其实,优先级反转是在高优级(假设为A)的任务要访问一个被低优先级任务(假设为C)占有的资源时,被阻塞.而此时又有优先级高于占有资源的任务(C)而低于被阻塞的任务(A)的优先级的任务(假设为B)时,于是,占有资源的任务就被挂起(占有的资源仍为它占有),因为占有资源的任务优先级很低,所以,它可能一直被另外的任务挂起.而它占有的资源也就一直不能释放,这样,引起任务A一直没办法执行.而比它优先低的任务却可以执行。 目前解决优先级反转有许多种方法。其中普遍使用的有2种方法：一种被称作优先级继承(priority inheritance)；另一种被称作优先级极限(priority ceilings)。 select是一种多路复用技术。其收到所有输入的文件描述符，返回哪些文件有新数据。 其可以设置为阻塞或者非阻塞状态，底层采用1024位bitmap做实现，因此有文件描述符上限数。 poll是一种多路复用技术。其收到所有输入的文件描述符，返回哪些文件有新数据。 其通过<a href="/jump/super-jump/word?word=%E9%93%BE%E8%A1%A8">链表</a>代替了之前select的数据结构，使得其没有上限限制。 poll是一种多路复用技术。其采用一个文件描述符管理多个输入的文件描述符，采用事件回调的方式，提高了程序运行效率。 虚拟地址由虚拟页号和页偏移两部分组成。通过虚拟地址的页面号，首先在快表中查询是否有该映射，查询不成功，在页表中找到该页对应的物理地址。然后通过页物理地址+页偏移，得到真实的物理地址 页表用于存储虚拟地址中的虚拟页面号和物理页面号的映射关系。除此之外，有些页的读写有限制，页表也通过其他存储位，标记该页访问位，是否在内存中（可能被页面置换出去了）等等。 多级页表用于减少内存的占用。以二级页表为例，虚拟地址被分为DIR,PAGE和offset三部分，通过顶级页表和DIR，寻找到该二级页表的起始位置，再通过二级页表的起始位置和PAGE，找到页物理地址，最后加上页偏移，即可得到最终的物理地址。 快表也称为页表高速缓存。其会存储一定数量的页表项，以此加快虚拟地址到物理地址的映射速度。 MMU即内存管理单元，该硬件负责处理虚拟地址到物理地址的转化工作。快表也存储在MMU上。 先来先服务调度<a href="/jump/super-jump/word?word=%E7%AE%97%E6%B3%95">算法</a>：创建一个任务队列，一旦有新任务就加入这个队列，CPU完成一个任务后就从队列取任务。 短作业(进程)优先调度<a href="/jump/super-jump/word?word=%E7%AE%97%E6%B3%95">算法</a>：针对较短的作业，优先调给CPU工作。 时间片轮转<a href="/jump/super-jump/word?word=%E7%AE%97%E6%B3%95">算法</a>：每个时间片依次执行一个任务，时间片结束后将该任务放回任务队列。 多级反馈队列：也按时间片轮转<a href="/jump/super-jump/word?word=%E7%AE%97%E6%B3%95">算法</a>执行任务，设置n个队列，当第一个队列任务为空，才执行第二个队列，依次类推。如果在i队列的任务在该时间片执行后没有完成，即插入i+1号队列。 进程组即多个进程的集合,进程组有一个组长,组长进程的PID等于进程组的PGID。 协程，即用户态线程。我们知道，在Linux下，线程有PCB，然后可以占用时间片去调度，但是在用户态线程中，该线程的执行不由内核做调度，由用户自己实现 可以这么理解，在用户进程A中，再实现了个调度器，调度用户线程，这些线程不像之前的线程，内核是感知不到的，它们只能感知到A的存在，用户态线程之间时间片只能争取内核分给进程A的时间片。 </p>
+<h2 id="多线程模型"><a href="#多线程模型" class="headerlink" title="多线程模型"></a>多线程模型</h2><ol>
+<li><p>多对一模型。将多个用户级线程映射到一个内核级线程上。该模型下，线程在用户空间进行管理，效率较高。缺点就是一个线程阻塞，整个进程内的所有线程都会阻塞。几乎没有系统继续使用这个模型。 </p>
+</li>
+<li><p>一对一模型。将内核线程与用户线程一一对应。优点是一个线程阻塞时，不会影响到其它线程的执行。该模型具有更好的并发性。缺点是内核线程数量一般有上限，会限制用户线程的数量。更多的内核线程数目也给线程切换带来额外的负担。linux和Windows操作系统家族都是使用一对一模型。 </p>
+</li>
+<li><p>多对多模型。将多个用户级线程映射到多个内核级线程上。结合了多对一模型和一对一模型的特点。 </p>
+<h2 id="进程同步的方法"><a href="#进程同步的方法" class="headerlink" title="进程同步的方法"></a>进程同步的方法</h2></li>
+<li><p>互斥锁 </p>
+</li>
+<li><p>读写锁 </p>
+</li>
+<li><p>条件变量 </p>
+</li>
+<li><p>记录锁(record locking) </p>
+</li>
+<li><p>信号量 </p>
+</li>
+<li><p>屏障（barrier） </p>
+<h2 id="线程同步的方法"><a href="#线程同步的方法" class="headerlink" title="线程同步的方法"></a>线程同步的方法</h2></li>
+<li><p>互斥锁 </p>
+</li>
+<li><p>读写锁 </p>
+</li>
+<li><p>条件变量 </p>
+</li>
+<li><p>信号量 </p>
+</li>
+<li><p>自旋锁 </p>
+</li>
+<li><p>屏障（barrier） </p>
+<h2 id="进程同步与线程同步有什么区别"><a href="#进程同步与线程同步有什么区别" class="headerlink" title="进程同步与线程同步有什么区别"></a>进程同步与线程同步有什么区别</h2><h2 id="死锁是怎样产生的？"><a href="#死锁是怎样产生的？" class="headerlink" title="死锁是怎样产生的？"></a>死锁是怎样产生的？</h2></li>
+<li><p>互斥条件：进程对所分配到的资源不允许其他进程访问，若其他进程访问该资源，只能等待，直至占有该资源的进程使用完成后释放该资源。 </p>
+</li>
+<li><p>占有并等待条件：进程获得一定的资源后，又对其他资源发出请求，但是该资源可能被其他进程占有，此时请求阻塞，但该进程不会释放自己已经占有的资源。 </p>
+</li>
+<li><p>非抢占条件：进程已获得的资源，在未完成使用之前，不可被剥夺，只能在使用后自己释放。 </p>
+</li>
+<li><p>循环等待条件：进程发生死锁后，必然存在一个进程-资源之间的环形链。 </p>
+<h2 id="如何解决死锁问题？"><a href="#如何解决死锁问题？" class="headerlink" title="如何解决死锁问题？"></a>如何解决死锁问题？</h2></li>
+<li><p>资源一次性分配，这样就不会再有请求了（破坏请求条件）。 </p>
+</li>
+<li><p>只要有一个资源得不到分配，也不给这个进程分配其他的资源（破坏占有并等待条件）。 </p>
+</li>
+<li><p>可抢占资源：即当进程新的资源未得到满足时，释放已占有的资源，从而破坏不可抢占的条件。 </p>
+</li>
+<li><p>资源有序分配法：系统给每类资源赋予一个序号，每个进程按编号递增的请求资源，释放则相反，从而破坏环路等待的条件 </p>
+<h2 id="什么是虚拟地址，什么是物理地址？"><a href="#什么是虚拟地址，什么是物理地址？" class="headerlink" title="什么是虚拟地址，什么是物理地址？"></a>什么是虚拟地址，什么是物理地址？</h2><h2 id="什么是虚拟内存？"><a href="#什么是虚拟内存？" class="headerlink" title="什么是虚拟内存？"></a>什么是虚拟内存？</h2></li>
+<li><p>它将主存看成是一个存储在磁盘上的地址空间的高速缓存，在主存中只保存活动区域，并根据需要在磁盘和主存之间来回传送数据，通过这种方式，它高效地使用了主存。 </p>
+</li>
+<li><p>它为每个进程提供了一致的地址空间，从而简化了内存管理。 </p>
+</li>
+<li><p>它保护了每个进程的地址空间不被其他进程破坏。 </p>
+<h2 id="为什么要引入虚拟内存？"><a href="#为什么要引入虚拟内存？" class="headerlink" title="为什么要引入虚拟内存？"></a>为什么要引入虚拟内存？</h2></li>
+<li><p>虚拟内存作为缓存的工具 </p>
+<ul>
+<li> 虚拟内存被组织为一个由存放在磁盘上的N个连续的字节大小的单元组成的数组。 </li>
+<li> 虚拟内存利用DRAM缓存来自通常更大的虚拟地址空间的页面。 </li>
+</ul>
+</li>
+<li><p>虚拟内存作为内存管理的工具。操作系统为每个进程提供了一个独立的页表，也就是独立的虚拟地址空间。多个虚拟页面可以映射到同一个物理页面上。 </p>
+<ul>
+<li>一般：每个进程有各自私有的代码，数据，堆栈，是不和其他进程共享的，<strong>这样OS创建页表，将虚拟页映射到不连续的物理页面。</strong></li>
+<li>某些情况下，需要进程来共享代码和数据。例如每个进程调用相同的操作系统内核代码，或者C标准库函数。<strong>OS会把不同进程中适当的虚拟页面映射到相同的物理页面。</strong></li>
+<li><strong>加载器从不在磁盘到内存实际复制任何数据，在每个页初次被引用时，虚拟内存系统会按照需要自动的调入数据页。</strong></li>
+<li> 例如：一个给定的linux系统上的每个进程都是用类似的内存格式，对于64为地址空间，代码段总是从虚拟地址）0x400000开始，数据段，代码段，栈，堆等等。 </li>
+<li><strong>简化链接：</strong> 独立的地址空间允许每个进程的内存映像使用相同的基本格式，而不管代码和数据实际存放在物理内存的何处。 </li>
+<li><strong>简化加载：</strong> 虚拟内存还使得容易向内存中加载可执行文件和共享对象文件。要把目标文件中.text和.data节加载到一个新创建的进程中，Linux加载器为代码和数据段分配虚拟页VP，把他们<strong>标记为无效（未被缓存）</strong> ，将页表条目指向目标文件的起始位置。 </li>
+<li><strong>简化共享：</strong> 独立地址空间为OS提供了一个管理用户进程和操作系统自身之间共享的一致机制。 </li>
+<li><strong>简化内存分配：</strong> 虚拟内存向用户提供一个简单的分配额外内存的机制。当一个运行在用户进程中的程序要求额外的堆空间时（如malloc），OS分配一个适当k大小个连续的虚拟内存页面，并且将他们映射到物理内存中任意位置的k个任意物理页面，<strong>因此操作系统没有必要分配k个连续的物理内存页面，页面可以随机的分散在物理内存中</strong>。 </li>
+</ul>
+</li>
+</ol>
+<ul>
+<li><p> 虚拟内存作为内存保护的工具。不应该允许一个用户进程修改它的只读段，也不允许它修改任何内核代码和数据结构，不允许读写其他进程的私有内存，不允许修改任何与其他进程共享的虚拟页面。每次CPU生成一个地址时，MMU会读一个PTE，通过在PTE上添加一些额外的许可位来控制对一个虚拟页面内容的访问十分简单。 </p>
+<h2 id="常见的页面置换算法"><a href="#常见的页面置换算法" class="headerlink" title="常见的页面置换算法"></a>常见的页面置换<a href="/jump/super-jump/word?word=%E7%AE%97%E6%B3%95">算法</a></h2></li>
+<li><p>先进先出(FIFO)<a href="/jump/super-jump/word?word=%E7%AE%97%E6%B3%95">算法</a>： </p>
+<ul>
+<li>思路：置换最先调入内存的页面，即置换在内存中驻留时间最久的页面。 </li>
+<li>实现：按照进入内存的先后次序排列成队列，从队尾进入，从队首删除。 </li>
+<li>特点：实现简单；性能较差，调出的页面可能是经常访问的 </li>
+</ul>
+</li>
+<li><p>最近最少使用（LRU）<a href="/jump/super-jump/word?word=%E7%AE%97%E6%B3%95">算法</a>: </p>
+<ul>
+<li>思路：置换最近一段时间以来最长时间未访问过的页面。根据程序局部性原理，刚被访问的页面，可能马上又要被访问；而较长时间内没有被访问的页面，可能最近不会被访问。 </li>
+<li>实现：缺页时，计算内存中每个逻辑页面的上一次访问时间，选择上一次使用到当前时间最长的页面 </li>
+<li>特点：可能达到最优的效果，维护这样的访问<a href="/jump/super-jump/word?word=%E9%93%BE%E8%A1%A8">链表</a>开销比较大 </li>
+</ul>
+</li>
+<li><p>最不常用<a href="/jump/super-jump/word?word=%E7%AE%97%E6%B3%95">算法</a>（Least Frequently Used, LFU） </p>
+<ul>
+<li>思路：缺页时，置换访问次数最少的页面 </li>
+<li>实现：每个页面设置一个访问计数，访问页面时，访问计数加1，缺页时，置换计数最小的页面 </li>
+<li>特点：<a href="/jump/super-jump/word?word=%E7%AE%97%E6%B3%95">算法</a>开销大，开始时频繁使用，但以后不使用的页面很难置换 <h2 id="请说一下什么是写时复制？"><a href="#请说一下什么是写时复制？" class="headerlink" title="请说一下什么是写时复制？"></a>请说一下什么是写时复制？</h2></li>
+</ul>
+</li>
+<li><p>如果有多个进程要读取它们自己的那部门资源的副本，那么复制是不必要的。每个进程只要保存一个指向这个资源的指针就可以了。只要没有进程要去修改自己的“副本”，就存在着这样的幻觉：每个进程好像独占那个资源。从而就避免了复制带来的负担。如果一个进程要修改自己的那份资源“副本”，那么就会复制那份资源，并把复制的那份提供给进程。不过其中的复制对进程来说是透明的。这个进程就可以修改复制后的资源了，同时其他的进程仍然共享那份没有修改过的资源。所以这就是名称的由来：在写入时进行复制。 </p>
+</li>
+<li><p>写时复制的主要好处在于：如果进程从来就不需要修改资源，则不需要进行复制。惰性<a href="/jump/super-jump/word?word=%E7%AE%97%E6%B3%95">算法</a>的好处就在于它们尽量推迟代价高昂的操作，直到必要的时刻才会去执行。 </p>
+</li>
+<li><p>在使用虚拟内存的情况下，写时复制（Copy-On-Write）是以页为基础进行的。所以，只要进程不修改它全部的地址空间，那么就不必复制整个地址空间。在fork()调用结束后，父进程和子进程都相信它们有一个自己的地址空间，但实际上它们共享父进程的原始页，接下来这些页又可以被其他的父进程或子进程共享。 </p>
+<h2 id="实时操作系统的概念"><a href="#实时操作系统的概念" class="headerlink" title="实时操作系统的概念"></a>实时操作系统的概念</h2><h2 id="优先级反转是什么？如何解决"><a href="#优先级反转是什么？如何解决" class="headerlink" title="优先级反转是什么？如何解决"></a>优先级反转是什么？如何解决</h2></li>
+</ul>
+<ol>
+<li>优先级继承(priority inheritance) 优先级继承是指将低优先级任务的优先级提升到等待它所占有的资源的最高优先级任务的优先级.当高优先级任务由于等待资源而被阻塞时,此时资源的拥有者的优先级将会自动被提升。 </li>
+<li>优先级天花板(priority ceilings)优先级天花板是指将申请某资源的任务的优先级提升到可能访问该资源的所有任务中最高优先级任务的优先级.(这个优先级称为该资源的优先级天花板)。 <h2 id="简述-select"><a href="#简述-select" class="headerlink" title="简述 select"></a>简述 select</h2>select是一种多路复用技术。其收到所有输入的文件描述符，返回哪些文件有新数据。<br>其可以设置为阻塞或者非阻塞状态，底层采用1024位bitmap做实现，因此有文件描述符上限数。 <h2 id="简述poll"><a href="#简述poll" class="headerlink" title="简述poll"></a>简述poll</h2>poll是一种多路复用技术。其收到所有输入的文件描述符，返回哪些文件有新数据。<br>其通过<a href="/jump/super-jump/word?word=%E9%93%BE%E8%A1%A8">链表</a>代替了之前select的数据结构，使得其没有上限限制。 <h2 id="简述epoll"><a href="#简述epoll" class="headerlink" title="简述epoll"></a>简述epoll</h2>poll是一种多路复用技术。其采用一个文件描述符管理多个输入的文件描述符，采用事件回调的方式，提高了程序运行效率。 <h2 id="简述虚拟地址到物理地址转化过程"><a href="#简述虚拟地址到物理地址转化过程" class="headerlink" title="简述虚拟地址到物理地址转化过程"></a>简述虚拟地址到物理地址转化过程</h2>虚拟地址由虚拟页号和页偏移两部分组成。通过虚拟地址的页面号，首先在快表中查询是否有该映射，查询不成功，在页表中找到该页对应的物理地址。然后通过页物理地址+页偏移，得到真实的物理地址 <h2 id="简述页表"><a href="#简述页表" class="headerlink" title="简述页表"></a>简述页表</h2>页表用于存储虚拟地址中的虚拟页面号和物理页面号的映射关系。除此之外，有些页的读写有限制，页表也通过其他存储位，标记该页访问位，是否在内存中（可能被页面置换出去了）等等。 <h2 id="简述多级页表"><a href="#简述多级页表" class="headerlink" title="简述多级页表"></a>简述多级页表</h2>多级页表用于减少内存的占用。以二级页表为例，虚拟地址被分为DIR,PAGE和offset三部分，通过顶级页表和DIR，寻找到该二级页表的起始位置，再通过二级页表的起始位置和PAGE，找到页物理地址，最后加上页偏移，即可得到最终的物理地址。 <h2 id="简述快表"><a href="#简述快表" class="headerlink" title="简述快表"></a>简述快表</h2>快表也称为页表高速缓存。其会存储一定数量的页表项，以此加快虚拟地址到物理地址的映射速度。 <h2 id="简述MMU"><a href="#简述MMU" class="headerlink" title="简述MMU"></a>简述MMU</h2>MMU即内存管理单元，该硬件负责处理虚拟地址到物理地址的转化工作。快表也存储在MMU上。 <h2 id="进程调度算法"><a href="#进程调度算法" class="headerlink" title="进程调度算法"></a>进程调度<a href="/jump/super-jump/word?word=%E7%AE%97%E6%B3%95">算法</a></h2>先来先服务调度<a href="/jump/super-jump/word?word=%E7%AE%97%E6%B3%95">算法</a>：创建一个任务队列，一旦有新任务就加入这个队列，CPU完成一个任务后就从队列取任务。<br>短作业(进程)优先调度<a href="/jump/super-jump/word?word=%E7%AE%97%E6%B3%95">算法</a>：针对较短的作业，优先调给CPU工作。<br>时间片轮转<a href="/jump/super-jump/word?word=%E7%AE%97%E6%B3%95">算法</a>：每个时间片依次执行一个任务，时间片结束后将该任务放回任务队列。<br>多级反馈队列：也按时间片轮转<a href="/jump/super-jump/word?word=%E7%AE%97%E6%B3%95">算法</a>执行任务，设置n个队列，当第一个队列任务为空，才执行第二个队列，依次类推。如果在i队列的任务在该时间片执行后没有完成，即插入i+1号队列。 <h2 id="简述进程组"><a href="#简述进程组" class="headerlink" title="简述进程组"></a>简述进程组</h2>进程组即多个进程的集合,进程组有一个组长,组长进程的PID等于进程组的PGID。 <h2 id="简述协程"><a href="#简述协程" class="headerlink" title="简述协程"></a>简述协程</h2>协程，即用户态线程。我们知道，在Linux下，线程有PCB，然后可以占用时间片去调度，但是在用户态线程中，该线程的执行不由内核做调度，由用户自己实现<br>可以这么理解，在用户进程A中，再实现了个调度器，调度用户线程，这些线程不像之前的线程，内核是感知不到的，它们只能感知到A的存在，用户态线程之间时间片只能争取内核分给进程A的时间片。</li>
+</ol>
+</li>
+</ol>
+</div></article></div><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2022-05-21T13:03:41.000Z" title="2022/5/21 21:03:41">2022-05-21</time>发表</span><span class="level-item"><time dateTime="2023-01-17T09:39:40.977Z" title="2023/1/17 17:39:40">2023-01-17</time>更新</span><span class="level-item"><a class="link-muted" href="/categories/java/">java</a><span> / </span><a class="link-muted" href="/categories/java/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/">后端开发</a></span><span class="level-item">1 小时读完 (大约12450个字)</span></div></div><h1 class="title is-3 is-size-4-mobile"><a class="link-muted" href="/2022/05/21/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/">计算机网络</a></h1><div class="content"><h1 id="分层"><a href="#分层" class="headerlink" title="分层"></a>分层</h1><p><img src="https://cdn.nlark.com/yuque/0/2022/png/22222537/1657506890803-2f92c24f-e677-4640-aad6-29370dc5f594.png#clientId=u7cca30bd-a35c-4&crop=0&crop=0&crop=1&crop=1&from=paste&id=u82bc0f33&margin=%5Bobject%20Object%5D&originHeight=421&originWidth=731&originalType=url&ratio=1&rotation=0&showTitle=false&status=done&style=none&taskId=u3fa4f199-bb77-4569-bce1-4f708cb396f&title="></p>
 <h1 id="键入网址到网页显示，期间发生了什么？"><a href="#键入网址到网页显示，期间发生了什么？" class="headerlink" title="键入网址到网页显示，期间发生了什么？"></a>键入网址到网页显示，期间发生了什么？</h1><p>1、首先，在浏览器地址栏中输入url<br>2、浏览器先查看浏览器缓存-系统缓存-路由器缓存，如果缓存中有，会直接在屏幕中显示页面内容。若没有，则跳到第三步操作。<br>3、在发送http请求前，需要域名解析(DNS解析)，解析获取相应的IP地址。<br>4、浏览器向服务器发起tcp连接，与浏览器建立tcp三次握手。<br>5、握手成功后，浏览器向服务器发送http请求，请求数据包。<br>6、服务器处理收到的请求，将数据返回至浏览器<br>7、浏览器收到HTTP响应<br>8、读取页面内容，浏览器渲染，解析html源码<br>9、生成Dom树、解析css样式、js交互<br>10、客户端和服务器交互</p>
 <h1 id="TCP"><a href="#TCP" class="headerlink" title="TCP"></a>TCP</h1><p>TCP 是<strong>面向连接的、可靠的、基于字节流</strong>的传输层通信协议。</p>
 <ul>
@@ -630,63 +922,7 @@
 <li>Session是服务器保持状态的方法。首先需要明确的是，Session保存在服务器上，可以保存在数据库、文件或内存中，每个用户有独立的Session用户在客户端上记录用户的操作。我们可以理解为每个用户有一个独一无二的Session ID作为Session文件的Hash键，通过这个值可以锁定具体的Session结构的数据，这个Session结构中存储了用户操作行为。</li>
 </ul>
 <p>当服务器需要识别客户端时就需要结合Cookie了。每次HTTP请求的时候，客户端都会发送相应的Cookie信息到服务端。实际上大多数的应用都是用Cookie来实现Session跟踪的，第一次创建Session的时候，服务端会在HTTP协议中告诉客户端，需要在Cookie里面记录一个Session ID，以后每次请求把这个会话ID发送到服务器，我就知道你是谁了。如果客户端的浏览器禁用了Cookie，会使用一种叫做URL重写的技术来进行会话跟踪，即每次HTTP交互，URL后面都会被附加上一个诸如sid=xxxxx这样的参数，服务端据此来识别用户，这样就可以帮用户完成诸如用户名等信息自动填入的操作了。</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2022/05/21/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" data-id="cld18dn2200068wvk42fi156u" class="article-share-link">
-        分享
-      </a>
-      
-    </footer>
-
-  </div>
-
-  
-
-  
-
-</article>
-    
-    <article id="post-Mysql" class="article article-type-post" itemscope
-  itemprop="blogPost" data-scroll-reveal>
-
-  <div class="article-inner">
-    
-    <header class="article-header">
-      
-  
-  <h2 class="article-title" itemprop="name">
-    <a href="/2022/05/20/Mysql/">MySQL</a>
-  </h2>
-  
-  
-
-    </header>
-    
-
-    
-    <div class="article-meta">
-      <a href="/2022/05/20/Mysql/" class="article-date">
-  <time datetime="2022-05-20T13:03:41.000Z" itemprop="datePublished">2022-05-20</time>
-</a>
-      
-<div class="article-category">
-  <a class="article-category-link" href="/categories/java/">java</a> / <a class="article-category-link" href="/categories/java/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/">后端开发</a>
-</div>
-
-    </div>
-    
-
-    
-
-    <div class="article-entry" itemprop="articleBody">
-      
-      
-        
-      
-      
-        <h1 id="执行一条-select-语句，期间发生了什么？"><a href="#执行一条-select-语句，期间发生了什么？" class="headerlink" title="执行一条 select 语句，期间发生了什么？"></a>执行一条 select 语句，期间发生了什么？</h1><h2 id="第一步：连接器"><a href="#第一步：连接器" class="headerlink" title="第一步：连接器"></a>第一步：连接器</h2><p>连接的过程需要先经过 TCP 三次握手，因为 MySQL 是基于 TCP 协议进行传输的</p>
+</div></article></div><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2022-05-20T13:03:41.000Z" title="2022/5/20 21:03:41">2022-05-20</time>发表</span><span class="level-item"><time dateTime="2023-01-17T09:26:36.058Z" title="2023/1/17 17:26:36">2023-01-17</time>更新</span><span class="level-item"><a class="link-muted" href="/categories/java/">java</a><span> / </span><a class="link-muted" href="/categories/java/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/">后端开发</a></span><span class="level-item">1 小时读完 (大约8757个字)</span></div></div><h1 class="title is-3 is-size-4-mobile"><a class="link-muted" href="/2022/05/20/Mysql/">MySQL</a></h1><div class="content"><h1 id="执行一条-select-语句，期间发生了什么？"><a href="#执行一条-select-语句，期间发生了什么？" class="headerlink" title="执行一条 select 语句，期间发生了什么？"></a>执行一条 select 语句，期间发生了什么？</h1><h2 id="第一步：连接器"><a href="#第一步：连接器" class="headerlink" title="第一步：连接器"></a>第一步：连接器</h2><p>连接的过程需要先经过 TCP 三次握手，因为 MySQL 是基于 TCP 协议进行传输的</p>
 <h2 id="第二步：查询缓存"><a href="#第二步：查询缓存" class="headerlink" title="第二步：查询缓存"></a>第二步：查询缓存</h2><p>对于更新比较频繁的表，查询缓存的命中率很低的，因为只要一个表有更新操作，那么这个表的查询缓存就会被清空。如果刚缓存了一个查询结果很大的数据，还没被使用的时候，刚好这个表有更新操作，查询缓冲就被清空了，相当于缓存了个寂寞。<br>所以，MySQL 8.0 版本直接将查询缓存删掉了，也就是说 MySQL 8.0 开始，执行一条 SQL 查询语句，不会再走到查询缓存这个阶段了。<br>对于 MySQL 8.0 之前的版本，如果想关闭查询缓存，我们可以通过将参数 query_cache_type 设置成 DEMAND</p>
 <h2 id="第三步：解析-SQL"><a href="#第三步：解析-SQL" class="headerlink" title="第三步：解析 SQL"></a>第三步：解析 SQL</h2><h3 id="解析器"><a href="#解析器" class="headerlink" title="解析器"></a>解析器</h3><p>第一件事情，<strong>词法分析</strong>。MySQL 会根据你输入的字符串识别出关键字出来，构建出 SQL 语法树，这样方面后面模块获取 SQL 类型、表名、字段名、 where 条件等等。<br>第二件事情，<strong>语法分析</strong>。根据词法分析的结果，语法解析器会根据语法规则，判断你输入的这个 SQL 语句是否满足 MySQL 语法。</p>
 <h2 id="第四步：执行-SQL"><a href="#第四步：执行-SQL" class="headerlink" title="第四步：执行 SQL"></a>第四步：执行 SQL</h2><h3 id="预处理器"><a href="#预处理器" class="headerlink" title="预处理器"></a>预处理器</h3><p>我们先来说说预处理阶段做了什么事情。</p>
@@ -1075,126 +1311,48 @@
 </li>
 </ul>
 <p>保证高一致性：<br>MQ手动应答确保redis删除<br>Canal组件监听binlog日志</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2022/05/20/Mysql/" data-id="cld18dn1w00018wvk32ga9c28" class="article-share-link">
-        分享
-      </a>
-      
-    </footer>
-
-  </div>
-
-  
-
-  
-
-</article>
-    
-  </article>
-  
-
-  
-</section>
-</div>
-    <footer class="footer">
-  <div class="outer">
-    <ul class="list-inline">
-      <li>Winky&#39;s Blog &copy; 2023</li>
-      
-        <li>
-          
-            <a href="https://beian.miit.gov.cn/" target="_blank"></a>
-            
-        </li>
-      
-      <li>Powered by <a href="http://hexo.io/" target="_blank">Hexo</a></li>
-      <li>theme  <a target="_blank" rel="noopener" href="https://github.com/zhwangart/hexo-theme-ocean">Ocean</a></li>
-    </ul>
-    <p><ul class="list-inline">
-  
-  <li><i class="fe fe-bar-chart tooltip" data-tooltip="PV"></i> <span id="busuanzi_value_site_pv"></span></li>
-  
-  <li><i class="fe fe-smile-alt tooltip" data-tooltip="UV"></i> <span id="busuanzi_value_site_uv"></span></li>
-  
-</ul></p>
-  </div>
-</footer>
-  </main>
-  <aside class="sidebar">
-    <button class="navbar-toggle"></button>
-<nav class="navbar">
-  
-  <div class="logo">
-    <a href="/"><img src="/images/hexo.svg" alt="Winky&#39;s Blog"></a>
-  </div>
-  
-  <ul class="nav nav-main">
-    
-    <li class="nav-item">
-      <a class="nav-item-link" href="/">Home</a>
-    </li>
-    
-    <li class="nav-item">
-      <a class="nav-item-link" href="/archives">Archives</a>
-    </li>
-    
-    <li class="nav-item">
-      <a class="nav-item-link nav-item-search" title="搜索">
-        <i class="fe fe-search"></i>
-        搜索
-      </a>
-    </li>
-  </ul>
-</nav>
-<nav class="navbar navbar-bottom">
-  <ul class="nav">
-    <li class="nav-item">
-      <div class="totop" id="totop">
-  <i class="fe fe-rocket"></i>
-</div>
-    </li>
-    <li class="nav-item">
-      
-      <a class="nav-item-link" target="_blank" href="/atom.xml" title="RSS Feed">
-        <i class="fe fe-feed"></i>
-      </a>
-      
-    </li>
-  </ul>
-</nav>
-<div class="search-form-wrap">
-  <div class="local-search local-search-plugin">
-  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
-  <div id="local-search-result" class="local-search-result"></div>
-</div>
-</div>
-  </aside>
-  
-<script src="/js/jquery-2.0.3.min.js"></script>
-
-
-<script src="/js/jquery.justifiedGallery.min.js"></script>
-
-
-<script src="/js/lazyload.min.js"></script>
-
-
-<script src="/js/busuanzi-2.3.pure.min.js"></script>
-
-
-
-<script src="/fancybox/jquery.fancybox.min.js"></script>
-
-
-
-
-
-
-<script src="/js/ocean.js"></script>
-
-</body>
-
-</html>
+</div></article></div></div><div class="column column-left is-4-tablet is-4-desktop is-4-widescreen  order-1"><div class="card widget" data-type="profile"><div class="card-content"><nav class="level"><div class="level-item has-text-centered flex-shrink-1"><div><figure class="image is-128x128 mx-auto mb-2"><img class="avatar" src="/img/avatar.png" alt="Your name"></figure><p class="title is-size-4 is-block" style="line-height:inherit;">Your name</p><p class="is-size-6 is-block">Your title</p><p class="is-size-6 is-flex justify-content-center"><i class="fas fa-map-marker-alt mr-1"></i><span>Your location</span></p></div></div></nav><nav class="level is-mobile"><div class="level-item has-text-centered is-marginless"><div><p class="heading">文章</p><a href="/archives"><p class="title">4</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">分类</p><a href="/categories"><p class="title">2</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">标签</p><a href="/tags"><p class="title">0</p></a></div></div></nav><div class="level"><a class="level-item button is-primary is-rounded" href="https://github.com/ppoffice" target="_blank" rel="noopener">关注我</a></div><div class="level is-mobile is-multiline"><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Github" href="https://github.com/ppoffice"><i class="fab fa-github"></i></a></div></div></div><!--!--><div class="card widget" data-type="categories"><div class="card-content"><div class="menu"><h3 class="menu-label">分类</h3><ul class="menu-list"><li><a class="level is-mobile" href="/categories/java/"><span class="level-start"><span class="level-item">java</span></span><span class="level-end"><span class="level-item tag">4</span></span></a><ul><li><a class="level is-mobile" href="/categories/java/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/"><span class="level-start"><span class="level-item">后端开发</span></span><span class="level-end"><span class="level-item tag">4</span></span></a></li></ul></li></ul></div></div></div><div class="card widget" data-type="recent-posts"><div class="card-content"><h3 class="menu-label">最新文章</h3><article class="media"><div class="media-content"><p class="date"><time dateTime="2022-05-22T13:03:41.000Z">2022-05-22</time></p><p class="title"><a href="/2022/05/22/Spring/">Spring</a></p><p class="categories"><a href="/categories/java/">java</a> / <a href="/categories/java/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/">后端开发</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2022-05-22T13:03:41.000Z">2022-05-22</time></p><p class="title"><a href="/2022/05/22/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">操作系统</a></p><p class="categories"><a href="/categories/java/">java</a> / <a href="/categories/java/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/">后端开发</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2022-05-21T13:03:41.000Z">2022-05-21</time></p><p class="title"><a href="/2022/05/21/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/">计算机网络</a></p><p class="categories"><a href="/categories/java/">java</a> / <a href="/categories/java/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/">后端开发</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2022-05-20T13:03:41.000Z">2022-05-20</time></p><p class="title"><a href="/2022/05/20/Mysql/">MySQL</a></p><p class="categories"><a href="/categories/java/">java</a> / <a href="/categories/java/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/">后端开发</a></p></div></article></div></div><div class="card widget" data-type="archives"><div class="card-content"><div class="menu"><h3 class="menu-label">归档</h3><ul class="menu-list"><li><a class="level is-mobile" href="/archives/2022/05/"><span class="level-start"><span class="level-item">五月 2022</span></span><span class="level-end"><span class="level-item tag">4</span></span></a></li></ul></div></div></div><!--!--></div><!--!--></div></div></section><footer class="footer"><div class="container"><div class="level"><div class="level-start"><a class="footer-logo is-block mb-2" href="/"><img src="/img/logo.svg" alt="Winky&#039;s Blog" height="28"></a><p class="is-size-7"><span>&copy; 2023 Winky</span>  Powered by <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> &amp; <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank" rel="noopener">Icarus</a></p></div><div class="level-end"><div class="field has-addons"><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/WinkyGranger"><i class="fab fa-github"></i></a></p></div></div></div></div></footer><script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script><script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script><script>moment.locale("zh-cn");</script><script>var IcarusThemeSettings = {
+            article: {
+                highlight: {
+                    clipboard: true,
+                    fold: 'unfolded'
+                }
+            }
+        };</script><script src="/js/column.js"></script><script src="/js/animation.js"></script><a id="back-to-top" title="回到顶端" href="javascript:;"><i class="fas fa-chevron-up"></i></a><script src="/js/back_to_top.js" defer></script><!--!--><!--!--><!--!--><script src="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.js" defer></script><script>window.addEventListener("load", () => {
+      window.cookieconsent.initialise({
+        type: "info",
+        theme: "edgeless",
+        static: false,
+        position: "bottom-left",
+        content: {
+          message: "此网站使用Cookie来改善您的体验。",
+          dismiss: "知道了！",
+          allow: "允许使用Cookie",
+          deny: "拒绝",
+          link: "了解更多",
+          policy: "Cookie政策",
+          href: "https://www.cookiesandyou.com/",
+        },
+        palette: {
+          popup: {
+            background: "#edeff5",
+            text: "#838391"
+          },
+          button: {
+            background: "#4b81e8"
+          },
+        },
+      });
+    });</script><script src="https://cdn.jsdelivr.net/npm/lightgallery@1.10.0/dist/js/lightgallery.min.js" defer></script><script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/js/jquery.justifiedGallery.min.js" defer></script><script>window.addEventListener("load", () => {
+            if (typeof $.fn.lightGallery === 'function') {
+                $('.article').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof $.fn.justifiedGallery === 'function') {
+                if ($('.justified-gallery > p > .gallery-item').length) {
+                    $('.justified-gallery > p > .gallery-item').unwrap();
+                }
+                $('.justified-gallery').justifiedGallery();
+            }
+        });</script><!--!--><!--!--><!--!--><!--!--><!--!--><script src="/js/main.js" defer></script><div class="searchbox"><div class="searchbox-container"><div class="searchbox-header"><div class="searchbox-input-container"><input class="searchbox-input" type="text" placeholder="想要查找什么..."></div><a class="searchbox-close" href="javascript:;">×</a></div><div class="searchbox-body"></div></div></div><script src="/js/insight.js" defer></script><script>document.addEventListener('DOMContentLoaded', function () {
+            loadInsight({"contentUrl":"/content.json"}, {"hint":"想要查找什么...","untitled":"(无标题)","posts":"文章","pages":"页面","categories":"分类","tags":"标签"});
+        });</script></body></html>

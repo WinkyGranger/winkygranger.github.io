@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="668" height="430" viewBox="0 0 668 430">
+  <defs>
+    <style>
+      .cls-1, .cls-2 {
+        font-size: 72px;
+        font-family: Pristina;
+      }
+
+      .cls-1 {
+        fill: #983bfc;
+      }
+
+      .cls-2 {
+        fill: #0443f3;
+      }
+    </style>
+  </defs>
+  <text id="WG" class="cls-1" transform="translate(-9.471 330.32) scale(5.442)">WG</text>
+  <text id="WG-2" data-name="WG" class="cls-2" transform="translate(5.529 326.321) scale(5.442)">WG</text>
+</svg>

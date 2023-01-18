@@ -1,79 +1,36 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html lang="zh"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta><title>MySQL - Winky&#039;s Blog</title><link rel="manifest" href="/manifest.json"><meta name="application-name" content="Winky Granger"><meta name="msapplication-TileImage" content="/img/favicon.svg"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Winky Granger"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="description" content="执行一条 select 语句，期间发生了什么？第一步：连接器连接的过程需要先经过 TCP 三次握手，因为 MySQL 是基于 TCP 协议进行传输的 第二步：查询缓存对于更新比较频繁的表，查询缓存的命中率很低的，因为只要一个表有更新操作，那么这个表的查询缓存就会被清空。如果刚缓存了一个查询结果很大的数据，还没被使用的时候，刚好这个表有更新操作，查询缓冲就被清空了，相当于缓存了个寂寞。所以，MySQ"><meta property="og:type" content="blog"><meta property="og:title" content="MySQL"><meta property="og:url" content="http://example.com/2022/05/20/Mysql/"><meta property="og:site_name" content="Winky&#039;s Blog"><meta property="og:description" content="执行一条 select 语句，期间发生了什么？第一步：连接器连接的过程需要先经过 TCP 三次握手，因为 MySQL 是基于 TCP 协议进行传输的 第二步：查询缓存对于更新比较频繁的表，查询缓存的命中率很低的，因为只要一个表有更新操作，那么这个表的查询缓存就会被清空。如果刚缓存了一个查询结果很大的数据，还没被使用的时候，刚好这个表有更新操作，查询缓冲就被清空了，相当于缓存了个寂寞。所以，MySQ"><meta property="og:locale" content="zh_CN"><meta property="og:image" content="https://cdn.nlark.com/yuque/0/2022/png/22222537/1657333914716-af5bc129-39a9-4b31-8c80-e0ee9d39f500.png#averageHue=%23f2eee8&amp;clientId=ue1be819a-bbaf-4&amp;crop=0&amp;crop=0&amp;crop=1&amp;crop=1&amp;from=paste&amp;id=uda63ecc3&amp;margin=%5Bobject%20Object%5D&amp;originHeight=721&amp;originWidth=1261&amp;originalType=url&amp;ratio=1&amp;rotation=0&amp;showTitle=false&amp;status=done&amp;style=none&amp;taskId=u34333de7-b2ac-425f-b7d7-94b9014ee47&amp;title="><meta property="og:image" content="https://cdn.nlark.com/yuque/0/2022/png/22222537/1658305376551-ad5553c7-9e4e-4e53-9ec2-c0f9739a1783.png#averageHue=%23faf9f8&amp;clientId=u2af9f06b-6500-4&amp;crop=0&amp;crop=0&amp;crop=1&amp;crop=1&amp;from=paste&amp;height=177&amp;id=u947cd4cc&amp;margin=%5Bobject%20Object%5D&amp;name=image.png&amp;originHeight=199&amp;originWidth=909&amp;originalType=binary&amp;ratio=1&amp;rotation=0&amp;showTitle=false&amp;size=38949&amp;status=done&amp;style=none&amp;taskId=u2cecd7c2-0ddf-49fa-9ee1-8c0589c8ac2&amp;title=&amp;width=808"><meta property="og:image" content="https://cdn.nlark.com/yuque/0/2022/png/22222537/1658305387675-47f134db-f45f-4722-b9a0-1a88d5de0cf6.png#averageHue=%23faf8f5&amp;clientId=u2af9f06b-6500-4&amp;crop=0&amp;crop=0&amp;crop=1&amp;crop=1&amp;from=paste&amp;height=636&amp;id=u2ba8c273&amp;margin=%5Bobject%20Object%5D&amp;name=image.png&amp;originHeight=715&amp;originWidth=959&amp;originalType=binary&amp;ratio=1&amp;rotation=0&amp;showTitle=false&amp;size=312776&amp;status=done&amp;style=none&amp;taskId=uc94e0302-04a5-4e44-8c7c-57f404b0a13&amp;title=&amp;width=852.4444444444445"><meta property="og:image" content="https://cdn.nlark.com/yuque/0/2022/png/22222537/1657333063981-ebe95b29-107d-44e3-a5cc-11068f72dcba.png#averageHue=%23faf8f8&amp;clientId=ue1be819a-bbaf-4&amp;crop=0&amp;crop=0&amp;crop=1&amp;crop=1&amp;from=ui&amp;id=u040e3ad1&amp;margin=%5Bobject%20Object%5D&amp;name=image-20220520223417654.png&amp;originHeight=378&amp;originWidth=624&amp;originalType=binary&amp;ratio=1&amp;rotation=0&amp;showTitle=false&amp;size=90321&amp;status=done&amp;style=none&amp;taskId=u566585b9-3435-45f5-acdc-82f86af2bc7&amp;title="><meta property="og:image" content="https://cdn.nlark.com/yuque/0/2022/png/22222537/1657333113221-e980c641-94a1-41cb-afc3-8d561267e904.png#averageHue=%23dfc2be&amp;clientId=ue1be819a-bbaf-4&amp;crop=0&amp;crop=0&amp;crop=1&amp;crop=1&amp;from=ui&amp;id=uada987dd&amp;margin=%5Bobject%20Object%5D&amp;name=image-20220520224315911.png&amp;originHeight=144&amp;originWidth=924&amp;originalType=binary&amp;ratio=1&amp;rotation=0&amp;showTitle=false&amp;size=53834&amp;status=done&amp;style=none&amp;taskId=ub6088401-d761-4d5d-bc59-7ed1c601a2b&amp;title="><meta property="og:image" content="https://cdn.nlark.com/yuque/0/2022/png/22222537/1657333133166-f8db6502-9f48-45ea-920c-c05a2a3b96dd.png#averageHue=%23ddb1ab&amp;clientId=ue1be819a-bbaf-4&amp;crop=0&amp;crop=0&amp;crop=1&amp;crop=1&amp;from=ui&amp;id=uc1624c28&amp;margin=%5Bobject%20Object%5D&amp;name=image-20220520232600766.png&amp;originHeight=161&amp;originWidth=678&amp;originalType=binary&amp;ratio=1&amp;rotation=0&amp;showTitle=false&amp;size=30024&amp;status=done&amp;style=none&amp;taskId=uf200cd15-dfda-466d-8b2f-c774f4c864a&amp;title="><meta property="og:image" content="https://cdn.nlark.com/yuque/0/2022/png/22222537/1657333223780-4c02d9c3-5164-4eee-a728-213900de5c01.png#averageHue=%23f7f7f7&amp;clientId=ue1be819a-bbaf-4&amp;crop=0&amp;crop=0&amp;crop=1&amp;crop=1&amp;from=ui&amp;id=u89562f65&amp;margin=%5Bobject%20Object%5D&amp;name=image-20220509110016131.png&amp;originHeight=191&amp;originWidth=653&amp;originalType=binary&amp;ratio=1&amp;rotation=0&amp;showTitle=false&amp;size=15489&amp;status=done&amp;style=none&amp;taskId=u76b3800c-7c2b-4cc3-9364-e7abca2150b&amp;title="><meta property="og:image" content="https://cdn.nlark.com/yuque/0/2022/png/22222537/1657334316183-212c9bda-c218-41a8-972d-ca65855f7155.png#averageHue=%23f8f1e9&amp;clientId=ue1be819a-bbaf-4&amp;crop=0&amp;crop=0&amp;crop=1&amp;crop=1&amp;from=paste&amp;id=ua6c5e8d6&amp;margin=%5Bobject%20Object%5D&amp;name=image.png&amp;originHeight=509&amp;originWidth=1080&amp;originalType=url&amp;ratio=1&amp;rotation=0&amp;showTitle=false&amp;size=97395&amp;status=done&amp;style=none&amp;taskId=u1965a9e1-deb9-4dcf-bd97-0e0e36a792f&amp;title="><meta property="og:image" content="https://cdn.nlark.com/yuque/0/2022/png/22222537/1657333329885-3b7fdef7-9a04-4283-a545-d62272fa75c7.png#averageHue=%23999b98&amp;clientId=ue1be819a-bbaf-4&amp;crop=0&amp;crop=0&amp;crop=1&amp;crop=1&amp;from=ui&amp;id=u12a38d1a&amp;margin=%5Bobject%20Object%5D&amp;name=image-20220613161321165.png&amp;originHeight=236&amp;originWidth=558&amp;originalType=binary&amp;ratio=1&amp;rotation=0&amp;showTitle=false&amp;size=65469&amp;status=done&amp;style=none&amp;taskId=ud265d115-b908-46ab-a15e-74dc19c3f38&amp;title="><meta property="og:image" content="https://cdn.nlark.com/yuque/0/2022/png/22222537/1659944815452-bf46871a-de0e-4118-b912-69b3a44f67c7.png#averageHue=%23f0f0df&amp;clientId=u6df81462-1dfc-4&amp;crop=0&amp;crop=0&amp;crop=1&amp;crop=1&amp;from=paste&amp;id=uf18b65c6&amp;margin=%5Bobject%20Object%5D&amp;name=image.png&amp;originHeight=1068&amp;originWidth=1090&amp;originalType=url&amp;ratio=1&amp;rotation=0&amp;showTitle=false&amp;size=808043&amp;status=done&amp;style=none&amp;taskId=uf3a17778-a0ef-4a90-ac84-08c1ca33665&amp;title="><meta property="og:image" content="https://cdn.nlark.com/yuque/0/2022/png/22222537/1657333401038-cf3aa45a-aacc-40da-a002-3aa628617fdb.png#averageHue=%23f6f1e8&amp;clientId=ue1be819a-bbaf-4&amp;crop=0&amp;crop=0&amp;crop=1&amp;crop=1&amp;from=ui&amp;id=u0b9f2241&amp;margin=%5Bobject%20Object%5D&amp;name=image-20220612210116273.png&amp;originHeight=186&amp;originWidth=370&amp;originalType=binary&amp;ratio=1&amp;rotation=0&amp;showTitle=false&amp;size=75911&amp;status=done&amp;style=none&amp;taskId=ud6fa5de9-5f15-4f81-bb51-408da160276&amp;title="><meta property="article:published_time" content="2022-05-20T13:03:41.000Z"><meta property="article:modified_time" content="2023-01-17T09:26:36.058Z"><meta property="article:author" content="Winky"><meta property="twitter:card" content="summary"><meta property="twitter:image:src" content="https://cdn.nlark.com/yuque/0/2022/png/22222537/1657333914716-af5bc129-39a9-4b31-8c80-e0ee9d39f500.png#averageHue=%23f2eee8&amp;clientId=ue1be819a-bbaf-4&amp;crop=0&amp;crop=0&amp;crop=1&amp;crop=1&amp;from=paste&amp;id=uda63ecc3&amp;margin=%5Bobject%20Object%5D&amp;originHeight=721&amp;originWidth=1261&amp;originalType=url&amp;ratio=1&amp;rotation=0&amp;showTitle=false&amp;status=done&amp;style=none&amp;taskId=u34333de7-b2ac-425f-b7d7-94b9014ee47&amp;title="><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"http://example.com/2022/05/20/Mysql/"},"headline":"MySQL","image":[],"datePublished":"2022-05-20T13:03:41.000Z","dateModified":"2023-01-17T09:26:36.058Z","author":{"@type":"Person","name":"Winky"},"publisher":{"@type":"Organization","name":"Winky's Blog","logo":{"@type":"ImageObject","url":"http://example.com/img/logo.svg"}},"description":"执行一条 select 语句，期间发生了什么？第一步：连接器连接的过程需要先经过 TCP 三次握手，因为 MySQL 是基于 TCP 协议进行传输的 第二步：查询缓存对于更新比较频繁的表，查询缓存的命中率很低的，因为只要一个表有更新操作，那么这个表的查询缓存就会被清空。如果刚缓存了一个查询结果很大的数据，还没被使用的时候，刚好这个表有更新操作，查询缓冲就被清空了，相当于缓存了个寂寞。所以，MySQ"}</script><link rel="canonical" href="http://example.com/2022/05/20/Mysql/"><link rel="icon" href="/img/favicon.svg"><link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.0.0/css/all.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/xt256.css"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Oxanium:wght@300;400;600&amp;family=Roboto+Mono"><link rel="stylesheet" href="/css/cyberpunk.css"><style>body>.footer,body>.navbar,body>.section{opacity:0}</style><!--!--><!--!--><!--!--><!--!--><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.10.0/dist/css/lightgallery.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/css/justifiedGallery.min.css"><!--!--><!--!--><style>.pace{-webkit-pointer-events:none;pointer-events:none;-webkit-user-select:none;-moz-user-select:none;user-select:none}.pace-inactive{display:none}.pace .pace-progress{background:#3273dc;position:fixed;z-index:2000;top:0;right:100%;width:100%;height:2px}</style><script src="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/pace.min.js"></script><!--!--><!--!--><!-- hexo injector head_end start --><script>
+  (function () {
+      function switchTab() {
+          if (!location.hash) {
+            return;
+          }
 
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  
-  
-  
-  <title>
-    MySQL |
-    
-    Winky&#39;s Blog
-  </title>
-  <!-- Icon -->
-  
-    <link rel="shortcut icon" href="/favicon.ico">
-    
-  
-<link rel="stylesheet" href="/css/style.css">
+          const id = '#' + CSS.escape(location.hash.substring(1));
+          const $tabMenu = document.querySelector(`.tabs a[href="${id}"]`);
+          if (!$tabMenu) {
+            return;
+          }
 
-  
-  
-<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+          const $tabMenuContainer = $tabMenu.parentElement.parentElement;
+          Array.from($tabMenuContainer.children).forEach($menu => $menu.classList.remove('is-active'));
+          Array.from($tabMenuContainer.querySelectorAll('a'))
+              .map($menu => document.getElementById($menu.getAttribute("href").substring(1)))
+              .forEach($content => $content.classList.add('is-hidden'));
 
-  
-  
-<script src="/js/pace.min.js"></script>
-
-<meta name="generator" content="Hexo 5.4.2"><link rel="alternate" href="/atom.xml" title="Winky's Blog" type="application/atom+xml">
-</head>
-
-<body>
-  <main class="content">
-    <section class="outer">
-  <article id="post-Mysql" class="article article-type-post" itemscope
-  itemprop="blogPost" data-scroll-reveal>
-
-  <div class="article-inner">
-    
-    <header class="article-header">
-      
-  
-  <h1 class="article-title" itemprop="name">
-    MySQL
-  </h1>
-  
-  
-
-    </header>
-    
-
-    
-    <div class="article-meta">
-      <a href="/2022/05/20/Mysql/" class="article-date">
-  <time datetime="2022-05-20T13:03:41.000Z" itemprop="datePublished">2022-05-20</time>
-</a>
-      
-<div class="article-category">
-  <a class="article-category-link" href="/categories/java/">java</a> / <a class="article-category-link" href="/categories/java/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/">后端开发</a>
-</div>
-
-    </div>
-    
-
-    
-    
-<div class="tocbot"></div>
-
-    
-
-    <div class="article-entry" itemprop="articleBody">
-      
-      
-      
-        <h1 id="执行一条-select-语句，期间发生了什么？"><a href="#执行一条-select-语句，期间发生了什么？" class="headerlink" title="执行一条 select 语句，期间发生了什么？"></a>执行一条 select 语句，期间发生了什么？</h1><h2 id="第一步：连接器"><a href="#第一步：连接器" class="headerlink" title="第一步：连接器"></a>第一步：连接器</h2><p>连接的过程需要先经过 TCP 三次握手，因为 MySQL 是基于 TCP 协议进行传输的</p>
+          if ($tabMenu) {
+              $tabMenu.parentElement.classList.add('is-active');
+          }
+          const $activeTab = document.querySelector(id);
+          if ($activeTab) {
+              $activeTab.classList.remove('is-hidden');
+          }
+      }
+      switchTab();
+      window.addEventListener('hashchange', switchTab, false);
+  })();
+  </script><!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.0.0"><link rel="alternate" href="/atom.xml" title="Winky's Blog" type="application/atom+xml">
+</head><body class="is-2-column"><nav class="navbar navbar-main"><div class="container navbar-container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/"><img src="/img/logo.svg" alt="Winky&#039;s Blog" height="28"></a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item" href="/">Home</a><a class="navbar-item" href="/archives">Archives</a><a class="navbar-item" href="/categories">Categories</a><a class="navbar-item" href="/tags">Tags</a></div><div class="navbar-end"><a class="navbar-item" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/WinkyGranger"><i class="fab fa-github"></i></a><a class="navbar-item search" title="搜索" href="javascript:;"><i class="fas fa-search"></i></a></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-8-tablet is-8-desktop is-8-widescreen"><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2022-05-20T13:03:41.000Z" title="2022/5/20 21:03:41">2022-05-20</time>发表</span><span class="level-item"><time dateTime="2023-01-17T09:26:36.058Z" title="2023/1/17 17:26:36">2023-01-17</time>更新</span><span class="level-item"><a class="link-muted" href="/categories/java/">java</a><span> / </span><a class="link-muted" href="/categories/java/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/">后端开发</a></span><span class="level-item">1 小时读完 (大约8757个字)</span></div></div><h1 class="title is-3 is-size-4-mobile">MySQL</h1><div class="content"><h1 id="执行一条-select-语句，期间发生了什么？"><a href="#执行一条-select-语句，期间发生了什么？" class="headerlink" title="执行一条 select 语句，期间发生了什么？"></a>执行一条 select 语句，期间发生了什么？</h1><h2 id="第一步：连接器"><a href="#第一步：连接器" class="headerlink" title="第一步：连接器"></a>第一步：连接器</h2><p>连接的过程需要先经过 TCP 三次握手，因为 MySQL 是基于 TCP 协议进行传输的</p>
 <h2 id="第二步：查询缓存"><a href="#第二步：查询缓存" class="headerlink" title="第二步：查询缓存"></a>第二步：查询缓存</h2><p>对于更新比较频繁的表，查询缓存的命中率很低的，因为只要一个表有更新操作，那么这个表的查询缓存就会被清空。如果刚缓存了一个查询结果很大的数据，还没被使用的时候，刚好这个表有更新操作，查询缓冲就被清空了，相当于缓存了个寂寞。<br>所以，MySQL 8.0 版本直接将查询缓存删掉了，也就是说 MySQL 8.0 开始，执行一条 SQL 查询语句，不会再走到查询缓存这个阶段了。<br>对于 MySQL 8.0 之前的版本，如果想关闭查询缓存，我们可以通过将参数 query_cache_type 设置成 DEMAND</p>
 <h2 id="第三步：解析-SQL"><a href="#第三步：解析-SQL" class="headerlink" title="第三步：解析 SQL"></a>第三步：解析 SQL</h2><h3 id="解析器"><a href="#解析器" class="headerlink" title="解析器"></a>解析器</h3><p>第一件事情，<strong>词法分析</strong>。MySQL 会根据你输入的字符串识别出关键字出来，构建出 SQL 语法树，这样方面后面模块获取 SQL 类型、表名、字段名、 where 条件等等。<br>第二件事情，<strong>语法分析</strong>。根据词法分析的结果，语法解析器会根据语法规则，判断你输入的这个 SQL 语句是否满足 MySQL 语法。</p>
 <h2 id="第四步：执行-SQL"><a href="#第四步：执行-SQL" class="headerlink" title="第四步：执行 SQL"></a>第四步：执行 SQL</h2><h3 id="预处理器"><a href="#预处理器" class="headerlink" title="预处理器"></a>预处理器</h3><p>我们先来说说预处理阶段做了什么事情。</p>
@@ -462,200 +419,48 @@
 </li>
 </ul>
 <p>保证高一致性：<br>MQ手动应答确保redis删除<br>Canal组件监听binlog日志</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2022/05/20/Mysql/" data-id="cld18dn1w00018wvk32ga9c28" class="article-share-link">
-        分享
-      </a>
-      
-    </footer>
-
-  </div>
-
-  
-  
-<nav class="article-nav">
-  
-  <a href="/2022/05/21/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" class="article-nav-link">
-    <strong class="article-nav-caption">前一篇</strong>
-    <div class="article-nav-title">
-      
-      计算机网络
-      
-    </div>
-  </a>
-  
-  
-</nav>
-
-  
-
-  
-  
-<div class="vcomments" id="vcomments"></div>
-
-<script src="https://unpkg.com/valine/dist/Valine.min.js"></script>
-
-<script>
-  new Valine({
-    el: '#vcomments',
-    appId: '',
-    appKey: '',
-    notify: 'false',
-    verify: 'true',
-    avatar: 'mp',
-    pageSize: '10',
-    placeholder: '请输入...'
-  })
-</script>
-
-  
-<div class="gitalk" id="gitalk-container"></div>
-
-<link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
-
-
-<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
-
-
-<script src="https://cdn.bootcss.com/blueimp-md5/2.10.0/js/md5.min.js"></script>
-
-<script type="text/javascript">
-  var gitalk = new Gitalk({
-    clientID: '8bf6ad6d7398a1f67aa5',
-    clientSecret: 'f07834449dda641b82428622432b27a976fa9172',
-    repo: 'Winky_Blog',
-    owner: 'WinkyGranger',
-    admin: [''],
-    // id: location.pathname,      // Ensure uniqueness and length less than 50
-    id: md5(location.pathname),
-    distractionFreeMode: false,  // Facebook-like distraction free mode
-    pagerDirection: 'last'
-  })
-
-  gitalk.render('gitalk-container')
-</script>
-
-  
-
-</article>
-</section>
-    <footer class="footer">
-  <div class="outer">
-    <ul class="list-inline">
-      <li>Winky&#39;s Blog &copy; 2023</li>
-      
-        <li>
-          
-            <a href="https://beian.miit.gov.cn/" target="_blank"></a>
-            
-        </li>
-      
-      <li>Powered by <a href="http://hexo.io/" target="_blank">Hexo</a></li>
-      <li>theme  <a target="_blank" rel="noopener" href="https://github.com/zhwangart/hexo-theme-ocean">Ocean</a></li>
-    </ul>
-    <p><ul class="list-inline">
-  
-  <li><i class="fe fe-smile-alt tooltip" data-tooltip="UV"></i> <span id="busuanzi_value_site_uv"></span></li>
-  
-  <li><i class="fe fe-bookmark tooltip" data-tooltip="PV"></i> <span id="busuanzi_value_page_pv"></span></li>
-  
-</ul></p>
-  </div>
-</footer>
-  </main>
-  <aside class="sidebar">
-    <button class="navbar-toggle"></button>
-<nav class="navbar">
-  
-  <div class="logo">
-    <a href="/"><img src="/images/hexo.svg" alt="Winky&#39;s Blog"></a>
-  </div>
-  
-  <ul class="nav nav-main">
-    
-    <li class="nav-item">
-      <a class="nav-item-link" href="/">Home</a>
-    </li>
-    
-    <li class="nav-item">
-      <a class="nav-item-link" href="/archives">Archives</a>
-    </li>
-    
-    <li class="nav-item">
-      <a class="nav-item-link nav-item-search" title="搜索">
-        <i class="fe fe-search"></i>
-        搜索
-      </a>
-    </li>
-  </ul>
-</nav>
-<nav class="navbar navbar-bottom">
-  <ul class="nav">
-    <li class="nav-item">
-      <div class="totop" id="totop">
-  <i class="fe fe-rocket"></i>
-</div>
-    </li>
-    <li class="nav-item">
-      
-      <a class="nav-item-link" target="_blank" href="/atom.xml" title="RSS Feed">
-        <i class="fe fe-feed"></i>
-      </a>
-      
-    </li>
-  </ul>
-</nav>
-<div class="search-form-wrap">
-  <div class="local-search local-search-plugin">
-  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
-  <div id="local-search-result" class="local-search-result"></div>
-</div>
-</div>
-  </aside>
-  
-<script src="/js/jquery-2.0.3.min.js"></script>
-
-
-<script src="/js/jquery.justifiedGallery.min.js"></script>
-
-
-<script src="/js/lazyload.min.js"></script>
-
-
-<script src="/js/busuanzi-2.3.pure.min.js"></script>
-
-
-
-<script src="/fancybox/jquery.fancybox.min.js"></script>
-
-
-
-
-
-<script src="/js/tocbot.min.js"></script>
-
-
-<script>
-  // Tocbot_v4.7.0  http://tscanlin.github.io/tocbot/
-  tocbot.init({
-    tocSelector: '.tocbot',
-    contentSelector: '.article-entry',
-    headingSelector: 'h1, h2, h3, h4, h5, h6',
-    hasInnerContainers: true,
-    scrollSmooth: true,
-    positionFixedSelector: '.tocbot',
-    positionFixedClass: 'is-position-fixed',
-    fixedSidebarOffset: 'auto',
-  });
-</script>
-
-
-
-<script src="/js/ocean.js"></script>
-
-</body>
-
-</html>
+</div><div class="article-licensing box"><div class="licensing-title"><p>MySQL</p><p><a href="http://example.com/2022/05/20/Mysql/">http://example.com/2022/05/20/Mysql/</a></p></div><div class="licensing-meta level is-mobile"><div class="level-left"><div class="level-item is-narrow"><div><h6>作者</h6><p>Winky</p></div></div><div class="level-item is-narrow"><div><h6>发布于</h6><p>2022-05-20</p></div></div><div class="level-item is-narrow"><div><h6>更新于</h6><p>2023-01-17</p></div></div><div class="level-item is-narrow"><div><h6>许可协议</h6><p><a class="icons" rel="noopener" target="_blank" title="Creative Commons" href="https://creativecommons.org/"><i class="icon fab fa-creative-commons"></i></a><a class="icons" rel="noopener" target="_blank" title="Attribution" href="https://creativecommons.org/licenses/by/4.0/"><i class="icon fab fa-creative-commons-by"></i></a><a class="icons" rel="noopener" target="_blank" title="Noncommercial" href="https://creativecommons.org/licenses/by-nc/4.0/"><i class="icon fab fa-creative-commons-nc"></i></a></p></div></div></div></div></div><div class="notification is-danger">You need to set <code>install_url</code> to use ShareThis. Please set it in <code>_config.yml</code>.</div></article></div><div class="card"><div class="card-content"><h3 class="menu-label has-text-centered">喜欢这篇文章？打赏一下作者吧</h3><div class="buttons is-centered"><a class="button donate" href="/" target="_blank" rel="noopener" data-type="afdian"><span class="icon is-small"><i class="fas fa-charging-station"></i></span><span>爱发电</span></a><a class="button donate" data-type="alipay"><span class="icon is-small"><i class="fab fa-alipay"></i></span><span>支付宝</span><span class="qrcode"><img src="/" alt="支付宝"></span></a><a class="button donate" href="/" target="_blank" rel="noopener" data-type="buymeacoffee"><span class="icon is-small"><i class="fas fa-coffee"></i></span><span>送我杯咖啡</span></a><a class="button donate" href="/" target="_blank" rel="noopener" data-type="patreon"><span class="icon is-small"><i class="fab fa-patreon"></i></span><span>Patreon</span></a><div class="notification is-danger">You forgot to set the <code>business</code> or <code>currency_code</code> for Paypal. Please set it in <code>_config.yml</code>.</div><a class="button donate" data-type="wechat"><span class="icon is-small"><i class="fab fa-weixin"></i></span><span>微信</span><span class="qrcode"><img src="/" alt="微信"></span></a></div></div></div><nav class="post-navigation mt-4 level is-mobile"><div class="level-start"><a class="article-nav-prev level level-item link-muted" href="/2022/05/21/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/"><i class="level-item fas fa-chevron-left"></i><span class="level-item">计算机网络</span></a></div></nav><div class="card"><div class="card-content"><h3 class="title is-5">评论</h3><div class="notification is-danger">You forgot to set the <code>shortname</code> for Disqus. Please set it in <code>_config.yml</code>.</div></div></div></div><div class="column column-left is-4-tablet is-4-desktop is-4-widescreen  order-1"><div class="card widget" data-type="profile"><div class="card-content"><nav class="level"><div class="level-item has-text-centered flex-shrink-1"><div><figure class="image is-128x128 mx-auto mb-2"><img class="avatar" src="/img/avatar.png" alt="Your name"></figure><p class="title is-size-4 is-block" style="line-height:inherit;">Your name</p><p class="is-size-6 is-block">Your title</p><p class="is-size-6 is-flex justify-content-center"><i class="fas fa-map-marker-alt mr-1"></i><span>Your location</span></p></div></div></nav><nav class="level is-mobile"><div class="level-item has-text-centered is-marginless"><div><p class="heading">文章</p><a href="/archives"><p class="title">4</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">分类</p><a href="/categories"><p class="title">2</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">标签</p><a href="/tags"><p class="title">0</p></a></div></div></nav><div class="level"><a class="level-item button is-primary is-rounded" href="https://github.com/ppoffice" target="_blank" rel="noopener">关注我</a></div><div class="level is-mobile is-multiline"><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Github" href="https://github.com/ppoffice"><i class="fab fa-github"></i></a></div></div></div><!--!--><div class="card widget" data-type="categories"><div class="card-content"><div class="menu"><h3 class="menu-label">分类</h3><ul class="menu-list"><li><a class="level is-mobile" href="/categories/java/"><span class="level-start"><span class="level-item">java</span></span><span class="level-end"><span class="level-item tag">4</span></span></a><ul><li><a class="level is-mobile" href="/categories/java/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/"><span class="level-start"><span class="level-item">后端开发</span></span><span class="level-end"><span class="level-item tag">4</span></span></a></li></ul></li></ul></div></div></div><div class="card widget" data-type="recent-posts"><div class="card-content"><h3 class="menu-label">最新文章</h3><article class="media"><div class="media-content"><p class="date"><time dateTime="2022-05-22T13:03:41.000Z">2022-05-22</time></p><p class="title"><a href="/2022/05/22/Spring/">Spring</a></p><p class="categories"><a href="/categories/java/">java</a> / <a href="/categories/java/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/">后端开发</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2022-05-22T13:03:41.000Z">2022-05-22</time></p><p class="title"><a href="/2022/05/22/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">操作系统</a></p><p class="categories"><a href="/categories/java/">java</a> / <a href="/categories/java/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/">后端开发</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2022-05-21T13:03:41.000Z">2022-05-21</time></p><p class="title"><a href="/2022/05/21/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/">计算机网络</a></p><p class="categories"><a href="/categories/java/">java</a> / <a href="/categories/java/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/">后端开发</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2022-05-20T13:03:41.000Z">2022-05-20</time></p><p class="title"><a href="/2022/05/20/Mysql/">MySQL</a></p><p class="categories"><a href="/categories/java/">java</a> / <a href="/categories/java/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/">后端开发</a></p></div></article></div></div><div class="card widget" data-type="archives"><div class="card-content"><div class="menu"><h3 class="menu-label">归档</h3><ul class="menu-list"><li><a class="level is-mobile" href="/archives/2022/05/"><span class="level-start"><span class="level-item">五月 2022</span></span><span class="level-end"><span class="level-item tag">4</span></span></a></li></ul></div></div></div><!--!--></div><!--!--></div></div></section><footer class="footer"><div class="container"><div class="level"><div class="level-start"><a class="footer-logo is-block mb-2" href="/"><img src="/img/logo.svg" alt="Winky&#039;s Blog" height="28"></a><p class="is-size-7"><span>&copy; 2023 Winky</span>  Powered by <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> &amp; <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank" rel="noopener">Icarus</a></p></div><div class="level-end"><div class="field has-addons"><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/WinkyGranger"><i class="fab fa-github"></i></a></p></div></div></div></div></footer><script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script><script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script><script>moment.locale("zh-cn");</script><script>var IcarusThemeSettings = {
+            article: {
+                highlight: {
+                    clipboard: true,
+                    fold: 'unfolded'
+                }
+            }
+        };</script><script src="/js/column.js"></script><script src="/js/animation.js"></script><a id="back-to-top" title="回到顶端" href="javascript:;"><i class="fas fa-chevron-up"></i></a><script src="/js/back_to_top.js" defer></script><!--!--><!--!--><!--!--><script src="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.js" defer></script><script>window.addEventListener("load", () => {
+      window.cookieconsent.initialise({
+        type: "info",
+        theme: "edgeless",
+        static: false,
+        position: "bottom-left",
+        content: {
+          message: "此网站使用Cookie来改善您的体验。",
+          dismiss: "知道了！",
+          allow: "允许使用Cookie",
+          deny: "拒绝",
+          link: "了解更多",
+          policy: "Cookie政策",
+          href: "https://www.cookiesandyou.com/",
+        },
+        palette: {
+          popup: {
+            background: "#edeff5",
+            text: "#838391"
+          },
+          button: {
+            background: "#4b81e8"
+          },
+        },
+      });
+    });</script><script src="https://cdn.jsdelivr.net/npm/lightgallery@1.10.0/dist/js/lightgallery.min.js" defer></script><script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/js/jquery.justifiedGallery.min.js" defer></script><script>window.addEventListener("load", () => {
+            if (typeof $.fn.lightGallery === 'function') {
+                $('.article').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof $.fn.justifiedGallery === 'function') {
+                if ($('.justified-gallery > p > .gallery-item').length) {
+                    $('.justified-gallery > p > .gallery-item').unwrap();
+                }
+                $('.justified-gallery').justifiedGallery();
+            }
+        });</script><!--!--><!--!--><!--!--><!--!--><!--!--><script src="/js/main.js" defer></script><div class="searchbox"><div class="searchbox-container"><div class="searchbox-header"><div class="searchbox-input-container"><input class="searchbox-input" type="text" placeholder="想要查找什么..."></div><a class="searchbox-close" href="javascript:;">×</a></div><div class="searchbox-body"></div></div></div><script src="/js/insight.js" defer></script><script>document.addEventListener('DOMContentLoaded', function () {
+            loadInsight({"contentUrl":"/content.json"}, {"hint":"想要查找什么...","untitled":"(无标题)","posts":"文章","pages":"页面","categories":"分类","tags":"标签"});
+        });</script></body></html>
