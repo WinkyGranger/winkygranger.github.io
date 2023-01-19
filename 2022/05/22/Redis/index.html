@@ -1,0 +1,183 @@
+<!doctype html>
+<html lang="zh"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta><title>Redis - Winky&#039;s Blog</title><link rel="manifest" href="/manifest.json"><meta name="application-name" content="Winky Granger"><meta name="msapplication-TileImage" content="/img/favicon.svg"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Winky Granger"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="description" content="Redis数据类型、三种模式、淘汰策略"><meta property="og:type" content="blog"><meta property="og:title" content="Redis"><meta property="og:url" content="https://winkygranger.github.io/2022/05/22/Redis/"><meta property="og:site_name" content="Winky&#039;s Blog"><meta property="og:description" content="Redis数据类型、三种模式、淘汰策略"><meta property="og:locale" content="zh_CN"><meta property="og:image" content="https://winkygranger.github.io/2022/05/22/Redis/1657602795682-73a331b2-61f8-438e-a0e2-204db9ef2c98.png"><meta property="og:image" content="https://winkygranger.github.io/2022/05/22/Redis/1657603080956-a546e707-6713-4a9a-85db-713ac9825836.png"><meta property="og:image" content="https://winkygranger.github.io/2022/05/22/Redis/1617902398292-857d3496-ce3e-4032-a625-7d856d8ea1bf.jpeg"><meta property="og:image" content="https://winkygranger.github.io/2022/05/22/Redis/1660377928465-7017961a-eaf5-4857-827c-68d7b3ce8e8a.png"><meta property="og:image" content="https://winkygranger.github.io/2022/05/22/Redis/1658822164633-4e762444-3f42-4025-a4a0-eefccb5eb3bd.png"><meta property="og:image" content="https://winkygranger.github.io/2022/05/22/Redis/1658823208327-489b82c8-4e99-4088-b7d8-556f3dcc01a5.png"><meta property="article:published_time" content="2022-05-22T13:03:41.000Z"><meta property="article:modified_time" content="2023-01-19T07:52:15.159Z"><meta property="article:author" content="Winky"><meta property="article:tag" content="Redis"><meta property="twitter:card" content="summary"><meta property="twitter:image:src" content="https://winkygranger.github.io/2022/05/22/Redis/1657602795682-73a331b2-61f8-438e-a0e2-204db9ef2c98.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://winkygranger.github.io/2022/05/22/Redis/"},"headline":"Redis","image":["https://winkygranger.github.io/2022/05/22/Redis/1657602795682-73a331b2-61f8-438e-a0e2-204db9ef2c98.png","https://winkygranger.github.io/2022/05/22/Redis/1657603080956-a546e707-6713-4a9a-85db-713ac9825836.png","https://winkygranger.github.io/2022/05/22/Redis/1660377928465-7017961a-eaf5-4857-827c-68d7b3ce8e8a.png","https://winkygranger.github.io/2022/05/22/Redis/1658822164633-4e762444-3f42-4025-a4a0-eefccb5eb3bd.png","https://winkygranger.github.io/2022/05/22/Redis/1658823208327-489b82c8-4e99-4088-b7d8-556f3dcc01a5.png"],"datePublished":"2022-05-22T13:03:41.000Z","dateModified":"2023-01-19T07:52:15.159Z","author":{"@type":"Person","name":"Winky"},"publisher":{"@type":"Organization","name":"Winky's Blog","logo":{"@type":"ImageObject","url":"https://winkygranger.github.io/img/logo.svg"}},"description":"Redis数据类型、三种模式、淘汰策略"}</script><link rel="canonical" href="https://winkygranger.github.io/2022/05/22/Redis/"><link rel="icon" href="/img/favicon.svg"><link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.0.0/css/all.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/xt256.css"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Oxanium:wght@300;400;600&amp;family=Roboto+Mono"><link rel="stylesheet" href="/css/cyberpunk.css"><style>body>.footer,body>.navbar,body>.section{opacity:0}</style><!--!--><!--!--><!--!--><!--!--><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.10.0/dist/css/lightgallery.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/css/justifiedGallery.min.css"><!--!--><!--!--><style>.pace{-webkit-pointer-events:none;pointer-events:none;-webkit-user-select:none;-moz-user-select:none;user-select:none}.pace-inactive{display:none}.pace .pace-progress{background:#3273dc;position:fixed;z-index:2000;top:0;right:100%;width:100%;height:2px}</style><script src="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/pace.min.js"></script><!--!--><!--!--><!-- hexo injector head_end start --><script>
+  (function () {
+      function switchTab() {
+          if (!location.hash) {
+            return;
+          }
+
+          const id = '#' + CSS.escape(location.hash.substring(1));
+          const $tabMenu = document.querySelector(`.tabs a[href="${id}"]`);
+          if (!$tabMenu) {
+            return;
+          }
+
+          const $tabMenuContainer = $tabMenu.parentElement.parentElement;
+          Array.from($tabMenuContainer.children).forEach($menu => $menu.classList.remove('is-active'));
+          Array.from($tabMenuContainer.querySelectorAll('a'))
+              .map($menu => document.getElementById($menu.getAttribute("href").substring(1)))
+              .forEach($content => $content.classList.add('is-hidden'));
+
+          if ($tabMenu) {
+              $tabMenu.parentElement.classList.add('is-active');
+          }
+          const $activeTab = document.querySelector(id);
+          if ($activeTab) {
+              $activeTab.classList.remove('is-hidden');
+          }
+      }
+      switchTab();
+      window.addEventListener('hashchange', switchTab, false);
+  })();
+  </script><!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.0.0"><link rel="alternate" href="/atom.xml" title="Winky's Blog" type="application/atom+xml">
+</head><body class="is-3-column"><nav class="navbar navbar-main"><div class="container navbar-container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/"><img src="/img/logo.svg" alt="Winky&#039;s Blog" height="28"></a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item" href="/">Home</a><a class="navbar-item" href="/archives">Archives</a><a class="navbar-item" href="/categories">Categories</a><a class="navbar-item" href="/tags">Tags</a></div><div class="navbar-end"><a class="navbar-item" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/WinkyGranger"><i class="fab fa-github"></i></a><a class="navbar-item is-hidden-tablet catalogue" title="目录" href="javascript:;"><i class="fas fa-list-ul"></i></a><a class="navbar-item search" title="搜索" href="javascript:;"><i class="fas fa-search"></i></a></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-8-tablet is-8-desktop is-6-widescreen"><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2022-05-22T13:03:41.000Z" title="2022/5/22 21:03:41">2022-05-22</time>发表</span><span class="level-item"><time dateTime="2023-01-19T07:52:15.159Z" title="2023/1/19 15:52:15">2023-01-19</time>更新</span><span class="level-item"><a class="link-muted" href="/categories/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/">后端开发</a></span><span class="level-item">28 分钟读完 (大约4179个字)</span></div></div><h1 class="title is-3 is-size-4-mobile">Redis</h1><div class="content"><p>Redis数据类型、三种模式、淘汰策略</p>
+<span id="more"></span>
+
+<h1 id="5种数据类型"><a href="#5种数据类型" class="headerlink" title="5种数据类型"></a>5种数据类型</h1><p>Redis 在互联网产品中使用的场景实在是太多太多，这里分别对 Redis 几种数据类型做了整理：<br>1）<strong>String</strong>：缓存、限流、分布式锁、计数器、分布式 Session 等。<br>2）<strong>Hash</strong>：用户信息、用户主页访问量、组合查询等。<br>3）<strong>List</strong>：简单队列、关注列表时间轴。<br>4）<strong>Set</strong>：赞、踩、标签等。<br>5）<strong>有序集合 ZSet</strong>：排行榜、好友关系链表。<br>zset 是 Redis 中一个非常重要的数据结构，其底层是基于<strong>跳表（skip list）</strong> 实现的。<br><img src="/2022/05/22/Redis/1657602795682-73a331b2-61f8-438e-a0e2-204db9ef2c98.png"><br><img src="/2022/05/22/Redis/1657603080956-a546e707-6713-4a9a-85db-713ac9825836.png"><br>跳表是一种随机化的数据结构，基于并联的链表，实现简单，插入、删除、查找的复杂度均为 O(logN)。简单说来跳表也是链表的一种，只不过它在链表的基础上增加了跳跃功能，正是这个跳跃的功能，使得在查找元素时，跳表能够提供 O(logN) 的时间复杂度。<br>跳表为了避免每次插入或删除带来的额外操作，<code>不要求上下相邻两层链表之间的节点个数有严格的对应关系，而是为每个节点随机出一个层数（level)</code>。而且新插入一个节点不会影响其它节点的层数。因此，插入操作只需要修改插入节点前后的指针，而不需要对很多节点都进行调整。</p>
+<h1 id="zset为何不使用红黑树等平衡树？"><a href="#zset为何不使用红黑树等平衡树？" class="headerlink" title="zset为何不使用红黑树等平衡树？"></a>zset为何不使用红黑树等平衡树？</h1><p>1）<strong>跳跃表范围查询比平衡树操作简单。</strong> 因为平衡树在查询到最小值的时还需要采用中序遍历去查询最大值。 而跳表只需要在找到最小值后，对第一层的链表遍历即可。<br>2）<strong>平衡树的删除和插入需要对子树进行相应的调整</strong>，而跳表只需要修改相邻的节点即可。<br>3）跳表和平衡树的查询操作都是O（logN）的时间复杂度。<br>4）从整体上来看，跳表算法实现的难度要低于平衡树。</p>
+<h1 id="Redis主从复制"><a href="#Redis主从复制" class="headerlink" title="Redis主从复制"></a>Redis主从复制</h1><h2 id="1-全量复制"><a href="#1-全量复制" class="headerlink" title="1.全量复制"></a>1.全量复制</h2><p>发生节点: 在slave 从服务器初始化阶段，需要将master主服务器上的所有数据都复制一份，流程如下：</p>
+<ul>
+<li>从服务器连接主服务器，并发送sycn命令</li>
+<li>主服务器接收到sycn命令后，执行bgsave命令生成RDB文件，并且在缓冲区中记录之后所有的操作记录</li>
+<li>master执行完bgsave后，master将RDB文件发送给slave，并在此阶段内继续在缓冲区内写操作</li>
+<li>slave在接收到RDB文件前 ，会将自身的数据全部丢弃，载入RDB</li>
+<li>master发送完毕，会向slave 的缓冲区发 写入执行命令</li>
+<li>slave 完成对RDB的载入，开始接受命令请求，并执行缓冲区的命令</li>
+</ul>
+<h2 id="2-增量复制"><a href="#2-增量复制" class="headerlink" title="2.增量复制"></a>2.增量复制</h2><p>其中有三个重要参数：</p>
+<ul>
+<li>主服务器的偏移量和从服务器的<strong>复制偏移量（offset）</strong></li>
+<li>主服务器的<strong>复制积压缓冲区</strong></li>
+<li>服务器的<strong>运行ID（runID）</strong></li>
+</ul>
+<h4 id="复制偏移量"><a href="#复制偏移量" class="headerlink" title="复制偏移量"></a><code>复制偏移量</code></h4><p>主节点和从节点分别维护一个复制偏移量（offset），代表的是<strong>主节点向从节点传递的字节数</strong><br>offset用于判断主从节点的数据库状态是否一致：如果二者offset相同，则一致；如果offset不同，则不一致，此时可以根据两个offset找出从节点缺少的那部分数据。<br>例如，如果主节点的offset是1000，而从节点的offset是500，那么部分复制就需要将offset为501-1000的数据传递给从节点。而offset为501-1000的数据存储的位置，就是下面要介绍的复制积压缓冲区。</p>
+<h4 id="复制积压缓冲区"><a href="#复制积压缓冲区" class="headerlink" title="复制积压缓冲区"></a><code>复制积压缓冲区</code></h4><p>复制积压缓冲区是由主节点维护的、固定长度的、先进先出(FIFO)队列，默认大小1MB；当主节点开始有从节点时创建，其作用是备份主节点最近发送给从节点的数据。注意，无论主节点有一个还是多个从节点，都只需要一个复制积压缓冲区。<br>在命令传播阶段，主节点除了将写命令发送给从节点，还会发送一份给复制积压缓冲区，作为写命令的备份；除了存储写命令，复制积压缓冲区中还存储了其中的每个字节对应的复制偏移量（offset）。由于复制积压缓冲区定长且是先进先出，所以它保存的是主节点最近执行的写命令；时间较早的写命令会被挤出缓冲区。</p>
+<p>从节点将offset发送给主节点后，主节点根据offset和缓冲区大小决定能否执行部分复制：</p>
+<ul>
+<li>如果offset偏移量之后的数据，仍然都在复制积压缓冲区里，则执行部分复制；</li>
+<li>如果offset偏移量之后的数据已不在复制积压缓冲区中（数据已被挤出），则执行全量复制。</li>
+</ul>
+<h1 id="哨兵模式"><a href="#哨兵模式" class="headerlink" title="哨兵模式"></a>哨兵模式</h1><h2 id="哨兵模式下主观下线-客观下线"><a href="#哨兵模式下主观下线-客观下线" class="headerlink" title="哨兵模式下主观下线/客观下线"></a>哨兵模式下主观下线/客观下线</h2><ul>
+<li><p>在默认情况下，Sentinel会以每秒一次的频率向所有与他创建了连接的实例（包括主服务器、从服务器、其他Sentinel）发送PING命令，通过PING的返回值判断实例是否在线</p>
+</li>
+<li><p>回复+PONG、-LOADING、-MASTERDOWN、则有效</p>
+</li>
+<li><p>除以上三个之外的回复或者规定时间内down-after-milliseconds时间内没有回复则主观下线</p>
+</li>
+<li><p>当判断主观下线后，会对其他Sentinel进行询问，当一半以上觉得主观下线的话，视为客观下线</p>
+<h2 id="选出新的主服务器"><a href="#选出新的主服务器" class="headerlink" title="选出新的主服务器"></a>选出新的主服务器</h2></li>
+<li><p>先判断slave节点与master节点断开的时长，如果超过指定（down-after-milliseconds * 10）则会排除该节点</p>
+</li>
+<li><p>判断slave节点的slave-priority,数字越小优先级越高，0则是用不参加选举</p>
+</li>
+<li><p>如果有多个相同最高优先级的，则选出其中偏移量offset最大的从服务器</p>
+</li>
+<li><p>最后判断运行ID，选出ID最小的服务器</p>
+<h2 id="故障转移"><a href="#故障转移" class="headerlink" title="故障转移"></a>故障转移</h2></li>
+<li><p>选中以后，sentinel会给备选的slave发送slaveof no one，让该节点变为master</p>
+</li>
+<li><p>广播其他从节点，发送slaveof 新的ip 新的端口号给其他的从节点，让这些slave成为新的master的从节点，开始从新的master上同步数据</p>
+</li>
+<li><p>sentinel将故障节点标记为slave，当故障节点恢复后会自动成为新的master的slave（直接修改配置文件为slaveof 新的ip 新的端口号）</p>
+</li>
+</ul>
+<h1 id="集群模式"><a href="#集群模式" class="headerlink" title="集群模式"></a>集群模式</h1><h2 id="哈希槽"><a href="#哈希槽" class="headerlink" title="哈希槽"></a>哈希槽</h2><p>Redis集群通过分片的方式保存键值对：集群被分为16384个槽（slot），数据库中每个键都属于其中的一个。每个槽都必须有节点在处理。</p>
+<ul>
+<li>数据key不与节点绑定，而是与插槽绑定。</li>
+<li>key中包含{}且至少有一个字符，则{}中为有效部分</li>
+<li>不包含{}则 key 都是有效部分<ul>
+<li>key是{itcast}num，根据itcast计算，计算方式是CRC16算法得到一个hash值，然后%16384得到最后slot</li>
+</ul>
+</li>
+</ul>
+<h1 id="删除机制"><a href="#删除机制" class="headerlink" title="删除机制"></a>删除机制</h1><h2 id="惰性删除"><a href="#惰性删除" class="headerlink" title="惰性删除"></a><code>惰性删除</code></h2><p>在读写key时才判断是否过期，如果过期就删除掉，属于将删除环节后置了，这样避免了轮询但是要增加了内存的占用。极端情况下如果某些体积非常大的key一直没有被访问，那么将占用内存很久，无疑在内存紧张的情况下对性能产生影响</p>
+<h2 id="定期删除"><a href="#定期删除" class="headerlink" title="定期删除"></a><code>定期删除</code></h2><p>在主节点执行ServerCron任务定时扫描需要被删掉的key，节约了空间，但是使用了轮询消耗一定的CPU，因此在需要被删除键很多且CPU资源不富裕的情况下，对Redis服务的性能会产生影响。</p>
+<h2 id="定时删除"><a href="#定时删除" class="headerlink" title="定时删除"></a><code>定时删除</code></h2><p>在设置键的过期时间的同时，创建一个定时器（timer），让定时器在键的过期时间来临时，立即执行对键的删除操作。不现实。浪费cpu</p>
+<p>在实际中Redis将惰性删除作为默认开启，定期删除可以通过配置来进行设定删除频率和内存阈值触发等，算是个折中的选择</p>
+<ul>
+<li><code>**单线程删除阻塞问题**</code></li>
+</ul>
+<p>Redis作为一个单线程模型的服务，当执行一些耗时的命令时，比如使用DEL删除一个value特别大的key时，或使用FLUSHDB 和 FLUSHALL 进行清库操作，都会造成redis阻塞，从而降低性能甚至发生故障转移</p>
+<ul>
+<li><code>**异步删除命令**</code></li>
+</ul>
+<p><strong>UNLINK</strong>是<strong>DEL</strong>的异步删除版本，<strong>UNLINK</strong>命令与<strong>DEL</strong>阻塞删除不同，<strong>UNLINK</strong>在删除集合类键时，如果集合键的元素个数大于64个，会把真正的内存释放操作，给单独的<strong>BackgroundIO</strong>线程来操作，有实验表明使用<strong>UNLINK</strong>命令删除一个大键mylist, 它包含200万个元素，但用时只有数毫秒。</p>
+<p>通过对<strong>FLUSHALL/FLUSHDB</strong>添加<strong>ASYNC</strong>异步清理选项，redis在清理整个实例或DB时，操作也都是异步的，有实验数据表明异步清理200w数据耗时也只有数毫秒。</p>
+<p>综上可知，采用<strong>UNLINK、FLUSHALL、FLUSHDB</strong>代替之前的阻塞删除命令可以使处理相同数据的耗时从传统秒级、甚至分钟级降低到目前的微妙，毫秒级，确实是个巨大的飞跃，或许这也是Redis直接从3.x飞跃到4.0的原因。</p>
+<h1 id="布隆过滤器"><a href="#布隆过滤器" class="headerlink" title="布隆过滤器"></a>布隆过滤器</h1><p>假如现在有三个哈希函数分别为**h1,h2,h3,**同时有三个输入x,y,z。三个输入分别通过h1-h3进行哈希计算出对应整数之后，对bitarray的长度进行取模运算，获取对应下标再进行置1，这样运算三次就形成了如图的bitmap结构：<br><img src="/2022/05/22/Redis/1617902398292-857d3496-ce3e-4032-a625-7d856d8ea1bf.jpeg"><br>布隆过滤器检索时，使用相同的哈希函数进行计算出对应的bit位置，只要看这些位置的值，如果这些位置有任何一个0，则被检元素一定不在；如果都是1，则被检元素可能存在。</p>
+<p><strong>一句话概率就是有0一定不存在、全1不一定存在。</strong><br><strong>不支持删除值，可以通过业务逻辑排除</strong></p>
+<p><strong>误算率</strong>是其中之一，随着存入的元素数量增加，误算率随之增加，但是如果元素数量太少，则使用散列表足够。另外一般情况下不能从布隆过滤器中删除元素。</p>
+<h1 id="Redis淘汰策略"><a href="#Redis淘汰策略" class="headerlink" title="Redis淘汰策略"></a>Redis淘汰策略</h1><p><img src="/2022/05/22/Redis/1660377928465-7017961a-eaf5-4857-827c-68d7b3ce8e8a.png"></p>
+<h1 id="Redis为什么采用跳表而不是红黑树"><a href="#Redis为什么采用跳表而不是红黑树" class="headerlink" title="Redis为什么采用跳表而不是红黑树"></a>Redis为什么采用跳表而不是红黑树</h1><p>在做范围查找的时候，平衡树比skiplist操作要复杂。<br>在平衡树上，我们找到指定范围的小值之后，还需要以中序遍历的顺序继续寻找其它不超过大值的节点。<br>如果不对平衡树进行一定的改造，这里的中序遍历并不容易实现。而在skiplist上进行范围查找就非常简单，只需要在找到小值之后，对第1层链表进行若干步的遍历就可以实现。</p>
+<p>平衡树的插入和删除操作可能引发子树的调整，逻辑复杂，而skiplist的插入和删除只需要修改相邻节点的指针，操作简单又快速。<br>从内存占用上来说，skiplist比平衡树更灵活一些。</p>
+<p>一般来说，平衡树每个节点包含2个指针（分别指向左右子树），而skiplist每个节点包含的指针数目平均为1/(1-p)，具体取决于参数p的大小。如果像Redis里的实现一样，取p=1/4，那么平均每个节点包含1.33个指针，比平衡树更有优势。</p>
+<p>查找单个key，skiplist和平衡树的时间复杂度都为O(log n)，大体相当；而哈希表在保持较低的哈希值冲突概率的前提下，查找时间复杂度接近O(1)，性能更高一些。所以我们平常使用的各种Map或dictionary结构，大都是基于哈希表实现的。<br>从算法实现难度上来比较，skiplist比平衡树要简单得多。</p>
+<h1 id="Redis为什么这么快"><a href="#Redis为什么这么快" class="headerlink" title="Redis为什么这么快"></a>Redis为什么这么快</h1><p>Redis基于Reactor模式开发了自己的网络事件处理器：这个处理器被称为文件事件处理器（file event handler）：</p>
+<ul>
+<li>文件事件处理器使用I/O多路复用（multiplexing）程序来同时监听多个套接字，并根据套接字目前执行的任务来为套接字关联不同的事件处理器。</li>
+<li>当被监听的套接字准备好执行连接应答（accept）、读取（read）、写入（write）、关闭（close）等操作时，与操作相对应的文件事件就会产生，这时文件事件处理器就会调用套接字之前关联好的事件处理器来处理这些事件。</li>
+</ul>
+<p><strong>1、完全基于内存，绝大部分请求是纯粹的内存操作，非常快速。数据存在内存中，类似于HashMap，HashMap的优势就是查找和操作的时间复杂度都是O(1)；</strong><br><strong>2、数据结构简单，对数据操作也简单，Redis中的数据结构是专门进行设计的；</strong><br><strong>3、采用单线程，避免了不必要的上下文切换和竞争条件，也不存在多进程或者多线程导致的切换而消耗 CPU，不用去考虑各种锁的问题，不存在加锁释放锁操作，没有因为可能出现死锁而导致的性能消耗；</strong><br><strong>4、使用多路I/O复用模型，非阻塞IO；</strong><br>多路I/O复用模型是利用 select、poll、epoll 可以同时监察多个流的 I/O 事件的能力，在空闲的时候，会把当前线程阻塞掉，当有一个或多个流有 I/O 事件时，就从阻塞态中唤醒，于是程序就会轮询一遍所有的流（epoll 是只轮询那些真正发出了事件的流），并且只依次顺序的处理就绪的流，这种做法就避免了大量的无用操作。<br>这里“多路”指的是多个网络连接，“复用”指的是复用同一个线程。采用多路 I/O 复用技术可以让单个线程高效的处理多个连接请求（尽量减少网络 IO 的时间消耗），且 Redis 在内存中操作数据的速度非常快，也就是说内存内的操作不会成为影响Redis性能的瓶颈，主要由以上几点造就了 Redis 具有很高的吞吐量。<br><strong>5、使用底层模型不同，它们之间底层实现方式以及与客户端之间通信的应用协议不一样，Redis直接自己构建了VM 机制 ，因为一般的系统调用系统函数的话，会浪费一定的时间去移动和请求；</strong></p>
+<h1 id="动态字符串SDS（保存单个字符串）"><a href="#动态字符串SDS（保存单个字符串）" class="headerlink" title="动态字符串SDS（保存单个字符串）"></a>动态字符串SDS（保存单个字符串）</h1><p><img src="/2022/05/22/Redis/1658822164633-4e762444-3f42-4025-a4a0-eefccb5eb3bd.png"></p>
+<h1 id="IntSet（整数集合）"><a href="#IntSet（整数集合）" class="headerlink" title="IntSet（整数集合）"></a>IntSet（整数集合）</h1><p><img src="/2022/05/22/Redis/1658823208327-489b82c8-4e99-4088-b7d8-556f3dcc01a5.png"></p>
+</div><div class="article-tags is-size-7 mb-4"><span class="mr-2">#</span><a class="link-muted mr-2" rel="tag" href="/tags/Redis/">Redis</a></div><!--!--></article></div><!--!--><nav class="post-navigation mt-4 level is-mobile"><div class="level-start"><a class="article-nav-prev level level-item link-muted" href="/2022/05/22/JUC(JAVA%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B)/"><i class="level-item fas fa-chevron-left"></i><span class="level-item">JUC(Java并发编程)</span></a></div><div class="level-end"><a class="article-nav-next level level-item link-muted" href="/2022/05/22/Spring/"><span class="level-item">Spring</span><i class="level-item fas fa-chevron-right"></i></a></div></nav><div class="card"><div class="card-content"><h3 class="title is-5">评论</h3><div id="comment-container"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1.7.2/dist/gitalk.css"><script src="https://cdn.jsdelivr.net/npm/gitalk@1.7.2/dist/gitalk.min.js"></script><script>var gitalk = new Gitalk({
+            id: "38d108248796fbd3487767040a5cb6ba",
+            repo: "Winky_Blog",
+            owner: "WinkyGranger",
+            clientID: "8bf6ad6d7398a1f67aa5",
+            clientSecret: "f07834449dda641b82428622432b27a976fa9172",
+            admin: ["WinkyGranger"],
+            createIssueManually: false,
+            distractionFreeMode: false,
+            perPage: 20,
+            pagerDirection: "last",
+            
+            
+            enableHotKey: true,
+            
+        })
+        gitalk.render('comment-container')</script></div></div></div><div class="column column-left is-4-tablet is-4-desktop is-3-widescreen  order-1 is-sticky"><div class="card widget" data-type="profile"><div class="card-content"><nav class="level"><div class="level-item has-text-centered flex-shrink-1"><div><figure class="image is-128x128 mx-auto mb-2"><img class="avatar" src="/img/avatar.png" alt="Winky Granger"></figure><p class="title is-size-4 is-block" style="line-height:inherit;">Winky Granger</p><p class="is-size-6 is-block">一个正在成长的开发</p><p class="is-size-6 is-flex justify-content-center"><i class="fas fa-map-marker-alt mr-1"></i><span>Shanghai,China</span></p></div></div></nav><nav class="level is-mobile"><div class="level-item has-text-centered is-marginless"><div><p class="heading">文章</p><a href="/archives"><p class="title">8</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">分类</p><a href="/categories"><p class="title">4</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">标签</p><a href="/tags"><p class="title">9</p></a></div></div></nav><div class="level"><a class="level-item button is-primary is-rounded" href="https://github.com/WinkyGranger" target="_blank" rel="noopener">关注我</a></div></div></div><div class="card widget" data-type="categories"><div class="card-content"><div class="menu"><h3 class="menu-label">分类</h3><ul class="menu-list"><li><a class="level is-mobile" href="/categories/Java%E5%9F%BA%E7%A1%80/"><span class="level-start"><span class="level-item">Java基础</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/categories/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/"><span class="level-start"><span class="level-item">后端开发</span></span><span class="level-end"><span class="level-item tag">3</span></span></a></li><li><a class="level is-mobile" href="/categories/%E5%AE%89%E5%85%A8/"><span class="level-start"><span class="level-item">安全</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li><li><a class="level is-mobile" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/"><span class="level-start"><span class="level-item">计算机基础</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li></ul></div></div></div><div class="card widget" data-type="tags"><div class="card-content"><div class="menu"><h3 class="menu-label">标签</h3><div class="field is-grouped is-grouped-multiline"><div class="control"><a class="tags has-addons" href="/tags/JUC/"><span class="tag">JUC</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Redis/"><span class="tag">Redis</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/java%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/"><span class="tag">java反序列化</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/mysql/"><span class="tag">mysql</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/nmap/"><span class="tag">nmap</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/spring/"><span class="tag">spring</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/"><span class="tag">信息收集</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/"><span class="tag">操作系统</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/"><span class="tag">计算机网络</span><span class="tag">1</span></a></div></div></div></div></div><div class="column-right-shadow is-hidden-widescreen is-sticky"></div></div><div class="column column-right is-4-tablet is-4-desktop is-3-widescreen is-hidden-touch is-hidden-desktop-only order-3 is-sticky"><div class="card widget" id="toc" data-type="toc"><div class="card-content"><div class="menu"><h3 class="menu-label">目录</h3><ul class="menu-list"><li><a class="level is-mobile" href="#5种数据类型"><span class="level-left"><span class="level-item">1</span><span class="level-item">5种数据类型</span></span></a></li><li><a class="level is-mobile" href="#zset为何不使用红黑树等平衡树？"><span class="level-left"><span class="level-item">2</span><span class="level-item">zset为何不使用红黑树等平衡树？</span></span></a></li><li><a class="level is-mobile" href="#Redis主从复制"><span class="level-left"><span class="level-item">3</span><span class="level-item">Redis主从复制</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#1-全量复制"><span class="level-left"><span class="level-item">3.1</span><span class="level-item">1.全量复制</span></span></a></li><li><a class="level is-mobile" href="#2-增量复制"><span class="level-left"><span class="level-item">3.2</span><span class="level-item">2.增量复制</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#复制积压缓冲区"><span class="level-left"><span class="level-item">3.2.1</span><span class="level-item">复制积压缓冲区</span></span></a></li></ul></li></ul></li><li><a class="level is-mobile" href="#哨兵模式"><span class="level-left"><span class="level-item">4</span><span class="level-item">哨兵模式</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#哨兵模式下主观下线-客观下线"><span class="level-left"><span class="level-item">4.1</span><span class="level-item">哨兵模式下主观下线/客观下线</span></span></a></li><li><a class="level is-mobile" href="#选出新的主服务器"><span class="level-left"><span class="level-item">4.2</span><span class="level-item">选出新的主服务器</span></span></a></li><li><a class="level is-mobile" href="#故障转移"><span class="level-left"><span class="level-item">4.3</span><span class="level-item">故障转移</span></span></a></li></ul></li><li><a class="level is-mobile" href="#集群模式"><span class="level-left"><span class="level-item">5</span><span class="level-item">集群模式</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#哈希槽"><span class="level-left"><span class="level-item">5.1</span><span class="level-item">哈希槽</span></span></a></li></ul></li><li><a class="level is-mobile" href="#删除机制"><span class="level-left"><span class="level-item">6</span><span class="level-item">删除机制</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#惰性删除"><span class="level-left"><span class="level-item">6.1</span><span class="level-item">惰性删除</span></span></a></li><li><a class="level is-mobile" href="#定期删除"><span class="level-left"><span class="level-item">6.2</span><span class="level-item">定期删除</span></span></a></li><li><a class="level is-mobile" href="#定时删除"><span class="level-left"><span class="level-item">6.3</span><span class="level-item">定时删除</span></span></a></li></ul></li><li><a class="level is-mobile" href="#布隆过滤器"><span class="level-left"><span class="level-item">7</span><span class="level-item">布隆过滤器</span></span></a></li><li><a class="level is-mobile" href="#Redis淘汰策略"><span class="level-left"><span class="level-item">8</span><span class="level-item">Redis淘汰策略</span></span></a></li><li><a class="level is-mobile" href="#Redis为什么采用跳表而不是红黑树"><span class="level-left"><span class="level-item">9</span><span class="level-item">Redis为什么采用跳表而不是红黑树</span></span></a></li><li><a class="level is-mobile" href="#Redis为什么这么快"><span class="level-left"><span class="level-item">10</span><span class="level-item">Redis为什么这么快</span></span></a></li><li><a class="level is-mobile" href="#动态字符串SDS（保存单个字符串）"><span class="level-left"><span class="level-item">11</span><span class="level-item">动态字符串SDS（保存单个字符串）</span></span></a></li><li><a class="level is-mobile" href="#IntSet（整数集合）"><span class="level-left"><span class="level-item">12</span><span class="level-item">IntSet（整数集合）</span></span></a></li></ul></div></div><style>#toc .menu-list > li > a.is-active + .menu-list { display: block; }#toc .menu-list > li > a + .menu-list { display: none; }</style><script src="/js/toc.js" defer></script></div></div></div></div></section><footer class="footer"><div class="container"><div class="level"><div class="level-start"><a class="footer-logo is-block mb-2" href="/"><img src="/img/logo.svg" alt="Winky&#039;s Blog" height="28"></a><p class="is-size-7"><span>&copy; 2023 Winky</span>  Powered by <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> &amp; <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank" rel="noopener">Icarus</a></p></div><div class="level-end"><div class="field has-addons"><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/WinkyGranger"><i class="fab fa-github"></i></a></p></div></div></div></div></footer><script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script><script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script><script>moment.locale("zh-cn");</script><script>var IcarusThemeSettings = {
+            article: {
+                highlight: {
+                    clipboard: true,
+                    fold: 'unfolded'
+                }
+            }
+        };</script><script src="/js/column.js"></script><script src="/js/animation.js"></script><a id="back-to-top" title="回到顶端" href="javascript:;"><i class="fas fa-chevron-up"></i></a><script src="/js/back_to_top.js" defer></script><!--!--><!--!--><!--!--><script src="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.js" defer></script><script>window.addEventListener("load", () => {
+      window.cookieconsent.initialise({
+        type: "info",
+        theme: "edgeless",
+        static: false,
+        position: "bottom-left",
+        content: {
+          message: "此网站使用Cookie来改善您的体验。",
+          dismiss: "知道了！",
+          allow: "允许使用Cookie",
+          deny: "拒绝",
+          link: "了解更多",
+          policy: "Cookie政策",
+          href: "https://www.cookiesandyou.com/",
+        },
+        palette: {
+          popup: {
+            background: "#edeff5",
+            text: "#838391"
+          },
+          button: {
+            background: "#4b81e8"
+          },
+        },
+      });
+    });</script><script src="https://cdn.jsdelivr.net/npm/lightgallery@1.10.0/dist/js/lightgallery.min.js" defer></script><script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/js/jquery.justifiedGallery.min.js" defer></script><script>window.addEventListener("load", () => {
+            if (typeof $.fn.lightGallery === 'function') {
+                $('.article').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof $.fn.justifiedGallery === 'function') {
+                if ($('.justified-gallery > p > .gallery-item').length) {
+                    $('.justified-gallery > p > .gallery-item').unwrap();
+                }
+                $('.justified-gallery').justifiedGallery();
+            }
+        });</script><!--!--><!--!--><!--!--><!--!--><!--!--><script src="/js/main.js" defer></script><div class="searchbox"><div class="searchbox-container"><div class="searchbox-header"><div class="searchbox-input-container"><input class="searchbox-input" type="text" placeholder="想要查找什么..."></div><a class="searchbox-close" href="javascript:;">×</a></div><div class="searchbox-body"></div></div></div><script src="/js/insight.js" defer></script><script>document.addEventListener('DOMContentLoaded', function () {
+            loadInsight({"contentUrl":"/content.json"}, {"hint":"想要查找什么...","untitled":"(无标题)","posts":"文章","pages":"页面","categories":"分类","tags":"标签"});
+        });</script></body></html>
