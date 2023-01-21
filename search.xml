@@ -4,7 +4,7 @@
   
     
     <entry>
-      <title>操作系统</title>
+      <title>口令破解</title>
       <link href="/2023/01/20/%E5%8F%A3%E4%BB%A4%E7%A0%B4%E8%A7%A3/"/>
       <url>/2023/01/20/%E5%8F%A3%E4%BB%A4%E7%A0%B4%E8%A7%A3/</url>
       
@@ -13,7 +13,7 @@
       
       <categories>
           
-          <category> 安全 </category>
+          <category> 安全工具 </category>
           
       </categories>
       
@@ -38,7 +38,7 @@
       
       <categories>
           
-          <category> 安全 </category>
+          <category> 安全工具 </category>
           
       </categories>
       
@@ -65,14 +65,64 @@
       
       <categories>
           
-          <category> 安全 </category>
+          <category> Java安全 </category>
           
       </categories>
       
       
         <tags>
             
-            <tag> java反序列化 </tag>
+            <tag> Java反序列化 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>2023.7-</title>
+      <link href="/2022/12/22/%E7%99%BE%E5%BA%A6%E5%B7%A5%E4%BD%9C/"/>
+      <url>/2022/12/22/%E7%99%BE%E5%BA%A6%E5%B7%A5%E4%BD%9C/</url>
+      
+        <content type="html"><![CDATA[<p>dev-sec-ops</p><span id="more"></span>]]></content>
+      
+      
+      <categories>
+          
+          <category> 工牌之旅 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 工牌 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>RabbitMQ</title>
+      <link href="/2022/05/25/MQ/"/>
+      <url>/2022/05/25/MQ/</url>
+      
+        <content type="html"><![CDATA[<p>RabbitMQ相关内容</p><span id="more"></span>]]></content>
+      
+      
+      <categories>
+          
+          <category> 后端开发 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 消息队列 </tag>
             
         </tags>
       
