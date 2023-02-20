@@ -253,41 +253,28 @@
 </li>
 <li><p>IO密集型，判断程序中十分消耗IO的线程，大于这个数就行，一般设置为2倍</p>
 <ul>
-<li>这种任务应用起来，系统会用大部分的时间来处理 I/O 交互，而线程在处理 I/O 的时间段内不会占用 CPU 来处理，这时就可以将 CPU 交出给其它线程使用。因此在 I/O 密集型任务的应用中，我们可以多配置一些线程，具体的计算方法是 2N。<h1 id="JMM模型（Java内存模型）"><a href="#JMM模型（Java内存模型）" class="headerlink" title="JMM模型（Java内存模型）"></a>JMM模型（Java内存模型）</h1>为了屏蔽系统之间的差异<br>Java 内存模型抽象了线程和主内存之间的关系，就比如说线程之间的共享变量必须存储在主内存中。Java 内存模型主要目的是为了屏蔽系统和硬件的差异，避免一套代码在不同的平台下产生的效果不一致。<br>在 JDK1.2 之前，Java 的内存模型实现总是从<strong>主存</strong>（即共享内存）读取变量，是不需要进行特别的注意的。而在当前的 Java 内存模型下，线程可以把变量保存<strong>本地内存</strong>（比如机器的寄存器）中，而不是直接在主存中进行读写。这就可能造成一个线程在主存中修改了一个变量的值，而另外一个线程还继续使用它在寄存器中的变量值的拷贝，造成<strong>数据的不一致</strong>。<br><img src="/2022/05/22/JUC(JAVA%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B)/1657351998026-7bd11dc5-7f4b-4d9b-a474-bf11bf9e2779.png"></li>
+<li>这种任务应用起来，系统会用大部分的时间来处理 I/O 交互，而线程在处理 I/O 的时间段内不会占用 CPU 来处理，这时就可以将 CPU 交出给其它线程使用。因此在 I/O 密集型任务的应用中，我们可以多配置一些线程，具体的计算方法是 2N。</li>
 </ul>
 </li>
-<li><p>lock(锁定):作用于主内存的变量，它把一个变量标识为一条线程独占的状态。</p>
-</li>
-<li><p>unlock(解锁):作用于主内存的变量，它把一个处于锁定状态的变量释放出来，释放后的变量 才可以被其他线程锁定。</p>
-</li>
-<li><p>read(读取):作用于主内存的变量，它把一个变量的值从主内存传输到线程的工作内存中，以 便随后的load动作使用。</p>
-</li>
-<li><p>load(载入):作用于工作内存的变量，它把read操作从主内存中得到的变量值放入工作内存的 变量副本中。</p>
-</li>
-<li><p>use(使用):作用于工作内存的变量，它把工作内存中一个变量的值传递给执行引擎，每当虚 拟机遇到一个需要使用变量的值的字节码指令时将会执行这个操作。</p>
-</li>
-<li><p>assign(赋值):作用于工作内存的变量，它把一个从执行引擎接收的值赋给工作内存的变量， 每当虚拟机遇到一个给变量赋值的字节码指令时执行这个操作</p>
-</li>
-<li><p>store(存储):作用于工作内存的变量，它把工作内存中一个变量的值传送到主内存中，以便随 后的write操作使用。</p>
-</li>
-<li><p>write(写入):作用于主内存的变量，它把store操作从工作内存中得到的变量的值放入主内存的 变量中。</p>
-</li>
-<li><p>不允许read和load、store和write操作之一单独出现，即不允许一个变量从主内存读取了但工作内 存不接受，或者工作内存发起回写了但主内存不接受的情况出现。</p>
-</li>
-<li><p>不允许一个线程丢弃它最近的assign操作，即变量在工作内存中改变了之后必须把该变化同步回 主内存。</p>
-</li>
-<li><p>不允许一个线程无原因地(没有发生过任何assign操作)把数据从线程的工作内存同步回主内存 中。</p>
-</li>
-<li><p>一个新的变量只能在主内存中“诞生”，不允许在工作内存中直接使用一个未被初始化(load或 a s s i gn ) 的 变 量 ， 换 句 话 说 就 是 对 一 个 变 量 实 施 u s e 、 s t o r e 操 作 之 前 ， 必 须 先 执 行 a s s i gn 和 l o a d 操 作 。</p>
-</li>
-<li><p>一个变量在同一个时刻只允许一条线程对其进行lock操作，但lock操作可以被同一条线程重复执 行多次，多次执行lock后，只有执行相同次数的unlock操作，变量才会被解锁。</p>
-</li>
-<li><p>如果对一个变量执行lock操作，那将会清空工作内存中此变量的值，在执行引擎使用这个变量 前，需要重新执行load或assign操作以初始化变量的值。</p>
-</li>
-<li><p>如果一个变量事先没有被lock操作锁定，那就不允许对它执行unlock操作，也不允许去unlock一个 被其他线程锁定的变量。</p>
-</li>
-<li><p>对一个变量执行unlock操作之前，必须先把此变量同步回主内存中(执行store、write操作)。</p>
-</li>
+</ul>
+<h1 id="JMM模型（Java内存模型）"><a href="#JMM模型（Java内存模型）" class="headerlink" title="JMM模型（Java内存模型）"></a>JMM模型（Java内存模型）</h1><p>为了屏蔽系统之间的差异<br>Java 内存模型抽象了线程和主内存之间的关系，就比如说线程之间的共享变量必须存储在主内存中。Java 内存模型主要目的是为了屏蔽系统和硬件的差异，避免一套代码在不同的平台下产生的效果不一致。<br>在 JDK1.2 之前，Java 的内存模型实现总是从<strong>主存</strong>（即共享内存）读取变量，是不需要进行特别的注意的。而在当前的 Java 内存模型下，线程可以把变量保存<strong>本地内存</strong>（比如机器的寄存器）中，而不是直接在主存中进行读写。这就可能造成一个线程在主存中修改了一个变量的值，而另外一个线程还继续使用它在寄存器中的变量值的拷贝，造成<strong>数据的不一致</strong>。<br><img src="/2022/05/22/JUC(JAVA%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B)/1657351998026-7bd11dc5-7f4b-4d9b-a474-bf11bf9e2779.png"></p>
+<ul>
+<li>lock(锁定):作用于主内存的变量，它把一个变量标识为一条线程独占的状态。</li>
+<li>unlock(解锁):作用于主内存的变量，它把一个处于锁定状态的变量释放出来，释放后的变量 才可以被其他线程锁定。</li>
+<li>read(读取):作用于主内存的变量，它把一个变量的值从主内存传输到线程的工作内存中，以 便随后的load动作使用。</li>
+<li>load(载入):作用于工作内存的变量，它把read操作从主内存中得到的变量值放入工作内存的 变量副本中。</li>
+<li>use(使用):作用于工作内存的变量，它把工作内存中一个变量的值传递给执行引擎，每当虚 拟机遇到一个需要使用变量的值的字节码指令时将会执行这个操作。</li>
+<li>assign(赋值):作用于工作内存的变量，它把一个从执行引擎接收的值赋给工作内存的变量， 每当虚拟机遇到一个给变量赋值的字节码指令时执行这个操作</li>
+<li>store(存储):作用于工作内存的变量，它把工作内存中一个变量的值传送到主内存中，以便随 后的write操作使用。</li>
+<li>write(写入):作用于主内存的变量，它把store操作从工作内存中得到的变量的值放入主内存的 变量中。</li>
+<li>不允许read和load、store和write操作之一单独出现，即不允许一个变量从主内存读取了但工作内 存不接受，或者工作内存发起回写了但主内存不接受的情况出现。</li>
+<li>不允许一个线程丢弃它最近的assign操作，即变量在工作内存中改变了之后必须把该变化同步回 主内存。</li>
+<li>不允许一个线程无原因地(没有发生过任何assign操作)把数据从线程的工作内存同步回主内存 中。</li>
+<li>一个新的变量只能在主内存中“诞生”，不允许在工作内存中直接使用一个未被初始化(load或 a s s i gn ) 的 变 量 ， 换 句 话 说 就 是 对 一 个 变 量 实 施 u s e 、 s t o r e 操 作 之 前 ， 必 须 先 执 行 a s s i gn 和 l o a d 操 作 。</li>
+<li>一个变量在同一个时刻只允许一条线程对其进行lock操作，但lock操作可以被同一条线程重复执 行多次，多次执行lock后，只有执行相同次数的unlock操作，变量才会被解锁。</li>
+<li>如果对一个变量执行lock操作，那将会清空工作内存中此变量的值，在执行引擎使用这个变量 前，需要重新执行load或assign操作以初始化变量的值。</li>
+<li>如果一个变量事先没有被lock操作锁定，那就不允许对它执行unlock操作，也不允许去unlock一个 被其他线程锁定的变量。</li>
+<li>对一个变量执行unlock操作之前，必须先把此变量同步回主内存中(执行store、write操作)。</li>
 </ul>
 <h1 id="Volatile"><a href="#Volatile" class="headerlink" title="Volatile"></a>Volatile</h1><p><strong>volatile 关键字防止 JVM 的指令重排 ，保证变量的可见性，内存屏障保证有序性，但volatile不保证原子性</strong><br>什么是指令重排：<strong>你写的程序，计算机并不是按照你写的那样去执行的</strong><br>源代码–&gt; 编译器的优化重排–&gt; 指令运行也可能会重排–&gt; 内存系统也会重排–&gt;执行<br><strong>处理器在进行指令重排的时候，考虑：数据之间依赖性问题</strong></p>
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="type">int</span> <span class="variable">x</span> <span class="operator">=</span> <span class="number">1</span>;</span><br><span class="line"><span class="type">int</span> <span class="variable">x</span> <span class="operator">=</span> <span class="number">2</span>;</span><br><span class="line">x = x + <span class="number">5</span>;</span><br><span class="line">y = x * x;</span><br><span class="line"><span class="comment">//我们希望：1234</span></span><br><span class="line"><span class="comment">//但可能是：2134 1324</span></span><br><span class="line"><span class="comment">//可不可能：4123？ 不可能</span></span><br></pre></td></tr></table></figure>
@@ -351,28 +338,20 @@
 <p><img src="/2022/05/22/JUC(JAVA%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B)/1657352248117-b31d1278-67ca-4c44-a13f-73c846324a56.png"></p>
 <p><img src="/2022/05/22/JUC(JAVA%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B)/1657352255758-3a137f8d-44df-4b24-b46f-f17ff62df08f.png"></p>
 <ul>
-<li><p>AtomicBoolean:  原子更新布尔类型。 </p>
-</li>
-<li><p>AtomicInteger:    原子更新整型。 </p>
-</li>
-<li><p>AtomicLong:       原子更新长整型。 </p>
-</li>
-<li><p>AtomicReference:  原子更新引用类型。 </p>
-</li>
-<li><p>AtomicReferenceFieldUpdater:  原子更新引用类型的字段。 </p>
-</li>
-<li><p>AtomicMarkableReferce:  原子更新带有标记位的引用类型，可以使用构造方法更新一个布尔类型的标记位和引用类型。 </p>
-</li>
-<li><p>AtomicIntegerFieldUpdater:  原子更新整型的字段的更新器。 </p>
-</li>
-<li><p>AtomicLongFieldUpdater:  原子更新长整型字段的更新器。 </p>
-</li>
-<li><p>AtomicStampedFieldUpdater:  原子更新带有版本号的引用类型。 </p>
+<li>AtomicBoolean:  原子更新布尔类型。 </li>
+<li>AtomicInteger:    原子更新整型。 </li>
+<li>AtomicLong:       原子更新长整型。 </li>
+<li>AtomicReference:  原子更新引用类型。 </li>
+<li>AtomicReferenceFieldUpdater:  原子更新引用类型的字段。 </li>
+<li>AtomicMarkableReferce:  原子更新带有标记位的引用类型，可以使用构造方法更新一个布尔类型的标记位和引用类型。 </li>
+<li>AtomicIntegerFieldUpdater:  原子更新整型的字段的更新器。 </li>
+<li>AtomicLongFieldUpdater:  原子更新长整型字段的更新器。 </li>
+<li>AtomicStampedFieldUpdater:  原子更新带有版本号的引用类型。 </li>
+</ul>
 <h1 id="各种锁的理解"><a href="#各种锁的理解" class="headerlink" title="各种锁的理解"></a>各种锁的理解</h1><h2 id="公平锁、非公平锁"><a href="#公平锁、非公平锁" class="headerlink" title="公平锁、非公平锁"></a>公平锁、非公平锁</h2><p>公平锁：非常公平，不能够插队，必须先来后到<br>非公平所：非常不公平，可以插队（默认都是非公平）</p>
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Creates an instance of &#123;<span class="doctag">@code</span> ReentrantLock&#125;.</span></span><br><span class="line"><span class="comment"> * This is equivalent to using &#123;<span class="doctag">@code</span> ReentrantLock(false)&#125;.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="title function_">ReentrantLock</span><span class="params">()</span> &#123;</span><br><span class="line">    sync = <span class="keyword">new</span> <span class="title class_">NonfairSync</span>();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="可重入锁（递归锁）"><a href="#可重入锁（递归锁）" class="headerlink" title="可重入锁（递归锁）"></a>可重入锁（递归锁）</h2></li>
-<li><p>synchronized锁</p>
-</li>
+<h2 id="可重入锁（递归锁）"><a href="#可重入锁（递归锁）" class="headerlink" title="可重入锁（递归锁）"></a>可重入锁（递归锁）</h2><ul>
+<li>synchronized锁</li>
 </ul>
 <p><img src="/2022/05/22/JUC(JAVA%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B)/1657352333987-a31ffe5f-cbbc-4578-8e0e-422fd54cc580.png"></p>
 <ul>
@@ -388,22 +367,17 @@
 <p>输出：</p>
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line">Thread[线程 <span class="number">1</span>,<span class="number">5</span>,main]get resource1</span><br><span class="line">Thread[线程 <span class="number">2</span>,<span class="number">5</span>,main]get resource2</span><br><span class="line">Thread[线程 <span class="number">1</span>,<span class="number">5</span>,main]waiting get resource2</span><br><span class="line">Thread[线程 <span class="number">2</span>,<span class="number">5</span>,main]waiting get resource1</span><br></pre></td></tr></table></figure>
 <h2 id="死锁的四个必要条件"><a href="#死锁的四个必要条件" class="headerlink" title="死锁的四个必要条件"></a>死锁的四个必要条件</h2><ul>
-<li><p><strong>互斥条件</strong>：一段时间内某个资源只能由一个线程占用</p>
-</li>
-<li><p><strong>请求和保持条件</strong>：线程至少保持了一个资源，但又提出了新的资源要求，该新资源被其他线程占有，此时请求阻塞，但又对自己持有的资源不放</p>
-</li>
-<li><p><strong>不剥夺条件</strong>：线程获得的资源在未释放以前不能被其他线程剥夺占有</p>
-</li>
-<li><p><strong>环路等待条件</strong>：发生死锁时，必然存在一个线程资源环形链，A等B，B等C，C等A。</p>
-<h1 id="ThreadLocal"><a href="#ThreadLocal" class="headerlink" title="ThreadLocal"></a>ThreadLocal</h1></li>
-<li><p>线程并发：在多线程并发场景下</p>
-</li>
-<li><p>传递数据：可以通过ThreadLocal在同一线程不同组件中传递公共变量</p>
-</li>
-<li><p>线程隔离：每个线程变量都是独立的，<strong>不会相互影响</strong></p>
-</li>
+<li><strong>互斥条件</strong>：一段时间内某个资源只能由一个线程占用</li>
+<li><strong>请求和保持条件</strong>：线程至少保持了一个资源，但又提出了新的资源要求，该新资源被其他线程占有，此时请求阻塞，但又对自己持有的资源不放</li>
+<li><strong>不剥夺条件</strong>：线程获得的资源在未释放以前不能被其他线程剥夺占有</li>
+<li><strong>环路等待条件</strong>：发生死锁时，必然存在一个线程资源环形链，A等B，B等C，C等A。</li>
 </ul>
-<p><img src="https://cdn.nlark.com/yuque/0/2022/png/22222537/1657352460769-1cce4812-905a-4d40-86f7-e6722a6e0375.png#clientId=ue848bfe3-0a12-4&crop=0&crop=0&crop=1&crop=1&from=ui&id=u99528103&margin=%5Bobject%20Object%5D&name=image-20220622221402678.png&originHeight=692&originWidth=874&originalType=binary&ratio=1&rotation=0&showTitle=false&size=160122&status=done&style=none&taskId=ubaf950be-af38-4fc8-a9a1-d2dfc17a257&title=" alt="image-20220622221402678.png"><br>JDK8优点：</p>
+<h1 id="ThreadLocal"><a href="#ThreadLocal" class="headerlink" title="ThreadLocal"></a>ThreadLocal</h1><ul>
+<li>线程并发：在多线程并发场景下</li>
+<li>传递数据：可以通过ThreadLocal在同一线程不同组件中传递公共变量</li>
+<li>线程隔离：每个线程变量都是独立的，<strong>不会相互影响</strong></li>
+</ul>
+<p>JDK8优点：</p>
 <ul>
 <li>每个Map存储的Entry变少（避免hash冲突）</li>
 <li>Thread销毁的时候，ThreadLocalMap也会随之销毁，减少内存的使用</li>
