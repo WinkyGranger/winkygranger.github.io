@@ -2,6 +2,15 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://winkygranger.github.io/2023/05/02/Icarus%E4%B8%BB%E9%A2%98%E9%AD%94%E6%94%B9/</loc>
+    
+    <lastmod>2023-05-02</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://winkygranger.github.io/2023/04/18/Kubernetes/</loc>
     
     <lastmod>2023-05-01</lastmod>
@@ -190,6 +199,13 @@
     <priority>0.2</priority>
   </url>
   
+  <url>
+    <loc>https://winkygranger.github.io/tags/hexo/</loc>
+    <lastmod>2023-05-02</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
 
   
   <url>
@@ -215,6 +231,13 @@
   
   <url>
     <loc>https://winkygranger.github.io/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/</loc>
+    <lastmod>2023-05-02</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://winkygranger.github.io/categories/hexo/</loc>
     <lastmod>2023-05-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
