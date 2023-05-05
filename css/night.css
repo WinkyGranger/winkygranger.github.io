@@ -7,6 +7,11 @@
 }
 body.night {
   background: #0e1225;
+  background-image: url("/img/NightBG.jpg");
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
 }
 .night .content code {
   color: #cbba7d;

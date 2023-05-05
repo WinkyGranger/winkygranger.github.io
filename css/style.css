@@ -10967,6 +10967,8 @@ a.article-nav-next span {
 .navbar-main .navbar-item {
   display: flex;
   align-items: center;
+  padding: 1.25rem 0.75rem;
+  margin: 0 0;
   padding: 6px !important;
   margin: 4px !important;
 }
@@ -11014,18 +11016,6 @@ footer.footer .level-end .field {
 }
 .footer-logo img {
   max-height: 1.75rem;
-}
-:target::before {
-  content: "";
-  display: inline-block;
-  padding-top: 73px;
-  margin-top: -73px;
-}
-.footnote-item::before {
-  display: block;
-  padding-top: 55px;
-  margin-top: -55px;
-  margin-bottom: -25px;
 }
 .pagination {
   margin-top: 1.5rem;
