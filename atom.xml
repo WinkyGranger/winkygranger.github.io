@@ -6,7 +6,7 @@
   <link href="https://winkygranger.github.io/atom.xml" rel="self"/>
   
   <link href="https://winkygranger.github.io/"/>
-  <updated>2023-05-04T10:24:10.974Z</updated>
+  <updated>2023-05-06T08:31:23.587Z</updated>
   <id>https://winkygranger.github.io/</id>
   
   <author>
@@ -21,12 +21,12 @@
     <link href="https://winkygranger.github.io/2023/05/04/CICD/"/>
     <id>https://winkygranger.github.io/2023/05/04/CICD/</id>
     <published>2023-05-04T08:00:00.000Z</published>
-    <updated>2023-05-04T10:24:10.974Z</updated>
+    <updated>2023-05-06T08:31:23.587Z</updated>
     
-    <content type="html"><![CDATA[<p>DevOps、持续集成、持续部署、</p><span id="more"></span><h1 id="什么是DevOps"><a href="#什么是DevOps" class="headerlink" title="什么是DevOps"></a>什么是DevOps</h1><p><img src="/2023/05/04/CICD/001.jpg"></p>]]></content>
+    <content type="html"><![CDATA[<p>DevOps、持续集成、持续部署</p><span id="more"></span><h1 id="什么是CI-CD"><a href="#什么是CI-CD" class="headerlink" title="什么是CI/CD"></a>什么是CI/CD</h1><p><img src="/2023/05/04/CICD/001.jpg"></p><p>持续集成和持续交付/持续部署的缩写分别为CI和CD。简而言之，CI/CD是一套现代软件开发方法，常常一致地逐步更改代码。CI触发的自动构建和测试阶段保证了提交到源代码库中的代码更改是可靠的。</p>]]></content>
     
     
-    <summary type="html">&lt;p&gt;DevOps、持续集成、持续部署、&lt;/p&gt;</summary>
+    <summary type="html">&lt;p&gt;DevOps、持续集成、持续部署&lt;/p&gt;</summary>
     
     
     
