@@ -6,7 +6,7 @@
   <link href="https://winkygranger.github.io/atom.xml" rel="self"/>
   
   <link href="https://winkygranger.github.io/"/>
-  <updated>2023-05-06T09:21:19.424Z</updated>
+  <updated>2023-05-06T12:58:43.659Z</updated>
   <id>https://winkygranger.github.io/</id>
   
   <author>
@@ -21,9 +21,9 @@
     <link href="https://winkygranger.github.io/2023/05/04/CICD/"/>
     <id>https://winkygranger.github.io/2023/05/04/CICD/</id>
     <published>2023-05-04T08:00:00.000Z</published>
-    <updated>2023-05-06T09:21:19.424Z</updated>
+    <updated>2023-05-06T12:58:43.659Z</updated>
     
-    <content type="html"><![CDATA[<p>DevOps、持续集成、持续部署</p><span id="more"></span><h1 id="什么是CI-CD"><a href="#什么是CI-CD" class="headerlink" title="什么是CI/CD"></a>什么是CI/CD</h1><p><img src="/2023/05/04/CICD/001.jpg"></p><p>持续集成和持续交付/持续部署的缩写分别为CI和CD。简而言之，CI/CD是一套现代软件开发方法，常常一致地逐步更改代码。CI触发的自动构建和测试阶段保证了提交到源代码库中的代码更改是可靠的。</p>]]></content>
+    <content type="html"><![CDATA[<p>DevOps、持续集成、持续部署</p><span id="more"></span><h1 id="什么是CI-CD"><a href="#什么是CI-CD" class="headerlink" title="什么是CI/CD"></a>什么是CI/CD</h1><p><img src="/2023/05/04/CICD/001.jpg"></p><p>持续集成和持续交付/持续部署的缩写分别为CI和CD。简而言之，CI/CD是一套现代软件开发方法，常常一致地逐步更改代码。CI触发的自动构建和测试阶段保证了提交到源代码库中的代码更改是可靠的。</p><p>CI/CD管道通过结合集成、测试、交付和部署等多个流程，为DevOps服务创建了敏捷工作流程。它采用测试自动化，更早地发现可能存在的陷阱，并将代码更改提交到不同的环境。测试自动化评估几乎所有方面，包括API的性能和保护，这是管道质量管理的一个关键部分。</p><p>最终，CI/CD管道的多个阶段实现自动化的功能带来了更可靠、更快速和更优质的软件以及应用程序部署。</p><p>更重要的是，在开发过程本身之前应该创建CI/CD管道，因为在并行使用的CI/CD工具的帮助下，工作流程会发生极大的变化。但要做到这一点，您需要充分设置管道阶段。现在，不妨讨论CI/CD管道的各阶段。</p>]]></content>
     
     
     <summary type="html">&lt;p&gt;DevOps、持续集成、持续部署&lt;/p&gt;</summary>
